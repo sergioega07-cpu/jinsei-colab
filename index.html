@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>JINSEI × Niebla — Preventa de cafés | Colaboración</title>
+  <meta name="description" content="JINSEI × Niebla: preventa de cafés Niebla (Espantapájaros y Vampiros) vía JINSEI colab. Pedidos por WhatsApp.">
+  <meta name="theme-color" content="#080605">
+  <link rel="icon" href="assets/logo-placeholder.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://sergioega07-cpu.github.io/jinsei-colab/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="JINSEI × Niebla">
+  <meta property="og:title" content="JINSEI × Niebla — Preventa de cafés">
+  <meta property="og:description" content="Colaboración JINSEI colab con Niebla Coffee. Espantapájaros y Vampiros en preventa. Pedí por WhatsApp.">
+  <meta property="og:url" content="https://sergioega07-cpu.github.io/jinsei-colab/">
+  <meta property="og:image" content="https://sergioega07-cpu.github.io/jinsei-colab/assets/og-niebla.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+  <a class="skip" href="#cafe">Saltar al café disponible</a>
+
+  <div class="atmos" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a href="#portada" class="nav__brand" aria-label="JINSEI × Niebla, ir al inicio">
+      <img src="assets/logo-placeholder.svg" alt="" width="34" height="34">
+      <span>JINSEI <em class="nav__x">×</em> Niebla</span>
+    </a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#nosotros" data-nav="nosotros" class="nav__stack"><span>Colab</span><span class="sr-only"> · </span><small>Misión y Visión</small></a>
+      <a href="#origenes" data-nav="origenes">Orígenes</a>
+      <a href="#cafe" data-nav="cafe">Café</a>
+      <a href="#contacto" data-nav="contacto">Contacto</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__wa js-wa"
+         data-wa="Hola JINSEI × Niebla, vengo desde la preventa web y tengo una consulta."
+         href="https://wa.me/56951774751"
+         target="_blank" rel="noopener"
+         aria-label="Escribir por WhatsApp">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <button class="nav__toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <span class="nav__burger" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <div class="menu__backdrop" data-close-menu></div>
+    <nav class="menu__panel" aria-label="Menú principal">
+      <p class="menu__kicker">JINSEI × Niebla</p>
+      <ol class="menu__list">
+        <li><a href="#nosotros" data-nav="nosotros"><span class="menu__n">I</span><span class="menu__t">Colab<span class="sr-only"> · </span><small class="menu__sub">Misión y Visión</small></span></a></li>
+        <li><a href="#origenes" data-nav="origenes"><span class="menu__n">II</span><span class="menu__t">Orígenes</span></a></li>
+        <li><a href="#cafe" data-nav="cafe"><span class="menu__n menu__n--glyph">✦</span><span class="menu__t">Café</span></a></li>
+        <li><a href="#pedidos" data-nav="pedidos"><span class="menu__n">III</span><span class="menu__t">Pedidos</span></a></li>
+        <li><a href="#contacto" data-nav="contacto"><span class="menu__n menu__n--glyph">✦</span><span class="menu__t">Contacto</span></a></li>
+      </ol>
+      <p class="menu__foot">Preventa vía JINSEI colab<br><a href="https://www.instagram.com/niebla_coffee/" target="_blank" rel="noopener">@niebla_coffee</a></p>
+    </nav>
+  </div>
+
+  <main>
+    <!-- PORTADA -->
+    <section id="portada" class="hero">
+      <div class="hero__inner">
+        <div class="hero__medallion reveal">
+          <img src="assets/logo-placeholder.svg" alt="Medallón Niebla (colaboración JINSEI)" width="200" height="200">
+        </div>
+        <p class="kicker reveal">JINSEI colab · cooperación</p>
+        <h1 class="hero__title reveal">JINSEI<span class="hero__dash"> × </span><em>Niebla</em></h1>
+        <p class="hero__tagline reveal">Preventa de cafés Niebla vía JINSEI colab.<br><span>No somos el sitio oficial de Niebla: somos una colaboración. Pedí por WhatsApp y reservamos juntos.</span></p>
+        <div class="hero__cta reveal">
+          <a href="#cafe" class="btn btn--primary">Ver cafés</a>
+          <a class="btn btn--ghost js-wa"
+             href="https://wa.me/56951774751"
+             data-wa="Hola JINSEI × Niebla, vengo desde la preventa web y quiero hacer un pedido."
+             target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+        <ul class="hero__claims reveal" aria-label="Lo que ofrece esta preventa">
+          <li>Dos orígenes Niebla</li>
+          <li>250 g · $12.000</li>
+          <li>Pedidos por WhatsApp</li>
+        </ul>
+      </div>
+      <a href="#nosotros" class="hero__scroll" aria-label="Seguir bajando"><span></span></a>
+    </section>
+
+    <!-- COLAB · MISIÓN Y VISIÓN (textos de Niebla, atribuidos) -->
+    <section id="nosotros" class="section story">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <img class="emblem emblem--hat" src="assets/emblema-sombrero.webp" alt="" width="360" height="327" loading="lazy" decoding="async">
+          <p class="kicker">JINSEI × Niebla</p>
+          <h2>La colaboración</h2>
+          <p class="section__sub">JINSEI colab abre la puerta a los cafés de Niebla</p>
+        </header>
+        <div class="story__grid reveal">
+          <div class="story__text">
+            <h3 class="story__label">¿Qué es esto?</h3>
+            <p class="lead">Una cooperación, no el sitio oficial.</p>
+            <p><strong>JINSEI colab</strong> es la línea de colaboraciones de JINSEI (como JINSEI Lab con cookies). Acá trabajamos junto a <strong>Niebla Coffee</strong> — tostaduría mágica — para ofrecer una preventa de sus orígenes. Pedís con nosotros por WhatsApp; el café es de Niebla. Para seguir la marca: <a href="https://www.instagram.com/niebla_coffee/" target="_blank" rel="noopener">@niebla_coffee</a>.</p>
+            <h3 class="story__label" style="margin-top:1.8rem">Sobre Niebla</h3>
+            <p class="lead">Somos una sociedad de buscadores.</p>
+            <p>Personas que alguna vez probaron el café de Niebla y sintieron que algo cambió. No nos definimos por títulos ni etiquetas, sino por la inquietud que nos une. Somos lectores, pensadores, creadores, observadores. Nos inspira la alquimia del conocimiento, pero con los pies en la tierra: trabajamos con productores comprometidos, tostamos con precisión, y servimos con intención. Niebla no es solo un lugar, es una forma de ver.</p>
+          </div>
+          <ul class="story__pillars story__pillars--two">
+            <li class="card"><span class="pillar__n">i</span><h3>Misión <small class="pillar__who">Niebla</small></h3><p>En Niebla, buscamos cultivar momentos de pausa y profundidad. Nuestra misión es ofrecer café que inspire conversación, reflexión y descubrimiento. Cada taza es una invitación a explorar lo invisible: lo que se piensa, lo que se siente, lo que se transforma. Trabajamos con respeto por el origen, atención al detalle y una curiosidad constante por lo que aún no sabemos.</p></li>
+            <li class="card"><span class="pillar__n">ii</span><h3>Visión <small class="pillar__who">Niebla</small></h3><p>Queremos ser un punto de encuentro para quienes valoran el conocimiento, la sensibilidad y la búsqueda. En Niebla, el café no es solo bebida: es lenguaje, es ritual, es herramienta. Imaginamos una comunidad que crece a través del intercambio, donde cada persona que ha probado nuestro café se convierte en parte de una red silenciosa pero vibrante. Una sociedad que evoluciona con cada conversación, cada idea compartida, cada taza servida.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORÍGENES / CÓMO TOSTAMOS -->
+    <section id="origenes" class="section">
+      <div class="wrap">
+        <header class="section__head section__head--center reveal">
+          <img class="emblem emblem--book" src="assets/emblema-libro.webp" alt="" width="360" height="337" loading="lazy" decoding="async">
+          <p class="kicker">Niebla Orígenes</p>
+          <h2>Cómo tostan</h2>
+          <p class="section__sub">El café elige al barista</p>
+        </header>
+        <div class="card roast-intro reveal">
+          <div class="roast-intro__main">
+            <p class="learn__tag">Omniroast</p>
+            <h3>Un solo tueste por origen: omniroast</h3>
+            <p>Niebla tuesta en lotes pequeños y cada origen pasa por el tambor una sola vez, con un único perfil <strong>omniroast</strong>: versátil para filtrado y para espresso. No hacen un tueste distinto para cada método: complica el tostado y tiende a sobredesarrollar el café, apagando lo que el origen tiene para decir.</p>
+            <ul class="omni__uses" aria-label="Sirve para"><li>Filtrado</li><li>Espresso</li></ul>
+          </div>
+          <div class="roast-intro__side">
+            <p class="learn__tag">Fecha de tostado y reposo</p>
+            <p>Cada bolsa lleva escrita su fecha de tostado. Los primeros días el café libera CO₂: déjalo reposar. Su punto mágico va de los 5 a los 30 días desde el tueste.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAFÉ DISPONIBLE -->
+    <section id="cafe" class="section shop">
+      <div class="wrap">
+        <header class="section__head section__head--center reveal">
+          <p class="kicker">Café disponible</p>
+          <h2>Preventa JINSEI × Niebla</h2>
+          <p class="section__sub">Dos orígenes listos para pedir</p>
+          <p class="section__note">Precios y stock de preventa vía JINSEI colab. Pedidos por WhatsApp.</p>
+        </header>
+
+        <div class="products">
+          <article class="card product reveal" data-id="espantapajaros">
+            <div class="product__media product__media--label">
+              <img src="assets/labels/espantapajaros.webp" alt="Etiqueta Espantapájaros" width="480" height="576" loading="lazy" decoding="async">
+              <div class="product__badges">
+                <span class="badge badge--ok">Preventa</span>
+              </div>
+            </div>
+            <div class="product__body">
+              <p class="product__origin">Colombia · Tolima</p>
+              <h3 class="product__name">Espantapájaros</h3>
+              <dl class="product__meta">
+                <div><dt>Proceso</dt><dd>Lavado</dd></div>
+                <div><dt>Altura</dt><dd>1600–1800 msnm</dd></div>
+                <div><dt>Variedad</dt><dd>Caturra Colombia</dd></div>
+              </dl>
+              <ul class="notes" aria-label="Notas de sabor">
+                <li>pomelo dulce</li>
+                <li>caramelo</li>
+              </ul>
+              <p class="product__desc">Guía: más sabor y acidez limpia.</p>
+              <div class="product__buy">
+                <p class="price">$12.000<small>250 g</small></p>
+                <button type="button" class="btn btn--primary" data-add="espantapajaros">Agregar al pedido</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card product reveal" data-id="vampiros">
+            <div class="product__media product__media--label">
+              <img src="assets/labels/vampiros.webp" alt="Etiqueta Vampiros" width="480" height="576" loading="lazy" decoding="async">
+              <div class="product__badges">
+                <span class="badge badge--ok">Preventa</span>
+              </div>
+            </div>
+            <div class="product__body">
+              <p class="product__origin">Brasil · Furnas</p>
+              <h3 class="product__name">Vampiros</h3>
+              <dl class="product__meta">
+                <div><dt>Proceso</dt><dd>Natural</dd></div>
+                <div><dt>Altura</dt><dd>1350 msnm</dd></div>
+                <div><dt>Variedad</dt><dd>Catuaí Amarillo</dd></div>
+              </dl>
+              <ul class="notes" aria-label="Notas de sabor">
+                <li>cacao</li>
+                <li>miel</li>
+                <li>avellana</li>
+              </ul>
+              <p class="product__desc">Guía: suave y redondo, café de todos los días.</p>
+              <div class="product__buy">
+                <p class="price">$12.000<small>250 g</small></p>
+                <button type="button" class="btn btn--primary" data-add="vampiros">Agregar al pedido</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="shop__note reveal">Armá tu pedido, envialo por WhatsApp y coordinamos reserva, pago y entrega. Sin pago en línea.</p>
+      </div>
+    </section>
+
+    <!-- PEDIDOS -->
+    <section id="pedidos" class="section pedidos">
+      <div class="wrap pedidos__inner reveal">
+        <p class="kicker">Pedidos</p>
+        <h2>Cómo pedir</h2>
+        <p class="pedidos__lead">Agregá cafés al pedido, revisá el total y envialo por WhatsApp para reservar con JINSEI × Niebla. Se pueden realizar pedidos para la semana subsiguiente.</p>
+        <p class="pedidos__ig">Niebla en Instagram<br>
+          <a href="https://www.instagram.com/niebla_coffee/" target="_blank" rel="noopener">@niebla_coffee</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section contact">
+      <div class="wrap contact__inner reveal">
+        <p class="kicker">Contacto</p>
+        <h2>Escribinos</h2>
+        <ul class="contact__list">
+          <li><span class="contact__label">WhatsApp</span>
+            <a class="js-wa"
+               href="https://wa.me/56951774751"
+               data-wa="Hola JINSEI × Niebla, vengo desde la preventa web y tengo una consulta."
+               target="_blank" rel="noopener">+56 9 5177 4751</a>
+          </li>
+          <li><span class="contact__label">Instagram</span>
+            <a href="https://www.instagram.com/niebla_coffee/" target="_blank" rel="noopener">@niebla_coffee</a>
+          </li>
+        </ul>
+        <a class="btn btn--primary js-wa"
+           href="https://wa.me/56951774751"
+           data-wa="Hola JINSEI × Niebla, vengo desde la preventa web y tengo una consulta."
+           target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>JINSEI × Niebla · cooperación · preventa</p>
+    <p class="footer__small">JINSEI colab · no es el sitio oficial de Niebla Coffee</p>
+  </footer>
+
+  <!-- Pedido (carrito → WhatsApp, sin pago) -->
+  <button class="cart-fab" id="cart-open" type="button" aria-controls="cart" aria-expanded="false" aria-label="Abrir pedido">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 7h12l-1 13H7L6 7Zm3 0V5.5a3 3 0 0 1 6 0V7"/></svg>
+    <span class="cart-fab__count" id="cart-count" hidden>0</span>
+  </button>
+
+  <div class="cart-layer">
+  <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+  <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+    <header class="cart__head">
+      <h2 id="cart-title">Tu pedido</h2>
+      <button class="cart__close" id="cart-close" type="button" aria-label="Cerrar pedido">×</button>
+    </header>
+    <div class="cart__body">
+      <ul class="cart__items" id="cart-items"></ul>
+      <p class="cart__empty" id="cart-empty">Tu pedido está vacío.<br><a href="#cafe" data-close-cart>Ver cafés disponibles</a></p>
+    </div>
+    <footer class="cart__foot" id="cart-foot">
+      <div class="cart__total"><span>Total</span><strong id="cart-total">$0</strong></div>
+      <label class="field">
+        <span>Tu nombre (opcional)</span>
+        <input type="text" id="cart-name" autocomplete="name" placeholder="Ej: Ana">
+      </label>
+      <a class="btn btn--primary btn--block" id="cart-send" href="https://wa.me/56951774751" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+      <p class="cart__hint">No se cobra nada aquí. Sergio (JINSEI × Niebla) confirma reserva, pago y entrega por WhatsApp.</p>
+    </footer>
+  </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
