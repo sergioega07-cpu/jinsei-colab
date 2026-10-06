@@ -1,7 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-<defs><radialGradient id="bg" cx="50%" cy="36%" r="78%"><stop offset="0" stop-color="#2a2c2f"/><stop offset="1" stop-color="#0c0d0e"/></radialGradient></defs>
-<rect width="512" height="512" rx="112" fill="url(#bg)"/>
-<svg x="160.34" y="56.32" width="191.32" height="399.36" viewBox="0 0 824 1720"><defs><linearGradient id="silver" x1="0" y1="1" x2="0.18" y2="0"><stop offset="0" stop-color="#f2f4f6"/><stop offset="0.34" stop-color="#d3d7db"/><stop offset="0.52" stop-color="#9aa0a6"/><stop offset="0.68" stop-color="#dfe2e5"/><stop offset="1" stop-color="#a9afb5"/></linearGradient></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 824 1720" width="103" height="215" role="img" aria-label="JINSEI"><defs><linearGradient id="silver" x1="0" y1="1" x2="0.18" y2="0"><stop offset="0" stop-color="#f2f4f6"/><stop offset="0.34" stop-color="#d3d7db"/><stop offset="0.52" stop-color="#9aa0a6"/><stop offset="0.68" stop-color="#dfe2e5"/><stop offset="1" stop-color="#a9afb5"/></linearGradient></defs>
 <g transform="translate(0.000000,1720.000000) scale(0.100000,-0.100000)"
 fill="url(#silver)" stroke="none">
 <path d="M1141 17016 c-50 -28 -50 -31 -51 -494 0 -478 0 -480 61 -501 23 -8
@@ -22,5 +19,5 @@ fill="url(#silver)" stroke="none">
 -33 2151 -27 28 -27 28 -1990 30 -1616 2 -1966 0 -1986 -11z m2826 -5694 c32
 -20 33 -66 33 -1550 0 -1576 1 -1533 -46 -1540 -81 -12 -406 461 -530 772
 -224 560 -224 1279 2 1750 140 294 454 623 541 568z"/>
-</g></svg>
+</g>
 </svg>

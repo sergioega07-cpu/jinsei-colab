@@ -15,12 +15,14 @@ Pages: https://sergioega07-cpu.github.io/jinsei-colab/
 
 ## Logo JINSEI
 
-Logo real en `assets/` (crema `#F2E7CF` sobre transparente; SVG vectorizado + PNG/WebP en alta):
+Paleta (línea de ropa JINSEI, ref. LÝFT): negro lavado `#0d0e10` con textura acid-wash, marfil `#ece6d8` para texto, plata (`#e6e8ea` → `#9aa0a6`) como acento principal, navy lavado `#2c3a52` / denim `#4f6688`, y de apoyo arena `#c8b48c` (etiquetas, precios), salvia `#a7b3a0` (notas), moca `#6b5444` (tarjetas/hover).
+
+Logo real en `assets/`: versión plata `*-silver.*` (en uso, degradado metálico) y versión crema `#F2E7CF` (sin sufijo). SVG vectorizado + PNG/WebP en alta, fondo transparente:
 
 - `jinsei-js.*`: monograma JS (portada).
 - `jinsei-wordmark.*`: wordmark horizontal JÎṄSËÎ (header).
 - `jinsei-wordmark-stacked.*`, `jinsei-lockup.*`: variantes apilada y monograma + wordmark.
-- `jinsei-icon.svg`, `favicon-32.png`, `apple-touch-icon.png`: favicon (JS crema sobre cuadrado oscuro).
+- `jinsei-icon.svg`, `favicon-32.png`, `apple-touch-icon.png`: favicon (JS plata sobre carbón).
 
 ## Archivos
 
