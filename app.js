@@ -428,10 +428,29 @@
       a.classList.toggle("is-active", a.getAttribute("data-nav") === id);
     });
   }
+  // Al fondo de la página manda Café (la última sección nunca llega al umbral del scroll-spy)
+  const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+  // Clic en un enlace: queda activo al instante y se mantiene durante el scroll suave
+  let navLock = null, navLockT = 0, navLockMax = 0;
+  function releaseNavLock() { navLock = null; clearTimeout(navLockT); clearTimeout(navLockMax); }
+  function lockNav(id) {
+    navLock = id;
+    setActiveNav(id);
+    clearTimeout(navLockT); clearTimeout(navLockMax);
+    navLockT = setTimeout(releaseNavLock, 700);       // por si no hay scroll (ya estaba ahí)
+    navLockMax = setTimeout(releaseNavLock, 2500);    // tope de seguridad
+  }
+  $$("[data-nav]").forEach((a) => a.addEventListener("click", () => lockNav(a.getAttribute("data-nav"))));
+  window.addEventListener("scroll", () => {
+    if (navLock) { clearTimeout(navLockT); navLockT = setTimeout(releaseNavLock, 180); return; } // fin del scroll suave
+    if (atBottom()) setActiveNav("cafe");
+  }, { passive: true });
 
   if ("IntersectionObserver" in window && sections.length) {
     const io = new IntersectionObserver(
       (entries) => {
+        if (navLock) return;
+        if (atBottom()) return setActiveNav("cafe");
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);

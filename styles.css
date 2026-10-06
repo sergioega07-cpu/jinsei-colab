@@ -411,12 +411,24 @@ body.cart-open { overflow: hidden; }
 .hero { min-height: 88svh; padding: 6.5rem 1.25rem 4rem; }
 .hero__emblem { width: clamp(72px, 14vw, 104px); height: auto; margin: 0 auto 1.6rem; opacity: .85; filter: drop-shadow(0 0 26px rgba(204, 187, 152, .134)); }
 /* Monograma JS: brillo cálido y suave */
-.hero__emblem--js { width: auto; height: clamp(118px, 15vw, 156px); opacity: .97; filter: drop-shadow(0 0 12px rgba(216, 196, 150, .18)) drop-shadow(0 0 34px rgba(160, 124, 80, .26)); animation: jsGlow 7s ease-in-out infinite; }
-@keyframes jsGlow {
-  0%, 100% { filter: brightness(1) drop-shadow(0 0 12px rgba(216, 196, 150, .18)) drop-shadow(0 0 34px rgba(160, 124, 80, .26)); }
-  50% { filter: brightness(1.05) drop-shadow(0 0 15px rgba(222, 202, 158, .26)) drop-shadow(0 0 40px rgba(170, 132, 84, .34)); }
+/* Monograma JS: quieto (sin translateY ni filtros animados). El brillo cálido es una capa aparte detrás
+   (.hero__mark::before) que solo anima opacity, así el logo nunca se re-rasteriza ni salta 1 px. */
+.hero__mark { position: relative; display: block; width: fit-content; margin: 0 auto 1.6rem; isolation: isolate; }
+.hero__mark::before {
+  content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: 300%; height: 150%; pointer-events: none;
+  transform: translate(-50%, -50%) translateZ(0);
+  background: radial-gradient(closest-side, rgba(222, 202, 158, .2), rgba(170, 132, 84, .12) 45%, transparent 100%);
+  opacity: .45; will-change: opacity; animation: jsGlow 7s ease-in-out infinite;
 }
-@media (prefers-reduced-motion: reduce) { .hero__emblem--js { animation: none; } }
+.hero__emblem--js {
+  display: block; width: auto; height: clamp(118px, 15vw, 156px); margin: 0; opacity: .97;
+  filter: drop-shadow(0 0 12px rgba(216, 196, 150, .18)) drop-shadow(0 0 34px rgba(160, 124, 80, .26));
+  transform: translateZ(0); backface-visibility: hidden;
+}
+@keyframes jsGlow { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero__mark::before { animation: none; opacity: .7; } }
+/* Revelado solo con opacidad (sin desplazamiento) */
+.js .reveal.reveal--fade { transform: none; transition: opacity 1.1s var(--ease); }
 .hero__title { font-size: clamp(2.6rem, 10vw, 5.6rem); letter-spacing: .12em; }
 .hero__title em { display: inline; margin: 0; font-size: 1em; letter-spacing: .06em; text-transform: uppercase; font-family: var(--f-title); font-style: normal; color: var(--parchment); }
 .hero__x { -webkit-text-fill-color: var(--sand); font-family: var(--f-accent); font-style: italic; font-weight: 400; color: var(--gold); letter-spacing: 0; font-size: .7em; margin: 0 .05em; }
@@ -425,7 +437,7 @@ body.cart-open { overflow: hidden; }
 
 /* Colab */
 .colab__grid { list-style: none; padding: 0; margin: 0 auto; display: grid; gap: 1rem; max-width: 1040px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
-.colab__card { padding: 1.5rem 1.5rem 1.4rem; }
+.colab__card { padding: 1.5rem 1.5rem 1.4rem; text-align: center; } /* números, títulos y textos centrados */
 .colab__card h3 { font-size: 1.05rem; }
 .colab__card p { margin: .5rem 0 0; color: var(--ink-soft); font-size: .95rem; }
 .pillar__n { display: block; font: italic 500 1.4rem/1 var(--f-accent); color: var(--gold); margin-bottom: .6rem; opacity: .8; }
