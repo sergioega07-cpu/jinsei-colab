@@ -24,6 +24,12 @@ Logo real en `assets/`: versión arena/bronce `*-sand.*` (en uso), además de `*
 - `jinsei-wordmark-stacked.*`, `jinsei-lockup.*`: variantes apilada y monograma + wordmark.
 - `jinsei-icon.svg`, `favicon-32.png`, `apple-touch-icon.png`: favicon (JS arena sobre moca).
 
+## Barista Corner (rama del hub JINSEI)
+
+`barista-corner/` → https://sergioega07-cpu.github.io/jinsei-colab/barista-corner/  
+Sección general (sin subcategorías). Usa `../styles.css` (tokens, fondo, nav) + `barista.css`; productos en el arreglo `PRODUCTS` de `barista-corner/barista.js` (agregar un producto = agregar una entrada; si no hay precio confirmado, omitir `precio`). Fotos en `assets/barista/` (webp). Primer producto: Prestina → https://sergioega07-cpu.github.io/prestina/.  
+La raíz (`index.html`, × Niebla) no enlaza aún a Barista Corner.
+
 ## Archivos
 
 `index.html`, `styles.css`, `app.js`, `assets/` (labels, emblemas, logo, OG).

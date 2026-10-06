@@ -1,0 +1,95 @@
+/* ==========================================================================
+   JINSEI · Barista Corner
+   Usa los tokens y piezas comunes de ../styles.css (fondo .atmos/.tint, nav, menú, .btn, .card).
+   Aquí solo lo propio de esta rama: portada corta, grilla de productos centrada, pie mínimo.
+   Clases con prefijo bc- para no chocar con la página × Niebla.
+   ========================================================================== */
+html { scroll-padding-top: 80px; }
+body.bc { min-height: 100svh; display: flex; flex-direction: column; }
+body.bc main { flex: 1; }
+
+/* Nav: ramas que aún no existen (Lab, Ropa) quedan atenuadas, sin enlace */
+.nav__soon {
+  position: relative; padding: .35rem 0; white-space: nowrap; cursor: default;
+  font: 400 .72rem/1 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: rgba(239, 230, 210, .34);
+}
+.nav__soon small {
+  position: absolute; left: 0; right: .2em; top: calc(100% + .1rem); text-align: center;
+  font: italic 500 .78rem/1 var(--f-accent); letter-spacing: .02em; text-transform: none; color: rgba(190, 172, 138, .5);
+}
+.menu__item { display: flex; align-items: baseline; gap: 1.1rem; padding: 1.05rem 1.6rem 1.05rem .3rem; color: rgba(239, 230, 210, .38); }
+.menu__soon .menu__n { opacity: .35; }
+.menu__soon .menu__sub { color: rgba(190, 172, 138, .5); }
+
+/* Aparición suave: solo opacidad, sin desplazamiento */
+.js .bc-fade { opacity: 0; transition: opacity 1.1s var(--ease); }
+.js body.is-ready .bc-fade { opacity: 1; }
+.js body.is-ready .bc-hero__title { transition-delay: .08s; }
+.js body.is-ready .bc-hero__sub { transition-delay: .16s; }
+.js body.is-ready .bc-grid { transition-delay: .28s; }
+.js body.is-ready .bc-more { transition-delay: .4s; }
+@media (prefers-reduced-motion: reduce) { .js .bc-fade { transition: none; } }
+
+/* ---------- Portada ---------- */
+.bc-hero {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: calc(7.5rem + env(safe-area-inset-top)) 1.25rem clamp(2.75rem, 6vw, 4.25rem);
+}
+.bc-hero__mark {
+  width: auto; height: clamp(64px, 8vw, 84px); margin: 0 auto 1.6rem; opacity: .92;
+  filter: drop-shadow(0 0 10px rgba(216, 196, 150, .16)) drop-shadow(0 0 30px rgba(160, 124, 80, .22));
+}
+.bc-hero__title {
+  font-size: clamp(2.1rem, 8.4vw, 4.4rem); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; line-height: 1.05;
+  text-wrap: balance;
+}
+.bc-hero__sub {
+  margin: 1.2rem auto 0; max-width: 36rem; text-wrap: balance;
+  font: italic 400 clamp(1.12rem, 2.4vw, 1.35rem)/1.45 var(--f-accent); color: var(--ink-soft);
+}
+
+/* ---------- Grilla de productos ----------
+   Tarjetas de ancho fijo en una fila flexible centrada: 1 producto queda al centro, 2–4 se reparten
+   sin estirarse y una tarjeta sola en la última fila también se centra. */
+.bc-shop { padding: 0 0 clamp(3rem, 7vw, 5rem); }
+.bc-wrap { width: min(1240px, 100% - 2.5rem); margin-inline: auto; }
+.bc-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1.1rem, 2.4vw, 1.6rem);
+}
+.bc-grid > li { flex: 0 1 340px; min-width: 0; }
+@media (min-width: 1200px) { .bc-grid:not([data-count="1"]):not([data-count="2"]) > li { flex-basis: 280px; } }
+.bc-card { display: flex; flex-direction: column; overflow: hidden; }
+/* Foto de producto sobre su propio fondo claro (el del archivo): una «lámina» enmarcada dentro de la tarjeta */
+.bc-card__media {
+  display: block; margin: .6rem .6rem 0; border-radius: calc(var(--radius) - 6px); overflow: hidden;
+  aspect-ratio: 1 / 1; background: #f2f1eb; display: grid; place-items: center;
+  box-shadow: inset 0 0 0 1px rgba(42, 31, 22, .06);
+}
+.bc-card__media img { width: 100%; height: 100%; object-fit: contain; transform: scale(1.06); transition: transform .9s var(--ease); }
+.bc-card:hover .bc-card__media img { transform: scale(1.09); }
+@media (prefers-reduced-motion: reduce) { .bc-card__media img { transition: none; } .bc-card:hover .bc-card__media img { transform: scale(1.06); } }
+.bc-card__body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem 1.35rem 1.4rem; text-align: center; }
+.bc-card__brand {
+  align-self: center; margin: 0 0 .75rem; padding: .38rem .7rem; border-radius: 999px;
+  font: 500 .6rem/1 var(--f-mono); letter-spacing: .18em; text-transform: uppercase;
+  color: #dde2ee; border: 1px solid rgba(110, 122, 158, .55); background: rgba(75, 84, 112, .42);
+}
+.bc-card__name { font-size: 1.5rem; letter-spacing: .08em; }
+.bc-card__desc { margin: .5rem auto 0; max-width: 30ch; color: var(--ink-soft); font-size: .93rem; line-height: 1.55; text-wrap: balance; }
+.bc-card__foot {
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  margin-top: auto; padding-top: 1.15rem; border-top: 1px solid var(--line);
+}
+.bc-card__desc + .bc-card__foot { margin-top: 1.15rem; }
+.bc-card__price { margin: 0; font: 500 1.3rem/1 var(--f-title); letter-spacing: .03em; color: var(--sand-hi); }
+.bc-card__price small { margin-left: .4rem; font: 400 .6rem/1 var(--f-mono); letter-spacing: .16em; color: var(--ink-faint); }
+.bc-card__cta { width: 100%; }
+
+.bc-more { margin: clamp(2rem, 5vw, 3rem) 0 0; text-align: center; font: italic 400 1.1rem/1.4 var(--f-accent); color: rgba(204, 187, 152, .62); }
+.bc-noscript { text-align: center; }
+.bc-noscript a { color: var(--sand-hi); }
+
+/* ---------- Pie ---------- */
+.bc-footer { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 2.5rem 1rem calc(2.5rem + env(safe-area-inset-bottom)); }
+.bc-footer__mark { width: auto; height: 34px; opacity: .7; }
