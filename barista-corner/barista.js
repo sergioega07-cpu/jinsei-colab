@@ -20,7 +20,7 @@
       w: 661,
       h: 546,
       alt: "Prestina de Wacaco: prensa y taza en un solo cuerpo, con su cuchara dosificadora",
-      url: "https://sergioega07-cpu.github.io/prestina/",
+      url: "https://sergioega07-cpu.github.io/prestina/?desde=jinsei", // ?desde=jinsei: Prestina muestra «← Volver a JINSEI»
       cta: "Ver Prestina",
     },
   ];

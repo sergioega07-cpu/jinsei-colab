@@ -41,6 +41,7 @@
       <img class="brand__logo" src="assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="432" height="91" decoding="async">
     </a>
     <nav class="nav__links" aria-label="Secciones">
+      <a href="inicio/" class="nav__home"><span aria-hidden="true">←</span> JINSEI</a>
       <a href="#colab" data-nav="colab">Colab</a>
       <a href="#tostador" data-nav="tostador">Conoce a tu tostador</a>
       <a href="#cafe" data-nav="cafe">Café</a>
@@ -65,6 +66,8 @@
     <nav class="menu__panel" aria-label="Menú principal">
       <p class="menu__kicker">JINSEI × Niebla</p>
       <ol class="menu__list">
+        <!-- Volver a la portada JINSEI (sin data-nav: no participa del resaltado de secciones) -->
+        <li class="menu__home"><a href="inicio/"><span class="menu__n menu__n--home" aria-hidden="true">←</span><span class="menu__t">JINSEI<span class="menu__sub">Portada</span></span></a></li>
         <li><a href="#colab" data-nav="colab"><span class="menu__n">I</span><span class="menu__t">Colab</span></a></li>
         <li><a href="#tostador" data-nav="tostador"><span class="menu__n">II</span><span class="menu__t">Conoce a tu tostador</span></a></li>
         <li><a href="#cafe" data-nav="cafe"><span class="menu__n menu__n--glyph">✦</span><span class="menu__t">Café</span></a></li>
