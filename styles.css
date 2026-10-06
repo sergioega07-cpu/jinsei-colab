@@ -413,15 +413,20 @@ body.cart-open { overflow: hidden; }
 /* Monograma JS: brillo cálido y suave */
 /* Monograma JS: quieto (sin translateY ni filtros animados). El brillo cálido es una capa aparte detrás
    (.hero__mark::before) que solo anima opacity, así el logo nunca se re-rasteriza ni salta 1 px. */
-.hero__mark { position: relative; display: block; width: fit-content; margin: 0 auto 1.6rem; isolation: isolate; }
+.hero__mark {
+  --mark-h: clamp(140px, 18vw, 195px);
+  position: relative; display: flex; justify-content: center; align-items: center;
+  width: 100%; margin: 0 auto 1.6rem; isolation: isolate;
+}
 .hero__mark::before {
-  content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: 300%; height: 150%; pointer-events: none;
+  content: ""; position: absolute; z-index: -1; left: 50%; top: 50%;
+  width: calc(var(--mark-h) * 1.45); height: calc(var(--mark-h) * 1.5); pointer-events: none;
   transform: translate(-50%, -50%) translateZ(0);
   background: radial-gradient(closest-side, rgba(222, 202, 158, .2), rgba(170, 132, 84, .12) 45%, transparent 100%);
   opacity: .45; will-change: opacity; animation: jsGlow 7s ease-in-out infinite;
 }
 .hero__emblem--js {
-  display: block; width: auto; height: clamp(118px, 15vw, 156px); margin: 0; opacity: .97;
+  display: block; flex: none; width: auto; height: var(--mark-h); margin: 0 auto; opacity: .97;
   filter: drop-shadow(0 0 12px rgba(216, 196, 150, .18)) drop-shadow(0 0 34px rgba(160, 124, 80, .26));
   transform: translateZ(0); backface-visibility: hidden;
 }
@@ -431,8 +436,13 @@ body.cart-open { overflow: hidden; }
 .js .reveal.reveal--fade { transform: none; transition: opacity 1.1s var(--ease); }
 .hero__title { font-size: clamp(2.6rem, 10vw, 5.6rem); letter-spacing: .12em; }
 .hero__title em { display: inline; margin: 0; font-size: 1em; letter-spacing: .06em; text-transform: uppercase; font-family: var(--f-title); font-style: normal; color: var(--parchment); }
-.hero__x { -webkit-text-fill-color: var(--sand); font-family: var(--f-accent); font-style: italic; font-weight: 400; color: var(--gold); letter-spacing: 0; font-size: .7em; margin: 0 .05em; }
-@media (max-width: 560px) { .hero__title em { display: block; margin-top: .25rem; } .hero__x { display: block; font-size: .5em; line-height: 1.2; } }
+.hero__x {
+  -webkit-text-fill-color: var(--sand); font-family: var(--f-accent); font-style: italic; font-weight: 400; color: var(--gold); letter-spacing: 0; font-size: .7em;
+  /* centrado en la altura de las mayúsculas (Cinzel) y con el mismo aire a ambos lados:
+     el margen negativo compensa el letter-spacing (.12em del título = .1714em aquí) que queda tras «JINSEI» */
+  position: relative; top: -.31em; margin: 0 0 0 -.1714em;
+}
+@media (max-width: 560px) { .hero__title em { display: block; margin-top: .25rem; } .hero__x { display: block; font-size: .5em; line-height: 1.2; top: -.11em; margin: 0; } }
 .hero__tagline { margin-top: 1.4rem; }
 
 /* Colab */
