@@ -75,7 +75,8 @@ body.hb main { flex: 1; }
   position: absolute; inset: 0; margin: auto; width: 78%; height: 78%; object-fit: contain;
   transition: transform .9s var(--ease);
 }
-.hb-door__img--emblem { width: 64%; height: 60%; opacity: .9; filter: drop-shadow(0 0 18px rgba(204, 187, 152, .12)); }
+/* Logo oficial de Niebla (cuervo con sombrero de mago): círculo crema con el cuervo calado, así el cuervo toma el tono del panel */
+.hb-door__img--niebla { width: 66%; height: 66%; opacity: .94; filter: drop-shadow(0 0 22px rgba(204, 187, 152, .14)); }
 .hb-door__img--product { height: 84%; }
 .hb-door__img--mark { height: 42%; opacity: .13; }
 a.hb-door__card:hover .hb-door__img { transform: scale(1.04); }
