@@ -29,31 +29,27 @@
   <!-- CSP: este script en línea está permitido por su hash sha256 (si se edita, actualizar el hash en la meta CSP) -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
-<body class="has-js-home">
+<body>
   <a class="skip" href="#cafe">Saltar al café disponible</a>
 
   <div class="atmos" aria-hidden="true"></div>
   <div class="tint" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
-  <header class="nav nav--js" id="nav">
-    <!-- Marca: wordmark JÎṄSËÎ arena/bronce (assets/jinsei-wordmark-sand.svg) -->
-    <a href="inicio/" class="nav__brand" id="brand" aria-label="JINSEI, ir a la portada">
+  <header class="nav" id="nav">
+    <!-- Marca: wordmark JÎṄSËÎ arena/bronce, logo estático (sin enlace) -->
+    <span class="nav__brand" id="brand">
       <img class="brand__logo" src="assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="432" height="91" decoding="async">
-    </a>
-    <!-- Monograma JS centrado con halo de niebla: volver a la portada JINSEI -->
-    <a href="inicio/" class="nav__js" aria-label="Volver a la portada JINSEI">
-      <img src="assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
-    </a>
+    </span>
     <nav class="nav__links" aria-label="Secciones">
-      <span class="nav__group nav__group--l">
-        <a href="#colab" data-nav="colab">Colab</a>
-        <a href="#tostador" data-nav="tostador">Conoce a tu tostador</a>
-      </span>
-      <span class="nav__group nav__group--r">
-        <a href="#cafe" data-nav="cafe">Café</a>
-      </span>
+      <a href="#colab" data-nav="colab">Colab</a>
+      <a href="#tostador" data-nav="tostador">Conoce a tu tostador</a>
+      <a href="#cafe" data-nav="cafe">Café</a>
     </nav>
     <div class="nav__actions">
+      <!-- Botón maestro: monograma JS con halo de niebla = volver a la portada JINSEI -->
+      <a href="inicio/" class="nav__js" aria-label="Volver a la portada JINSEI">
+        <img src="assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
+      </a>
       <a class="nav__wa js-wa"
          data-wa="Hola JINSEI, vengo desde la preventa web y tengo una consulta."
          href="https://wa.me/56951774751"
@@ -73,8 +69,6 @@
     <nav class="menu__panel" aria-label="Menú principal">
       <p class="menu__kicker">JINSEI × Niebla</p>
       <ol class="menu__list">
-        <!-- Volver a la portada JINSEI (sin data-nav: no participa del resaltado de secciones) -->
-        <li class="menu__home"><a href="inicio/"><span class="menu__n menu__n--home" aria-hidden="true">←</span><span class="menu__t">JINSEI<span class="menu__sub">Portada</span></span></a></li>
         <li><a href="#colab" data-nav="colab"><span class="menu__n">I</span><span class="menu__t">Colab</span></a></li>
         <li><a href="#tostador" data-nav="tostador"><span class="menu__n">II</span><span class="menu__t">Conoce a tu tostador</span></a></li>
         <li><a href="#cafe" data-nav="cafe"><span class="menu__n menu__n--glyph">✦</span><span class="menu__t">Café</span></a></li>

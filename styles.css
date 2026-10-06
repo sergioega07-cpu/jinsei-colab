@@ -597,26 +597,16 @@ body.howto-open .howto__hint { opacity: 0; pointer-events: none; }
   .howto__body { transform: none; }
 }
 
-/* ---------- Volver a la portada JINSEI (menú móvil y nav de escritorio) ----------
-   Entrada de utilidad: más pequeña y atenuada que las secciones, con glifo tenue. Sin data-nav. */
-.menu__home .menu__t { font-size: 1.12rem; color: var(--ink-soft); }
-.menu__home .menu__sub { font-size: .92rem; }
-.menu__n--home { font: 400 1.05rem/1 var(--f-body); font-style: normal; opacity: .45; }
-.menu__home a:hover .menu__t, .menu__home a:focus-visible .menu__t { color: #fff; }
-.menu__home a.is-active .menu__t { color: var(--gold); }
-
-/* ---------- Monograma JS centrado en el header = volver a la portada JINSEI ----------
-   Páginas con body.has-js-home (× Niebla, Barista Corner). El JS va centrado exacto en la barra
-   (left/right 0 + margin auto, sin transform) y queda QUIETO; lo que respira es su halo de niebla:
+/* ---------- Botón maestro JINSEI: monograma JS con halo de niebla (a la derecha, junto a WhatsApp) ----------
+   Única vía de vuelta a la portada (× Niebla, Barista Corner; en Inicio es la página actual).
+   El glifo JS queda QUIETO; lo que respira es el halo:
    ::before = núcleo oscuro ahumado + bruma arena que late (opacity + scale, 5 s);
    ::after  = anillo de bruma que se abre y se disuelve (transform + opacity, 5 s).
-   Con «reducir movimiento»: el halo solo cambia de opacidad y el anillo queda quieto y tenue.
-   En escritorio la nav se parte a ambos lados con una grilla 1fr | hueco | 1fr del ancho completo
-   del header, así el hueco central coincide con el JS. La nav en línea aparece desde 1024 px
-   (900–1023: menú hamburguesa) para que nunca se amontone. */
+   Con «reducir movimiento»: el halo solo cambia de opacidad y el anillo queda quieto y tenue. */
+.nav__brand { cursor: default; }
 .nav__js {
-  position: absolute; z-index: 2; left: 0; right: 0; top: max(.8rem, env(safe-area-inset-top));
-  width: 48px; height: 44px; margin: 0 auto; isolation: isolate;
+  position: relative; flex: none; isolation: isolate;
+  width: 44px; height: 44px; margin-right: .35rem; /* aire para que el halo no pise el botón de WhatsApp */
   display: grid; place-items: center; border-radius: 50%; text-decoration: none;
 }
 .nav__js::before, .nav__js::after {
@@ -624,7 +614,7 @@ body.howto-open .howto__hint { opacity: 0; pointer-events: none; }
   will-change: transform, opacity;
 }
 .nav__js::before {
-  width: 64px; height: 64px; margin: -32px 0 0 -32px;
+  width: 62px; height: 62px; margin: -31px 0 0 -31px;
   background: radial-gradient(closest-side,
     rgba(14, 10, 8, .78) 0%, rgba(22, 16, 12, .6) 34%,
     rgba(214, 196, 158, .2) 58%, rgba(190, 172, 138, .08) 78%, rgba(190, 172, 138, 0) 100%);
@@ -652,20 +642,4 @@ body.howto-open .howto__hint { opacity: 0; pointer-events: none; }
   .nav__js::after { animation: none; opacity: .3; transform: scale(1.25); }
   .nav__js img { transition: none; }
 }
-@media (min-width: 1024px) { .nav__js img { height: 34px; } }
-
-@media (min-width: 900px) and (max-width: 1023.98px) {
-  .has-js-home .nav__links { display: none; }
-  .has-js-home .nav__toggle { display: inline-grid !important; }
-  .has-js-home .menu:not([hidden]) { display: block !important; }
-}
-@media (min-width: 1024px) {
-  .nav--js .nav__links {
-    position: absolute; left: 0; right: 0; top: max(.8rem, env(safe-area-inset-top)); height: 44px;
-    display: grid; grid-template-columns: 1fr 112px 1fr; align-items: center; gap: 0; pointer-events: none;
-  }
-  .nav--js .nav__group { display: flex; align-items: center; gap: clamp(1.4rem, 2.2vw, 2.2rem); pointer-events: auto; }
-  .nav--js .nav__group--l { grid-column: 1; justify-self: end; }
-  .nav--js .nav__group--r { grid-column: 3; justify-self: start; }
-}
-@media (min-width: 1280px) { .nav--js .nav__links { grid-template-columns: 1fr 136px 1fr; } }
+@media (min-width: 900px) { .nav__js img { height: 34px; } }

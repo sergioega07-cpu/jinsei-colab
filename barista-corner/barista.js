@@ -20,7 +20,7 @@
       w: 661,
       h: 546,
       alt: "Prestina de Wacaco: prensa y taza en un solo cuerpo, con su cuchara dosificadora",
-      url: "https://sergioega07-cpu.github.io/prestina/?desde=jinsei", // ?desde=jinsei: Prestina muestra «← Volver a JINSEI»
+      url: "https://sergioega07-cpu.github.io/prestina/",
       cta: "Ver Prestina",
     },
   ];
@@ -119,7 +119,7 @@
   menu?.querySelector("[data-close-menu]")?.addEventListener("click", () => closeMenu());
   $$(".menu__list a").forEach((a) => a.addEventListener("click", () => { if (menuIsOpen()) closeMenu({ restoreFocus: false }); }));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menuIsOpen()) closeMenu(); });
-  window.matchMedia("(min-width: 1024px)").addEventListener?.("change", (m) => { if (m.matches && menuIsOpen()) closeMenu({ restoreFocus: false }); });
+  window.matchMedia("(min-width: 900px)").addEventListener?.("change", (m) => { if (m.matches && menuIsOpen()) closeMenu({ restoreFocus: false }); });
 
   /* ---------- Nav con fondo al hacer scroll ---------- */
   const nav = $("#nav");

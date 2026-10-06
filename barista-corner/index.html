@@ -30,31 +30,28 @@
   <!-- CSP: este script en línea está permitido por su hash sha256 (si se edita, actualizar el hash en la meta CSP) -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
-<body class="bc has-js-home">
+<body class="bc">
   <a class="skip" href="#productos">Saltar a los productos</a>
 
   <div class="atmos" aria-hidden="true"></div>
   <div class="tint" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
-  <header class="nav nav--js" id="nav">
-    <a href="../inicio/" class="nav__brand" aria-label="JINSEI, ir a la portada">
+  <header class="nav" id="nav">
+    <!-- Marca: wordmark JÎṄSËÎ, logo estático (sin enlace) -->
+    <span class="nav__brand">
       <img class="brand__logo" src="../assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="432" height="91" decoding="async">
-    </a>
-    <!-- Monograma JS centrado con halo de niebla: volver a la portada JINSEI -->
-    <a href="../inicio/" class="nav__js" aria-label="Volver a la portada JINSEI">
-      <img src="../assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
-    </a>
+    </span>
     <nav class="nav__links" aria-label="Ramas JINSEI">
-      <span class="nav__group nav__group--l">
-        <a href="../">× Niebla</a>
-        <a href="./" class="is-active" aria-current="page">Barista Corner</a>
-      </span>
-      <span class="nav__group nav__group--r">
-        <span class="nav__soon">Lab<small>Pronto</small></span>
-        <span class="nav__soon">Ropa<small>Pronto</small></span>
-      </span>
+      <a href="../">× Niebla</a>
+      <a href="./" class="is-active" aria-current="page">Barista Corner</a>
+      <span class="nav__soon">Lab<small>Pronto</small></span>
+      <span class="nav__soon">Ropa<small>Pronto</small></span>
     </nav>
     <div class="nav__actions">
+      <!-- Botón maestro: monograma JS con halo de niebla = volver a la portada JINSEI -->
+      <a href="../inicio/" class="nav__js" aria-label="Volver a la portada JINSEI">
+        <img src="../assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
+      </a>
       <a class="nav__wa js-wa"
          data-wa="Hola JINSEI, vengo desde Barista Corner."
          href="https://wa.me/56951774751"
@@ -74,7 +71,6 @@
     <nav class="menu__panel" aria-label="Menú principal">
       <p class="menu__kicker">JINSEI</p>
       <ol class="menu__list">
-        <li class="menu__home"><a href="../inicio/"><span class="menu__n menu__n--home" aria-hidden="true">←</span><span class="menu__t">JINSEI<span class="menu__sub">Portada</span></span></a></li>
         <li><a href="../"><span class="menu__n">I</span><span class="menu__t">× Niebla</span></a></li>
         <li><a href="./" class="is-active" aria-current="page"><span class="menu__n">II</span><span class="menu__t">Barista Corner</span></a></li>
         <li class="menu__soon"><span class="menu__item"><span class="menu__n">III</span><span class="menu__t">Lab<span class="menu__sub">Pronto</span></span></span></li>
@@ -95,7 +91,7 @@
         <!-- Se llena desde PRODUCTS en barista.js (agregar un producto = agregar una entrada) -->
         <ul class="bc-grid bc-fade" id="bc-grid"></ul>
         <noscript>
-          <p class="bc-noscript"><a href="https://sergioega07-cpu.github.io/prestina/?desde=jinsei">Ver Prestina →</a></p>
+          <p class="bc-noscript"><a href="https://sergioega07-cpu.github.io/prestina/">Ver Prestina →</a></p>
         </noscript>
         <p class="bc-more bc-fade">Más herramientas, pronto.</p>
       </div>
