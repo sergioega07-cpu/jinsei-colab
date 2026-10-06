@@ -9,6 +9,8 @@
   const CART_KEY = "jinsei-niebla-carrito-v1";
   const NAME_KEY = "jinsei-niebla-nombre-v1";
   const FORMATO = "250 g";
+  // Logo JINSEI: cuando exista, poner aquí "assets/jinsei-logo.svg" (único lugar). Vacío = wordmark de texto.
+  const JINSEI_LOGO = "";
   const PRECIO = 12000;
 
   const CATALOG = {
@@ -25,7 +27,20 @@
   const waLink = (text) =>
     `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text).replace(/[()]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase())}`;
 
-  /* ---------- WhatsApp genéricos (nav / contacto) ---------- */
+  /* ---------- Marca / año ---------- */
+  if (JINSEI_LOGO) {
+    const word = $(".brand__word");
+    if (word) {
+      const img = new Image();
+      img.className = "brand__logo"; img.alt = "JINSEI";
+      img.onload = () => word.replaceWith(img);
+      img.src = JINSEI_LOGO;
+    }
+  }
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  /* ---------- WhatsApp genéricos ---------- */
   $$(".js-wa").forEach((a) => {
     const msg = a.getAttribute("data-wa");
     if (msg) a.href = waLink(msg);
@@ -176,6 +191,7 @@
   function openCart() {
     if (!drawer || !backdrop || !fab) return;
     if (menuIsOpen()) closeMenu({ restoreFocus: false });
+    closeHowto();
     lastFocus = document.activeElement;
     $("#toast")?.classList.remove("is-on");
     backdrop.hidden = false;
@@ -210,7 +226,7 @@
   /* ---------- Menú móvil ---------- */
   const menu = $("#menu");
   const menuToggle = $("#menu-toggle");
-  const BG_SELECTORS = "main, .footer, .cart-fab, .skip";
+  const BG_SELECTORS = "main, .footer, .cart-fab, .howto, .skip";
   let menuT;
 
   function menuIsOpen() {
@@ -260,8 +276,30 @@
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    if (drawer?.classList.contains("is-open")) closeCart();
+    if (howtoIsOpen()) closeHowto();
+    else if (drawer?.classList.contains("is-open")) closeCart();
     else if (menuIsOpen()) closeMenu();
+  });
+
+  /* ---------- Cómo pedir (nube flotante) ---------- */
+  const howtoBtn = $("#howto-open");
+  const howtoPop = $("#howto-pop");
+  function howtoIsOpen() { return !!howtoPop && !howtoPop.hidden; }
+  function openHowto() {
+    if (!howtoPop || !howtoBtn) return;
+    howtoPop.hidden = false;
+    howtoBtn.setAttribute("aria-expanded", "true");
+  }
+  function closeHowto({ restoreFocus = false } = {}) {
+    if (!howtoPop || !howtoBtn) return;
+    howtoPop.hidden = true;
+    howtoBtn.setAttribute("aria-expanded", "false");
+    if (restoreFocus) howtoBtn.focus({ preventScroll: true });
+  }
+  howtoBtn?.addEventListener("click", () => (howtoIsOpen() ? closeHowto() : openHowto()));
+  $("#howto-close")?.addEventListener("click", () => closeHowto({ restoreFocus: true }));
+  document.addEventListener("click", (e) => {
+    if (howtoIsOpen() && !e.target.closest("#howto")) closeHowto();
   });
 
   /* ---------- Nav scrolled + activa ---------- */
@@ -272,7 +310,7 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  const sections = ["nosotros", "origenes", "cafe", "pedidos", "contacto"]
+  const sections = ["portada", "colab", "tostador", "cafe"]
     .map((id) => document.getElementById(id))
     .filter(Boolean);
 

@@ -13,10 +13,14 @@ Pages: https://sergioega07-cpu.github.io/jinsei-colab/
 - Carrito → pedido por WhatsApp a Sergio (`+56951774751`), sin pago en línea.
 - Instagram de corroboración: [@niebla_coffee](https://www.instagram.com/niebla_coffee/).
 
+## Logo JINSEI
+
+Hoy la marca es un wordmark de texto. Para usar el logo real: subir `assets/jinsei-logo.svg` y poner esa ruta en `JINSEI_LOGO` (arriba de `app.js`). Único lugar.
+
 ## Archivos
 
 `index.html`, `styles.css`, `app.js`, `assets/` (labels, emblemas, logo, OG).
 
 ## Local
 
-Abrí `/workspace/bob/niebla-preventa/site/index.html` o serví la carpeta `site/`.
+Abre `/workspace/bob/niebla-preventa/site/index.html` o sirve la carpeta `site/`.
