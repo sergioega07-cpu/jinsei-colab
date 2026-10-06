@@ -20,6 +20,24 @@
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- Fondo: ciclo de color (bosque → espresso → vino → denim → petróleo) ----------
+     Un temporizador pasa la clase .on al velo siguiente cada 3,2 s; la transición CSS de 1,6 s funde los tonos
+     (ciclo completo 16 s). Corre siempre, incluso con «reducir movimiento» (es solo color, sin desplazamiento)
+     y no depende de @keyframes, que iOS puede ralentizar o suspender en modo de bajo consumo. */
+  (() => {
+    const tint = document.querySelector(".tint");
+    const layers = tint ? Array.from(tint.children) : [];
+    if (layers.length < 2) return;
+    let k = 0;
+    layers[0].classList.add("on");
+    tint.classList.add("tint--js");
+    setInterval(() => {
+      layers[k].classList.remove("on");
+      k = (k + 1) % layers.length;
+      layers[k].classList.add("on");
+    }, 3200);
+  })();
+
   const clp = (n) => "$" + String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const waLink = (text) =>
@@ -276,20 +294,63 @@
   const howtoRoot = $("#howto");
   const howtoHint = $("#howto-hint");
   const howtoBody = $(".howto__body");
-  function howtoIsOpen() { return !!howtoPop && !howtoPop.hidden; }
+  function howtoIsOpen() { return !!howtoPop && !howtoPop.hidden && !closing; }
+  const howtoMorph = $(".howto__morph");
+  const howtoCloud = $(".howto__cloud");
+  const canMorph = !reduceMotion && !!howtoPop && typeof howtoPop.animate === "function" && !!howtoCloud;
+  if (canMorph) howtoRoot?.classList.add("howto--morph");
+  let morphAnims = [];
+  let cloudRect = null;
+  let closing = false;
+  function stopMorph() { morphAnims.forEach((a) => a.cancel()); morphAnims = []; }
+  // Nube → hoja (o al revés): la hoja parte con el tamaño y la posición de la nube y crece hasta su lugar
+  function morph(open) {
+    stopMorph();
+    const pr = howtoPop.getBoundingClientRect();
+    const fr = cloudRect || howtoCloud.getBoundingClientRect();
+    if (!pr.width || !pr.height) return null;
+    const small = {
+      transform: `translate(${fr.left - pr.left}px, ${fr.top - pr.top}px) scale(${Math.max(fr.width / pr.width, .04)}, ${Math.max(fr.height / pr.height, .04)})`,
+      borderRadius: "50%",
+    };
+    const big = { transform: "translate(0px, 0px) scale(1, 1)", borderRadius: getComputedStyle(howtoPop).borderRadius };
+    const opts = open
+      ? { duration: 620, easing: "cubic-bezier(.45, .05, .25, 1)", fill: "both" }
+      : { duration: 380, easing: "cubic-bezier(.55, 0, .7, .4)", fill: "both" };
+    howtoPop.style.transformOrigin = "0 0";
+    const a = howtoPop.animate(open ? [small, big] : [big, small], opts);
+    morphAnims = [a];
+    if (howtoMorph) {
+      morphAnims.push(howtoMorph.animate(open
+        ? [{ opacity: 1 }, { opacity: 1, offset: .4 }, { opacity: 0 }]
+        : [{ opacity: 0 }, { opacity: 1, offset: .55 }, { opacity: 1 }], opts));
+    }
+    return a;
+  }
   function openHowto() {
     if (!howtoPop || !howtoBtn) return;
+    closing = false;
+    if (canMorph) cloudRect = howtoCloud.getBoundingClientRect(); // antes de que la nube se oculte (móvil)
     howtoPop.hidden = false;
     howtoBtn.setAttribute("aria-expanded", "true");
     document.body.classList.add("howto-open");
     howtoHint?.classList.remove("is-on");
+    if (canMorph) { const a = morph(true); if (a) a.onfinish = () => { if (!closing) stopMorph(); }; }
   }
   function closeHowto({ restoreFocus = false } = {}) {
-    if (!howtoPop || !howtoBtn) return;
-    howtoPop.hidden = true;
+    if (!howtoPop || !howtoBtn || closing) return;
+    const finish = () => {
+      closing = false;
+      stopMorph();
+      howtoPop.hidden = true;
+      document.body.classList.remove("howto-open");
+    };
     howtoBtn.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("howto-open");
     if (restoreFocus) howtoBtn.focus({ preventScroll: true });
+    const a = canMorph && !howtoPop.hidden ? morph(false) : null;
+    if (!a) return finish();
+    closing = true;
+    a.onfinish = () => { if (closing) finish(); };
   }
   howtoBtn?.addEventListener("click", () => (howtoIsOpen() ? closeHowto() : openHowto()));
   $("#howto-close")?.addEventListener("click", () => closeHowto({ restoreFocus: true }));

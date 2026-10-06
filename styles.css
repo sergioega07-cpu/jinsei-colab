@@ -65,7 +65,7 @@ button, input, select { font: inherit; color: inherit; }
    Capa 1 (.atmos): un solo gradiente largo para toda la página (las secciones son transparentes); al bajar,
    las manchas fluyen bosque ↔ espresso sobre una base casi negra, con una luz cálida tenue en la portada.
    Capa 2 (.tint): 5 velos fijos del tamaño de la pantalla, uno por tono (bosque → espresso → vino → denim →
-   petróleo), que se funden por OPACIDAD en un ciclo de 16 s (≈3 s por tono). Solo se anima opacity
+   petróleo), que se funden por OPACIDAD en un ciclo de 16 s (≈3 s por tono). Solo cambia opacity
    (lo hace el compositor, sin repintar). Sin textura ni ruido. */
 .atmos {
   position: absolute; inset: 0; z-index: -3; pointer-events: none;
@@ -91,26 +91,32 @@ button, input, select { font: inherit; color: inherit; }
       #080605 0%, #0C0806 9%, #0B0807 17%, #070A08 27%, #080A08 34%, #0A0706 42%, #0C0806 50%,
       #0A0706 58%, #070A08 67%, #080A08 74%, #0B0807 84%, #0C0806 92%, #080605 100%);
 }
-.tint { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; }
+.tint { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden; -webkit-transform: translateZ(0); transform: translateZ(0); }
 .tint i {
-  position: absolute; inset: 0; opacity: 0; will-change: opacity;
+  position: absolute; inset: 0; opacity: 0;
+  -webkit-transform: translateZ(0); transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;
   background:
     radial-gradient(ellipse 75% 62% at 16% 20%, var(--c), transparent 70%),
     radial-gradient(ellipse 70% 62% at 86% 80%, var(--c), transparent 70%);
-  animation: tint 16s linear infinite;
+  -webkit-transition: opacity 1.6s linear; transition: opacity 1.6s linear;
 }
-/* Paleta sobria y oscura (cada velo sobre casi negro queda < 45/255 por canal) */
-.tint i:nth-child(1) { --c: rgba(34, 56, 40, .62); animation-delay: 0s; }      /* bosque */
-.tint i:nth-child(2) { --c: rgba(86, 48, 30, .52); animation-delay: -12.8s; }  /* espresso */
-.tint i:nth-child(3) { --c: rgba(84, 26, 40, .5); animation-delay: -9.6s; }    /* vino */
-.tint i:nth-child(4) { --c: rgba(34, 50, 84, .58); animation-delay: -6.4s; }   /* denim */
-.tint i:nth-child(5) { --c: rgba(20, 60, 62, .58); animation-delay: -3.2s; }   /* petróleo */
-/* visible 0–10 %, se funde 10–20 % mientras entra el siguiente (desfase de 20 % = 3,2 s) */
+/* Paleta sobria y oscura (cada velo sobre casi negro queda < 60/255 por canal) */
+.tint i:nth-child(1) { --c: rgba(34, 56, 40, .62); }  /* bosque */
+.tint i:nth-child(2) { --c: rgba(86, 48, 30, .52); }  /* espresso */
+.tint i:nth-child(3) { --c: rgba(84, 26, 40, .5); }   /* vino */
+.tint i:nth-child(4) { --c: rgba(34, 50, 84, .58); }  /* denim */
+.tint i:nth-child(5) { --c: rgba(20, 60, 62, .58); }  /* petróleo */
+/* Motor principal (app.js): cada 3,2 s pasa la clase .on al velo siguiente y la transición de 1,6 s funde
+   los dos tonos. Corre SIEMPRE, también con «reducir movimiento» o modo de bajo consumo: es solo un fundido
+   de color, sin desplazamiento. Sin JS, el mismo ciclo lo hace este respaldo con @keyframes. */
+.tint i.on { opacity: 1; }
+.tint:not(.tint--js) i { -webkit-animation: tint 16s linear infinite; animation: tint 16s linear infinite; }
+.tint:not(.tint--js) i:nth-child(2) { -webkit-animation-delay: -12.8s; animation-delay: -12.8s; }
+.tint:not(.tint--js) i:nth-child(3) { -webkit-animation-delay: -9.6s; animation-delay: -9.6s; }
+.tint:not(.tint--js) i:nth-child(4) { -webkit-animation-delay: -6.4s; animation-delay: -6.4s; }
+.tint:not(.tint--js) i:nth-child(5) { -webkit-animation-delay: -3.2s; animation-delay: -3.2s; }
+@-webkit-keyframes tint { 0%, 10% { opacity: 1; } 20%, 90% { opacity: 0; } 100% { opacity: 1; } }
 @keyframes tint { 0%, 10% { opacity: 1; } 20%, 90% { opacity: 0; } 100% { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) {
-  .tint i { animation: none; }
-  .tint i:nth-child(1) { opacity: 1; }
-}
 /* Viñeta sutil fija */
 body::before {
   content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
@@ -506,13 +512,13 @@ body.howto-open .howto__hint { opacity: 0; pointer-events: none; }
 }
 @keyframes howtoIn { from { opacity: 0; transform: translate(-4px, 16px) scale(.82); } to { opacity: 1; transform: none; } }
 /* Móvil: hoja inferior compacta (no tapa la portada ni «Ver cafés») */
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .howto__pop .howto__title { margin-bottom: .65rem; }
   .howto__pop .howto__steps { gap: .42rem; }
   .howto__pop { position: fixed; left: .6rem; right: .6rem; bottom: max(.6rem, env(safe-area-inset-bottom)); width: auto; border-radius: 22px; padding: 1.05rem 1.15rem .95rem; transform-origin: 20% 100%; }
 }
 /* Pantallas bajas (p. ej. 390×667): hoja más compacta */
-@media (max-width: 560px) and (max-height: 760px) {
+@media (max-width: 640px) and (max-height: 760px) {
   .howto__pop { bottom: max(.45rem, env(safe-area-inset-bottom)); padding: .65rem 1rem .6rem; }
   .howto__pop .howto__title { margin-bottom: .45rem; font-size: .9rem; }
   .howto__pop .howto__steps { gap: .24rem; }
@@ -541,6 +547,27 @@ body.howto-open .howto__hint { opacity: 0; pointer-events: none; }
 .howto__go { grid-column: 3; justify-self: start; display: inline-flex; align-items: center; gap: .4rem; margin-top: .4rem; min-height: 32px; padding: .4rem .85rem; border-radius: 999px; background: var(--sand-grad); color: #2a1f16; font: 600 .62rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; box-shadow: 0 6px 18px -10px rgba(190, 172, 138, .6); transition: transform .3s var(--ease), box-shadow .3s; }
 .howto__go:hover { transform: translateY(-1px); box-shadow: 0 10px 22px -10px rgba(190, 172, 138, .75); }
 .howto__note { margin: .85rem 0 0; padding-top: .7rem; border-top: 1px solid var(--line); font: italic 500 1.02rem/1.3 var(--f-accent); color: var(--ink-soft); }
+/* Transformación nube → hoja (app.js, Web Animations): la hoja nace del tamaño y lugar de la nube con
+   un velo arena que se disuelve; al cerrar se encoge de vuelta a la nube. */
+.howto__morph { position: absolute; inset: -1px; z-index: 5; border-radius: inherit; pointer-events: none; opacity: 0; background: var(--sand-grad); }
+.howto--morph .howto__pop { animation: none; }
+/* Móvil: nube compacta (≈76×62) para no tapar la portada; al tocarla crece hasta la hoja */
+@media (max-width: 640px) {
+  .howto { left: max(.6rem, env(safe-area-inset-left)); bottom: max(.75rem, env(safe-area-inset-bottom)); }
+  .howto__fab { width: 76px; height: 62px; transition: opacity .25s ease .22s, transform .4s var(--ease) .22s; }
+  .howto__fab[aria-expanded="true"] { opacity: 0; transform: scale(.7); pointer-events: none; animation: none; transition-delay: 0s; }
+  .howto__fab:focus-visible { border-radius: 20px; }
+  .howto__cloud, .howto__ring { inset: 0 3px 19px; }
+  .howto__label { position: absolute; inset: 0; top: 0; }
+  .howto__star { position: absolute; left: 50%; top: 25px; margin: 0; font-size: 1.05rem; line-height: 1; vertical-align: 0; color: #5a4634; transform: translate(-50%, -50%); }
+  .howto__txt { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); font: italic 600 .84rem/1 var(--f-accent); color: var(--sand-hi); text-shadow: 0 1px 2px rgba(0, 0, 0, .9), 0 0 10px rgba(0, 0, 0, .8); }
+  .howto__spark--a { top: -7px; left: 18%; font-size: .72rem; --bx: -8px; --by: -10px; }
+  .howto__spark--b { top: -2px; right: -7px; font-size: .85rem; --bx: 10px; --by: -8px; }
+  .howto__spark--c { bottom: 16px; right: -6px; font-size: .6rem; --bx: 8px; --by: 6px; }
+  .howto__spark--d { top: 38%; left: -8px; font-size: .66rem; --bx: -10px; --by: 4px; }
+  .howto__hint { left: 8px; bottom: calc(100% + 8px); }
+  .howto__hint::after { left: 22px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .howto__fab, .howto__cloud, .howto__ring, .howto__pop, .howto__steps li, .howto__note { animation: none !important; }
   .howto__spark, .howto__ring, .howto__trail { display: none; }
