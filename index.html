@@ -29,22 +29,29 @@
   <!-- CSP: este script en línea está permitido por su hash sha256 (si se edita, actualizar el hash en la meta CSP) -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body class="has-js-home">
   <a class="skip" href="#cafe">Saltar al café disponible</a>
 
   <div class="atmos" aria-hidden="true"></div>
   <div class="tint" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
-  <header class="nav" id="nav">
+  <header class="nav nav--js" id="nav">
     <!-- Marca: wordmark JÎṄSËÎ arena/bronce (assets/jinsei-wordmark-sand.svg) -->
     <a href="inicio/" class="nav__brand" id="brand" aria-label="JINSEI, ir a la portada">
       <img class="brand__logo" src="assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="432" height="91" decoding="async">
     </a>
+    <!-- Monograma JS centrado con halo de niebla: volver a la portada JINSEI -->
+    <a href="inicio/" class="nav__js" aria-label="Volver a la portada JINSEI">
+      <img src="assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
+    </a>
     <nav class="nav__links" aria-label="Secciones">
-      <a href="inicio/" class="nav__home"><span aria-hidden="true">←</span> JINSEI</a>
-      <a href="#colab" data-nav="colab">Colab</a>
-      <a href="#tostador" data-nav="tostador">Conoce a tu tostador</a>
-      <a href="#cafe" data-nav="cafe">Café</a>
+      <span class="nav__group nav__group--l">
+        <a href="#colab" data-nav="colab">Colab</a>
+        <a href="#tostador" data-nav="tostador">Conoce a tu tostador</a>
+      </span>
+      <span class="nav__group nav__group--r">
+        <a href="#cafe" data-nav="cafe">Café</a>
+      </span>
     </nav>
     <div class="nav__actions">
       <a class="nav__wa js-wa"
