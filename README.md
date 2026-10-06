@@ -15,7 +15,12 @@ Pages: https://sergioega07-cpu.github.io/jinsei-colab/
 
 ## Logo JINSEI
 
-Hoy la marca es un wordmark de texto. Para usar el logo real: subir `assets/jinsei-logo.svg` y poner esa ruta en `JINSEI_LOGO` (arriba de `app.js`). Único lugar.
+Logo real en `assets/` (crema `#F2E7CF` sobre transparente; SVG vectorizado + PNG/WebP en alta):
+
+- `jinsei-js.*`: monograma JS (portada).
+- `jinsei-wordmark.*`: wordmark horizontal JÎṄSËÎ (header).
+- `jinsei-wordmark-stacked.*`, `jinsei-lockup.*`: variantes apilada y monograma + wordmark.
+- `jinsei-icon.svg`, `favicon-32.png`, `apple-touch-icon.png`: favicon (JS crema sobre cuadrado oscuro).
 
 ## Archivos
 

@@ -9,8 +9,6 @@
   const CART_KEY = "jinsei-niebla-carrito-v1";
   const NAME_KEY = "jinsei-niebla-nombre-v1";
   const FORMATO = "250 g";
-  // Logo JINSEI: cuando exista, poner aquí "assets/jinsei-logo.svg" (único lugar). Vacío = wordmark de texto.
-  const JINSEI_LOGO = "";
   const PRECIO = 12000;
 
   const CATALOG = {
@@ -28,15 +26,6 @@
     `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text).replace(/[()]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase())}`;
 
   /* ---------- Marca / año ---------- */
-  if (JINSEI_LOGO) {
-    const word = $(".brand__word");
-    if (word) {
-      const img = new Image();
-      img.className = "brand__logo"; img.alt = "JINSEI";
-      img.onload = () => word.replaceWith(img);
-      img.src = JINSEI_LOGO;
-    }
-  }
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 

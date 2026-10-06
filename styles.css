@@ -350,14 +350,22 @@ body.cart-open { overflow: hidden; }
 /* ==========================================================================
    JINSEI × Niebla — v2 (menos texto)
    ========================================================================== */
-/* Marca: wordmark de texto (el logo real reemplaza .brand__word desde app.js) */
-.nav__brand { display: flex; align-items: center; text-decoration: none; }
-.brand__word { font: 600 1.05rem/1 var(--f-title); letter-spacing: .32em; text-transform: uppercase; color: #F2E7CF; padding-left: .32em; text-shadow: 0 0 18px rgba(224, 168, 64, .25); }
-.brand__logo { height: 30px; width: auto; }
+/* Marca: wordmark JÎṄSËÎ (imagen, crema sobre transparente) */
+.nav__brand { display: flex; align-items: center; min-height: 44px; text-decoration: none; flex: none; }
+.brand__logo { height: 21px; width: auto; filter: drop-shadow(0 0 12px rgba(224, 168, 64, .22)); }
+@media (min-width: 900px) { .brand__logo { height: 25px; } }
 
 /* Portada mínima */
 .hero { min-height: 88svh; padding: 6.5rem 1.25rem 4rem; }
 .hero__emblem { width: clamp(72px, 14vw, 104px); height: auto; margin: 0 auto 1.6rem; opacity: .85; filter: drop-shadow(0 0 26px rgba(224, 168, 64, .28)); }
+/* Monograma JS: luz de vela suave */
+.hero__emblem--js { width: auto; height: clamp(118px, 15vw, 156px); opacity: .95; filter: drop-shadow(0 0 14px rgba(224, 168, 64, .32)) drop-shadow(0 0 38px rgba(167, 90, 43, .38)); animation: jsCandle 6s ease-in-out infinite; }
+@keyframes jsCandle {
+  0%, 100% { filter: drop-shadow(0 0 14px rgba(224, 168, 64, .32)) drop-shadow(0 0 38px rgba(167, 90, 43, .38)); }
+  45% { filter: drop-shadow(0 0 18px rgba(224, 168, 64, .42)) drop-shadow(0 0 46px rgba(167, 90, 43, .46)); }
+  70% { filter: drop-shadow(0 0 13px rgba(224, 168, 64, .3)) drop-shadow(0 0 36px rgba(167, 90, 43, .36)); }
+}
+@media (prefers-reduced-motion: reduce) { .hero__emblem--js { animation: none; } }
 .hero__title { font-size: clamp(2.6rem, 10vw, 5.6rem); letter-spacing: .12em; }
 .hero__title em { display: inline; margin: 0; font-size: 1em; letter-spacing: .06em; text-transform: uppercase; font-family: var(--f-title); font-style: normal; color: var(--parchment); }
 .hero__x { font-family: var(--f-accent); font-style: italic; font-weight: 400; color: var(--gold); letter-spacing: 0; font-size: .7em; margin: 0 .05em; }
