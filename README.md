@@ -15,14 +15,14 @@ Pages: https://sergioega07-cpu.github.io/jinsei-colab/
 
 ## Logo JINSEI
 
-Paleta (línea de ropa JINSEI, ref. LÝFT): negro lavado `#0d0e10` con textura acid-wash, marfil `#ece6d8` para texto, plata (`#e6e8ea` → `#9aa0a6`) como acento principal, navy lavado `#2c3a52` / denim `#4f6688`, y de apoyo arena `#c8b48c` (etiquetas, precios), salvia `#a7b3a0` (notas), moca `#6b5444` (tarjetas/hover).
+Paleta (línea de ropa JINSEI, poleras acid-wash): fondo espresso/moca `#241c16`–`#2e241c` con textura acid-wash, marfil `#efe6d2` para texto, títulos arena→marfil, **arena** `#beac8a` como acento principal (botones, nav activa, bordes, precios), **denim lavado** `#4b5470` como secundario (tags/chips), moca `#5f4c3c` / `#6c5947` para tarjetas y bandas.
 
-Logo real en `assets/`: versión plata `*-silver.*` (en uso, degradado metálico) y versión crema `#F2E7CF` (sin sufijo). SVG vectorizado + PNG/WebP en alta, fondo transparente:
+Logo real en `assets/`: versión arena/bronce `*-sand.*` (en uso), además de `*-silver.*` y crema (sin sufijo). SVG vectorizado + PNG/WebP en alta, fondo transparente:
 
 - `jinsei-js.*`: monograma JS (portada).
 - `jinsei-wordmark.*`: wordmark horizontal JÎṄSËÎ (header).
 - `jinsei-wordmark-stacked.*`, `jinsei-lockup.*`: variantes apilada y monograma + wordmark.
-- `jinsei-icon.svg`, `favicon-32.png`, `apple-touch-icon.png`: favicon (JS plata sobre carbón).
+- `jinsei-icon.svg`, `favicon-32.png`, `apple-touch-icon.png`: favicon (JS arena sobre moca).
 
 ## Archivos
 

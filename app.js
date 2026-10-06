@@ -273,16 +273,22 @@
   /* ---------- Cómo pedir (nube flotante) ---------- */
   const howtoBtn = $("#howto-open");
   const howtoPop = $("#howto-pop");
+  const howtoRoot = $("#howto");
+  const howtoHint = $("#howto-hint");
+  const howtoBody = $(".howto__body");
   function howtoIsOpen() { return !!howtoPop && !howtoPop.hidden; }
   function openHowto() {
     if (!howtoPop || !howtoBtn) return;
     howtoPop.hidden = false;
     howtoBtn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("howto-open");
+    howtoHint?.classList.remove("is-on");
   }
   function closeHowto({ restoreFocus = false } = {}) {
     if (!howtoPop || !howtoBtn) return;
     howtoPop.hidden = true;
     howtoBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("howto-open");
     if (restoreFocus) howtoBtn.focus({ preventScroll: true });
   }
   howtoBtn?.addEventListener("click", () => (howtoIsOpen() ? closeHowto() : openHowto()));
@@ -290,6 +296,59 @@
   document.addEventListener("click", (e) => {
     if (howtoIsOpen() && !e.target.closest("#howto")) closeHowto();
   });
+  // Paso 3: «Ver cafés» cierra la nube y baja a Café (el ancla hace el scroll)
+  $$("[data-close-howto]").forEach((el) => el.addEventListener("click", () => closeHowto()));
+
+  // Pista «¿Primera vez? Toca aquí»: una vez por sesión, ~3 s después de cargar, se oculta sola
+  const HINT_KEY = "jinsei-howto-hint-v1";
+  let hintSeen = false;
+  try { hintSeen = sessionStorage.getItem(HINT_KEY) === "1"; } catch (_) {}
+  if (howtoHint && !hintSeen) {
+    setTimeout(() => {
+      if (howtoIsOpen() || menuIsOpen() || document.body.classList.contains("cart-open")) return;
+      howtoHint.classList.add("is-on");
+      try { sessionStorage.setItem(HINT_KEY, "1"); } catch (_) {}
+      setTimeout(() => howtoHint.classList.remove("is-on"), 5000);
+    }, 3000);
+  }
+  howtoHint?.addEventListener("click", () => openHowto());
+
+  // Scroll: la nube se inclina / rebota y deja una breve estela de chispas (sin reduced motion)
+  if (!reduceMotion && howtoRoot && howtoBody && howtoBtn) {
+    let lastY = window.scrollY, settleT = 0, lastTrail = 0;
+    const spawnTrail = (dir) => {
+      const sp = document.createElement("span");
+      sp.className = "howto__trail";
+      sp.setAttribute("aria-hidden", "true");
+      sp.textContent = Math.random() < 0.5 ? "✦" : "✧";
+      const w = howtoBtn.offsetWidth, h = howtoBtn.offsetHeight;
+      sp.style.left = Math.round(w * (0.18 + Math.random() * 0.64)) + "px";
+      sp.style.top = Math.round(dir > 0 ? h * 0.78 : h * 0.12) + "px";
+      sp.style.setProperty("--tx", Math.round((Math.random() - 0.5) * 28) + "px");
+      sp.style.setProperty("--ty", Math.round(dir * (22 + Math.random() * 20)) + "px");
+      sp.style.setProperty("--s", (0.55 + Math.random() * 0.35).toFixed(2) + "rem");
+      sp.addEventListener("animationend", () => sp.remove());
+      howtoRoot.appendChild(sp);
+    };
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY, dy = y - lastY;
+      lastY = y;
+      if (Math.abs(dy) < 2 || howtoIsOpen()) return;
+      const dir = dy > 0 ? 1 : -1;
+      howtoBody.style.setProperty("--tilt", dir * -4 + "deg");
+      howtoBody.style.setProperty("--bob", dir * -4 + "px");
+      clearTimeout(settleT);
+      settleT = setTimeout(() => {
+        howtoBody.style.setProperty("--tilt", "0deg");
+        howtoBody.style.setProperty("--bob", "0px");
+      }, 160);
+      const now = performance.now();
+      if (now - lastTrail > 110 && howtoRoot.querySelectorAll(".howto__trail").length < 8) {
+        lastTrail = now;
+        spawnTrail(dir);
+      }
+    }, { passive: true });
+  }
 
   /* ---------- Nav scrolled + activa ---------- */
   const nav = $("#nav");
