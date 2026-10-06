@@ -100,7 +100,7 @@
 
   function buildOrderMessage() {
     const name = ($("#cart-name")?.value || "").trim();
-    const lines = ["Hola JINSEI × Niebla, quiero reservar este pedido de la preventa:"];
+    const lines = ["Hola JINSEI, quiero reservar este pedido de la preventa:"];
     for (const i of cart) {
       lines.push(`- ${i.qty}× ${i.nombre} ${i.formato} — ${clp(i.precio * i.qty)}`);
     }
@@ -145,7 +145,7 @@
     const a = $("#cart-send");
     if (!a) return;
     if (!cart.length) {
-      a.href = waLink("Hola JINSEI × Niebla, vengo desde la preventa web.");
+      a.href = waLink("Hola JINSEI, vengo desde la preventa web.");
       a.setAttribute("aria-disabled", "true");
       return;
     }
