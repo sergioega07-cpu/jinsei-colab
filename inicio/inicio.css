@@ -1,0 +1,112 @@
+/* ==========================================================================
+   JINSEI · Inicio (portada del hub)
+   Usa los tokens y piezas comunes de ../styles.css (fondo .atmos/.tint, nav, menú, .card).
+   Aquí solo lo propio: portada con el monograma JS, cuatro «puertas» (ramas), pie mínimo.
+   Clases con prefijo hb- para no chocar con la página × Niebla.
+   ========================================================================== */
+html { scroll-padding-top: 80px; }
+body.hb { min-height: 100svh; display: flex; flex-direction: column; }
+body.hb main { flex: 1; }
+
+/* Nav: ramas que aún no existen (Lab, Ropa) quedan atenuadas, sin enlace (igual que Barista Corner) */
+.nav__soon {
+  position: relative; padding: .35rem 0; white-space: nowrap; cursor: default;
+  font: 400 .72rem/1 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: rgba(239, 230, 210, .34);
+}
+.nav__soon small {
+  position: absolute; left: 0; right: .2em; top: calc(100% + .1rem); text-align: center;
+  font: italic 500 .78rem/1 var(--f-accent); letter-spacing: .02em; text-transform: none; color: rgba(190, 172, 138, .5);
+}
+.menu__item { display: flex; align-items: baseline; gap: 1.1rem; padding: 1.05rem 1.6rem 1.05rem .3rem; color: rgba(239, 230, 210, .38); }
+.menu__soon .menu__n { opacity: .35; }
+.menu__soon .menu__sub { color: rgba(190, 172, 138, .5); }
+
+/* Aparición suave: solo opacidad, sin desplazamiento */
+.js .hb-fade { opacity: 0; transition: opacity 1.2s var(--ease); }
+.js body.is-ready .hb-fade { opacity: 1; }
+.js body.is-ready .hb-hero__title { transition-delay: .12s; }
+.js body.is-ready .hb-hero__line { transition-delay: .24s; }
+.js body.is-ready .hb-grid { transition-delay: .4s; }
+@media (prefers-reduced-motion: reduce) { .js .hb-fade { transition: none; } }
+
+/* ---------- Portada ----------
+   Monograma JS quieto: sin transform animado ni filtros animados; el brillo es fijo. */
+.hb-hero {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: calc(7.5rem + env(safe-area-inset-top)) 1.25rem clamp(3.5rem, 8vw, 6rem);
+}
+.hb-hero__mark { display: flex; justify-content: center; width: 100%; margin: 0 0 clamp(1.8rem, 3.5vw, 2.4rem); }
+.hb-hero__js {
+  display: block; flex: none; width: auto; height: clamp(170px, 22vw, 250px); margin: 0 auto; opacity: .97;
+  filter: drop-shadow(0 0 12px rgba(216, 196, 150, .18)) drop-shadow(0 0 40px rgba(160, 124, 80, .26));
+}
+.hb-hero__title { margin: 0; line-height: 0; }
+.hb-hero__word { display: block; width: clamp(150px, 18vw, 210px); height: auto; margin: 0 auto; opacity: .92; }
+.hb-hero__line {
+  margin: clamp(1.3rem, 2.6vw, 1.7rem) auto 0; max-width: 36rem; text-wrap: balance;
+  font: italic 400 clamp(1.15rem, 2.4vw, 1.4rem)/1.45 var(--f-accent); color: var(--ink-soft);
+}
+
+/* ---------- Puertas (ramas) ----------
+   1 columna en móvil, 2×2 en tablet, 4 en fila en escritorio. */
+.hb-doors { padding: 0 0 clamp(3.5rem, 8vw, 6rem); }
+.hb-grid {
+  list-style: none; margin: 0 auto; padding: 0;
+  width: min(1160px, 100% - 2.5rem);
+  display: grid; gap: clamp(1rem, 2vw, 1.4rem);
+  grid-template-columns: minmax(0, 420px); justify-content: center;
+}
+@media (min-width: 640px) { .hb-grid { grid-template-columns: repeat(2, minmax(0, 340px)); } }
+@media (min-width: 1100px) { .hb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.hb-door { display: flex; min-width: 0; }
+.hb-door__card {
+  flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 1.3rem 1.2rem 1.45rem; text-decoration: none; color: inherit;
+}
+.hb-door__n { font: italic 500 1.3rem/1 var(--f-accent); color: var(--gold); opacity: .8; margin-bottom: 1rem; }
+.hb-door__plate {
+  position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; overflow: hidden;
+  border-radius: calc(var(--radius) - 6px);
+  background: radial-gradient(60% 55% at 50% 55%, rgba(167, 90, 43, .2), rgba(8, 6, 5, 0) 72%), rgba(8, 6, 5, .55);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+@media (max-width: 639px) { .hb-door__plate { aspect-ratio: 16 / 10; } }
+.hb-door__img {
+  position: absolute; inset: 0; margin: auto; width: 78%; height: 78%; object-fit: contain;
+  transition: transform .9s var(--ease);
+}
+.hb-door__img--emblem { width: 64%; height: 60%; opacity: .9; filter: drop-shadow(0 0 18px rgba(204, 187, 152, .12)); }
+.hb-door__img--product { height: 84%; }
+.hb-door__img--mark { height: 42%; opacity: .13; }
+a.hb-door__card:hover .hb-door__img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .hb-door__img { transition: none; } a.hb-door__card:hover .hb-door__img { transform: none; } }
+.hb-door__name { margin-top: 1.15rem; font: 500 1.28rem/1.15 var(--f-title); letter-spacing: .07em; color: var(--ivory); }
+.hb-door__x { font: italic 400 1.3em/1 var(--f-accent); color: var(--gold); letter-spacing: 0; }
+.hb-door__line { margin: .45rem 0 1.3rem; font-size: .9rem; line-height: 1.5; color: var(--ink-soft); text-wrap: balance; }
+.hb-door__go, .hb-door__soon { margin-top: auto; }
+.hb-door__go {
+  position: relative; display: inline-flex; gap: .45rem; padding: .35rem 0;
+  font: 500 .66rem/1 var(--f-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--sand-hi);
+}
+.hb-door__go::after {
+  content: ""; position: absolute; left: 50%; right: 50%; bottom: 0; height: 1px; background: var(--gold); opacity: 0;
+  transition: left .45s var(--ease), right .45s var(--ease), opacity .45s;
+}
+a.hb-door__card:hover .hb-door__go::after, a.hb-door__card:focus-visible .hb-door__go::after { left: 0; right: 0; opacity: 1; }
+
+/* Pronto: atenuadas pero cuidadas (sin enlace, sin brillo al pasar) */
+.hb-door--soon .hb-door__card { background: linear-gradient(180deg, rgba(24, 18, 14, .55), rgba(14, 10, 8, .6)); box-shadow: 0 0 0 1px rgba(190, 172, 138, .08); }
+.hb-door--soon .hb-door__card:hover { box-shadow: 0 0 0 1px rgba(190, 172, 138, .08); }
+.hb-door--soon .hb-door__n { opacity: .4; }
+.hb-door--soon .hb-door__plate { background: rgba(8, 6, 5, .35); }
+.hb-door--soon .hb-door__name { color: rgba(239, 230, 210, .6); }
+.hb-door--soon .hb-door__line { color: var(--ink-faint); }
+.hb-door__soon {
+  display: inline-block; padding: .4rem .75rem; border-radius: 999px;
+  font: 500 .6rem/1 var(--f-mono); letter-spacing: .18em; text-transform: uppercase;
+  color: #dde2ee; border: 1px solid rgba(110, 122, 158, .45); background: rgba(75, 84, 112, .32);
+}
+
+/* ---------- Pie ---------- */
+.hb-footer { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 2.5rem 1rem calc(2.5rem + env(safe-area-inset-bottom)); }
+.hb-footer__mark { width: auto; height: 34px; opacity: .7; }

@@ -30,6 +30,11 @@ Logo real en `assets/`: versión arena/bronce `*-sand.*` (en uso), además de `*
 Sección general (sin subcategorías). Usa `../styles.css` (tokens, fondo, nav) + `barista.css`; productos en el arreglo `PRODUCTS` de `barista-corner/barista.js` (agregar un producto = agregar una entrada; si no hay precio confirmado, omitir `precio`). Fotos en `assets/barista/` (webp). Primer producto: Prestina → https://sergioega07-cpu.github.io/prestina/.  
 La raíz (`index.html`, × Niebla) no enlaza aún a Barista Corner.
 
+## Inicio (portada del hub JINSEI, en vista previa)
+
+`inicio/` → https://sergioega07-cpu.github.io/jinsei-colab/inicio/  
+Monograma JS + wordmark y cuatro puertas: × Niebla (`../`), Barista Corner (`../barista-corner/`), Lab y Ropa (Pronto, sin enlace). `../styles.css` + `inicio.css` (prefijo `hb-`) + `inicio.js`. Aún no enlazada desde la raíz ni desde Barista Corner.
+
 ## Archivos
 
 `index.html`, `styles.css`, `app.js`, `assets/` (labels, emblemas, logo, OG).
