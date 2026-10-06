@@ -36,14 +36,15 @@
   <div class="tint" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
   <header class="nav" id="nav">
-    <!-- Marca: wordmark JÎṄSËÎ arena/bronce, logo estático (sin enlace) -->
+    <!-- Marca: wordmark JÎṄSËÎ, logo estático (sin enlace) -->
     <span class="nav__brand" id="brand">
       <img class="brand__logo" src="assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="432" height="91" decoding="async">
     </span>
-    <nav class="nav__links" aria-label="Secciones">
-      <a href="#colab" data-nav="colab">Colab</a>
-      <a href="#tostador" data-nav="tostador">Conoce a tu tostador</a>
-      <a href="#cafe" data-nav="cafe">Café</a>
+    <nav class="nav__links" aria-label="Ramas JINSEI">
+      <a href="#top" class="is-active" aria-current="page">× Niebla</a>
+      <a href="barista-corner/">Barista Corner</a>
+      <span class="nav__soon">Lab<small>Pronto</small></span>
+      <span class="nav__soon">Ropa<small>Pronto</small></span>
     </nav>
     <div class="nav__actions">
       <!-- Botón maestro: monograma JS con halo de niebla = volver a la portada JINSEI -->
@@ -67,11 +68,12 @@
   <div class="menu" id="menu" hidden>
     <div class="menu__backdrop" data-close-menu></div>
     <nav class="menu__panel" aria-label="Menú principal">
-      <p class="menu__kicker">JINSEI × Niebla</p>
+      <p class="menu__kicker">JINSEI</p>
       <ol class="menu__list">
-        <li><a href="#colab" data-nav="colab"><span class="menu__n">I</span><span class="menu__t">Colab</span></a></li>
-        <li><a href="#tostador" data-nav="tostador"><span class="menu__n">II</span><span class="menu__t">Conoce a tu tostador</span></a></li>
-        <li><a href="#cafe" data-nav="cafe"><span class="menu__n menu__n--glyph">✦</span><span class="menu__t">Café</span></a></li>
+        <li><a href="#top" class="is-active" aria-current="page"><span class="menu__n">I</span><span class="menu__t">× Niebla</span></a></li>
+        <li><a href="barista-corner/"><span class="menu__n">II</span><span class="menu__t">Barista Corner</span></a></li>
+        <li class="menu__soon"><span class="menu__item"><span class="menu__n">III</span><span class="menu__t">Lab<span class="menu__sub">Pronto</span></span></span></li>
+        <li class="menu__soon"><span class="menu__item"><span class="menu__n">IV</span><span class="menu__t">Ropa<span class="menu__sub">Pronto</span></span></span></li>
       </ol>
     </nav>
   </div>

@@ -27,7 +27,7 @@ Logo real en `assets/`: versión arena/bronce `*-sand.*` (en uso), además de `*
 ## Barista Corner (rama del hub JINSEI)
 
 `barista-corner/` → https://sergioega07-cpu.github.io/jinsei-colab/barista-corner/  
-Sección general (sin subcategorías). Usa `../styles.css` (tokens, fondo, nav) + `barista.css`; productos en el arreglo `PRODUCTS` de `barista-corner/barista.js` (agregar un producto = agregar una entrada; si no hay precio confirmado, omitir `precio`). Fotos en `assets/barista/` (webp). Primer producto: Prestina → https://sergioega07-cpu.github.io/prestina/.  
+Sección general (sin subcategorías). Usa `../styles.css` (tokens, fondo, nav) + `barista.css`; productos en el arreglo `PRODUCTS` de `barista-corner/barista.js` (agregar un producto = agregar una entrada; si no hay precio confirmado, omitir `precio`). Fotos en `assets/barista/` (webp). Primer producto: Prestina → https://sergioega07-cpu.github.io/prestina/?v=2.  
 La raíz (`index.html`, × Niebla) no enlaza aún a Barista Corner.
 
 ## Inicio (portada del hub JINSEI, en vista previa)
