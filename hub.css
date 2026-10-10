@@ -130,3 +130,14 @@ a.hb-door__card:hover .hb-door__go::after, a.hb-door__card:focus-visible .hb-doo
 .tz-pay__rules{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.06em;opacity:.75}
 .tz-cta{display:flex;flex-direction:column;align-items:center;gap:14px}
 .tz-pdf{color:inherit;opacity:.8;font-size:.9rem}
+
+/* Subtítulo de puerta (p. ej. Colab / Niebla) */
+.hb-door__sub {
+  display: block;
+  margin-top: -0.2rem;
+  font-family: var(--f-title, serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #beac8a;
+}
