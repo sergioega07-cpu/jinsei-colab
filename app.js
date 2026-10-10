@@ -65,11 +65,13 @@
   }
 
   /* ---------- Carrito ---------- */
+  const MAX_QTY = 20;
   let cart = [];
   try {
     cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
     if (!Array.isArray(cart)) cart = [];
-    cart = cart.filter((i) => CATALOG[i.id]);
+    cart = cart.filter((i) => i && typeof i.id === "string" && Object.prototype.hasOwnProperty.call(CATALOG, i.id))
+      .map((i) => ({ ...i, key: i.id, precio: PRECIO, qty: Math.min(MAX_QTY, Math.max(1, parseInt(i.qty, 10) || 1)) }));
   } catch {
     cart = [];
   }
@@ -85,7 +87,7 @@
     if (!p) return;
     const key = id;
     const it = cart.find((i) => i.key === key);
-    if (it) it.qty++;
+    if (it) { if (it.qty >= MAX_QTY) { toast(`Máximo ${MAX_QTY} por café en la preventa`); return; } it.qty++; }
     else cart.push({ key, id: p.id, nombre: p.nombre, formato: FORMATO, precio: PRECIO, qty: 1 });
     saveCart();
     renderCart();
@@ -118,7 +120,7 @@
         <div><p class="cart-item__name">${esc(i.nombre)}</p><p class="cart-item__opt">${esc(i.formato)} · ${clp(i.precio)} c/u</p></div>
         <div class="cart-item__price">${clp(i.precio * i.qty)}</div>
         <div class="cart-item__row">
-          <div class="qty"><button type="button" data-q="-1" aria-label="Quitar uno">−</button><output aria-live="polite">${i.qty}</output><button type="button" data-q="1" aria-label="Agregar uno">+</button></div>
+          <div class="qty"><button type="button" data-q="-1" aria-label="Quitar uno">−</button><output aria-live="polite">${esc(i.qty)}</output><button type="button" data-q="1" aria-label="Agregar uno" ${i.qty >= MAX_QTY ? "disabled" : ""}>+</button></div>
           <button type="button" class="cart-item__remove" data-remove>Eliminar</button>
         </div>
       </li>`
@@ -165,6 +167,7 @@
     if (e.target.closest("[data-remove]")) cart = cart.filter((i) => i !== it);
     const q = e.target.closest("[data-q]");
     if (q) {
+      if (+q.dataset.q > 0 && it.qty >= MAX_QTY) { toast(`Máximo ${MAX_QTY} por café en la preventa`); return; }
       it.qty += +q.dataset.q;
       if (it.qty <= 0) cart = cart.filter((i) => i !== it);
     }
