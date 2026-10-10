@@ -100,3 +100,33 @@ a.hb-door__card:hover .hb-door__go::after, a.hb-door__card:focus-visible .hb-doo
 /* ---------- Pie ---------- */
 .hb-footer { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 2.5rem 1rem calc(2.5rem + env(safe-area-inset-bottom)); }
 .hb-footer__mark { width: auto; height: 34px; opacity: .7; }
+
+/* ---------- Invitación a tostadores (portada) ---------- */
+.hb-serv{max-width:1180px;margin:0 auto;padding:0 20px 64px}
+.hb-serv__card{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:32px 24px;text-decoration:none;color:inherit}
+.hb-serv__kicker,.tz-kicker{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin:0}
+.hb-serv__title{font-family:"Cormorant Garamond",serif;font-size:clamp(1.4rem,3vw,2rem);line-height:1.2}
+.hb-serv__line{opacity:.8}
+
+/* ---------- Página Para tostadores (prefijo tz-) ---------- */
+.tz{max-width:1080px;margin:0 auto;padding:120px 20px 64px;display:flex;flex-direction:column;gap:40px}
+.tz-hero{text-align:center}
+.tz-title{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(2rem,6vw,3.6rem);line-height:1.1;margin:.3em 0}
+.tz-lead{font-size:clamp(1.05rem,2.4vw,1.3rem);opacity:.85;margin:0}
+.tz-case,.tz-pay{padding:28px 24px;text-align:center}
+.tz-case a{color:inherit}
+.tz-case__text{font-family:"Cormorant Garamond",serif;font-size:clamp(1.2rem,2.6vw,1.55rem);line-height:1.35;margin:.6em auto 0;max-width:46ch}
+.tz-grid{list-style:none;margin:0;padding:0;display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:860px){.tz-grid{grid-template-columns:repeat(3,1fr)}}
+.tz-plan{position:relative;padding:28px 22px}
+.tz-plan--rec{outline:1px solid currentColor}
+.tz-plan__tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;background:#c9b48a;color:#1b1a18;border-radius:999px}
+.tz-plan__name{font-family:"Cinzel",serif;font-size:1.4rem;margin:0 0 12px}
+.tz-plan__price{margin:4px 0;font-size:1.05rem}
+.tz-plan__price span{display:inline-block;min-width:5.5em;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.tz-plan__list{margin:14px 0 0;padding-left:1.1em;line-height:1.6;opacity:.9}
+.tz-pay__title{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(1.5rem,3.4vw,2.1rem);margin:0 0 .4em}
+.tz-pay p{max-width:52ch;margin:0 auto .6em}
+.tz-pay__rules{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.06em;opacity:.75}
+.tz-cta{display:flex;flex-direction:column;align-items:center;gap:14px}
+.tz-pdf{color:inherit;opacity:.8;font-size:.9rem}

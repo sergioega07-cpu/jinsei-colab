@@ -5,33 +5,33 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qOhFsq0QMV2REqNwk5hGH5bZE9SkX6gt6yeyKdYPv+U='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self' https://wa.me https://api.whatsapp.com; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Barista Corner — JINSEI</title>
-  <meta name="description" content="Barista Corner de JINSEI: herramientas para tu café de cada día. Primera: Prestina.">
+  <title>Para tostadores · JINSEI</title>
+  <meta name="description" content="Tu tostaduría, al alcance de todos: página web con catálogo y pedidos por WhatsApp. Aceptamos café como pago.">
   <meta name="theme-color" content="#080605">
   <link rel="icon" href="../assets/jinsei-icon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=3" sizes="180x180">
-  <link rel="canonical" href="https://sergioega07-cpu.github.io/jinsei-colab/barista-corner/">
+  <link rel="canonical" href="https://sergioega07-cpu.github.io/jinsei-colab/tostadores/">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CL">
   <meta property="og:site_name" content="JINSEI">
-  <meta property="og:title" content="Barista Corner — JINSEI">
-  <meta property="og:description" content="Herramientas para tu café de cada día, elegidas por JINSEI.">
-  <meta property="og:url" content="https://sergioega07-cpu.github.io/jinsei-colab/barista-corner/">
+  <meta property="og:title" content="Para tostadores · JINSEI">
+  <meta property="og:description" content="Coffee, Comfort Food &amp; Lifestyle">
+  <meta property="og:url" content="https://sergioega07-cpu.github.io/jinsei-colab/tostadores/">
   <meta name="twitter:card" content="summary">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Tokens y piezas comunes (fondo, tint, nav, menú, botones) desde la página raíz; lo propio en barista.css -->
+  <!-- Tokens y piezas comunes (fondo, tint, nav, menú, botones) desde la página raíz; lo propio en inicio.css (prefijo hb-) -->
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="barista.css">
+  <link rel="stylesheet" href="../hub.css">
   <!-- CSP: este script en línea está permitido por su hash sha256 (si se edita, actualizar el hash en la meta CSP) -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
-<body class="bc">
-  <a class="skip" href="#productos">Saltar a los productos</a>
+<body class="hb">
+  <a class="skip" href="#planes">Saltar a los planes</a>
 
   <div class="atmos" aria-hidden="true"></div>
   <div class="tint" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
@@ -43,7 +43,7 @@
     </span>
     <nav class="nav__links" aria-label="Ramas JINSEI">
       <a href="../niebla/">Niebla</a>
-      <a href="./" class="is-active" aria-current="page">Barista Corner</a>
+      <a href="../barista-corner/">Barista Corner</a>
       <span class="nav__soon">Lab<small>Pronto</small></span>
       <span class="nav__soon">Ropa<small>Pronto</small></span>
     </nav>
@@ -53,7 +53,7 @@
         <img src="../assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
       </a>
       <a class="nav__wa js-wa"
-         data-wa="Hola JINSEI, vengo desde Barista Corner."
+         data-wa="Hola JINSEI, vengo desde la web."
          href="https://wa.me/56951774751"
          target="_blank" rel="noopener noreferrer"
          aria-label="Escribir por WhatsApp">
@@ -72,38 +72,69 @@
       <p class="menu__kicker">JINSEI</p>
       <ol class="menu__list">
         <li><a href="../niebla/"><span class="menu__n">I</span><span class="menu__t">Niebla</span></a></li>
-        <li><a href="./" class="is-active" aria-current="page"><span class="menu__n">II</span><span class="menu__t">Barista Corner</span></a></li>
-        <li><a href="../tostadores/"><span class="menu__n">·</span><span class="menu__t">Para tostadores</span></a></li>
+        <li><a href="../barista-corner/"><span class="menu__n">II</span><span class="menu__t">Barista Corner</span></a></li>
+        <li><a href="./" class="is-active" aria-current="page"><span class="menu__n">·</span><span class="menu__t">Para tostadores</span></a></li>
         <li class="menu__soon"><span class="menu__item"><span class="menu__n">III</span><span class="menu__t">Lab<span class="menu__sub">Pronto</span></span></span></li>
         <li class="menu__soon"><span class="menu__item"><span class="menu__n">IV</span><span class="menu__t">Ropa<span class="menu__sub">Pronto</span></span></span></li>
       </ol>
     </nav>
   </div>
 
-  <main>
-    <section class="bc-hero">
-      <img class="bc-hero__mark bc-fade" src="../assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
-      <h1 class="bc-hero__title bc-fade">Barista Corner</h1>
-      <p class="bc-hero__sub bc-fade">Herramientas para tu café de cada día, elegidas por JINSEI.</p>
+  <main class="tz">
+    <section class="tz-hero hb-fade">
+      <p class="tz-kicker">Para tostadores</p>
+      <h1 class="tz-title">Tu tostaduría, al alcance de todos.</h1>
+      <p class="tz-lead">Tú te preocupas del café. Lo demás lo hacemos nosotros.</p>
     </section>
 
-    <section id="productos" class="bc-shop" aria-label="Productos">
-      <div class="bc-wrap">
-        <!-- Se llena desde PRODUCTS en barista.js (agregar un producto = agregar una entrada) -->
-        <ul class="bc-grid bc-fade" id="bc-grid"></ul>
-        <noscript>
-          <p class="bc-noscript"><a href="https://sergioega07-cpu.github.io/prestina/?v=2">Ver Prestina →</a></p>
-        </noscript>
-        <p class="bc-more bc-fade">Más herramientas, pronto.</p>
-      </div>
+    <section class="tz-case card hb-fade">
+      <p class="tz-kicker">Caso: <a href="https://nieblacoffee.cl/" target="_blank" rel="noopener noreferrer">Niebla Café · nieblacoffee.cl</a></p>
+      <p class="tz-case__text">No hacemos solo una página web: convertimos tu visión en realidad y optimizamos todos los procesos, para que tú te centres en tus metas y objetivos.</p>
+    </section>
+
+    <section id="planes" class="tz-plans hb-fade" aria-label="Planes">
+      <ol class="tz-grid">
+        <li class="card tz-plan">
+          
+          <h3 class="tz-plan__name">Semilla</h3>
+          <p class="tz-plan__price"><span>Armado</span> $120.000 + 1 kg</p>
+          <p class="tz-plan__price"><span>Mensual</span> $20.000 + 250 g</p>
+          <ul class="tz-plan__list"><li>Catálogo y carrito a WhatsApp</li><li>Dominio .cl con HTTPS</li><li>Hasta 2 cambios al mes</li></ul>
+        </li>
+        <li class="card tz-plan tz-plan--rec">
+          <span class="tz-plan__tag">Recomendado</span>
+          <h3 class="tz-plan__name">Tueste</h3>
+          <p class="tz-plan__price"><span>Armado</span> $150.000 + 2 kg</p>
+          <p class="tz-plan__price"><span>Mensual</span> $25.000 + 250 g</p>
+          <ul class="tz-plan__list"><li>Todo lo de Semilla</li><li>Cambios ilimitados</li><li>Precios, stock y temporadas</li></ul>
+        </li>
+        <li class="card tz-plan">
+          
+          <h3 class="tz-plan__name">Origen</h3>
+          <p class="tz-plan__price"><span>Armado</span> $200.000 + 2 kg</p>
+          <p class="tz-plan__price"><span>Mensual</span> $40.000 + 500 g</p>
+          <ul class="tz-plan__list"><li>Todo lo de Tueste</li><li>Historia y orígenes con fotos</li><li>Instagram</li><li>Respuesta en menos de 24 h</li></ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="tz-pay card hb-fade">
+      <h2 class="tz-pay__title">Aceptamos café como pago</h2>
+      <p>Valoramos el trabajo del tostador. Buscamos un intercambio justo entre servicio y café: sin cobros enormes, solo lo justo. Y nos encanta el café.</p>
+      <p class="tz-pay__rules">Precios claros, sin cobros escondidos · Mínimo 3 meses, luego mes a mes</p>
+    </section>
+
+    <section class="tz-cta hb-fade">
+      <a class="btn btn--primary js-wa" data-wa="Hola JINSEI, tengo una tostaduría y me interesa su servicio web." href="https://wa.me/56951774751" target="_blank" rel="noopener noreferrer">Conversemos por WhatsApp</a>
+      <a class="tz-pdf" href="../assets/jinsei-propuesta-tostadores.pdf" download>Descargar la propuesta (PDF)</a>
     </section>
   </main>
 
-  <footer class="footer bc-footer">
-    <img class="bc-footer__mark" src="../assets/jinsei-js-sand.svg" alt="" width="103" height="215" loading="lazy" decoding="async">
-    <p>JINSEI</p>
+  <footer class="footer hb-footer">
+    <img class="hb-footer__mark" src="../assets/jinsei-js-sand.svg" alt="" width="103" height="215" loading="lazy" decoding="async">
+    <p>JINSEI · <a href="./">Para tostadores</a></p>
   </footer>
 
-  <script src="barista.js" defer></script>
+  <script src="../hub.js" defer></script>
 </body>
 </html>

@@ -5,8 +5,8 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qOhFsq0QMV2REqNwk5hGH5bZE9SkX6gt6yeyKdYPv+U='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self' https://wa.me https://api.whatsapp.com; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>JINSEI × Niebla — Preventa de cafés</title>
-  <meta name="description" content="JINSEI × Niebla: preventa de cafés de especialidad Niebla (Espantapájaros y Vampiros). Pide por WhatsApp.">
+  <title>JINSEI</title>
+  <meta name="description" content="JINSEI: coffee, comfort food &amp; lifestyle. Niebla, Barista Corner, Lab y Ropa.">
   <meta name="theme-color" content="#080605">
   <link rel="icon" href="assets/jinsei-icon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
@@ -15,44 +15,46 @@
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CL">
-  <meta property="og:site_name" content="JINSEI × Niebla">
-  <meta property="og:title" content="JINSEI × Niebla — Preventa de cafés">
-  <meta property="og:description" content="JINSEI colab con Niebla: Espantapájaros y Vampiros en preventa. Pide por WhatsApp.">
+  <meta property="og:site_name" content="JINSEI">
+  <meta property="og:title" content="JINSEI">
+  <meta property="og:description" content="Coffee, Comfort Food &amp; Lifestyle">
   <meta property="og:url" content="https://sergioega07-cpu.github.io/jinsei-colab/">
-  <meta property="og:image" content="https://sergioega07-cpu.github.io/jinsei-colab/assets/og-niebla.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Tokens y piezas comunes (fondo, tint, nav, menú, botones) desde la página raíz; lo propio en inicio.css (prefijo hb-) -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="hub.css">
+  <script src="legacy-hash.js"></script>
   <!-- CSP: este script en línea está permitido por su hash sha256 (si se edita, actualizar el hash en la meta CSP) -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
-<body>
-  <a class="skip" href="#cafe">Saltar al café disponible</a>
+<body class="hb">
+  <a class="skip" href="#ramas">Saltar a las ramas</a>
 
   <div class="atmos" aria-hidden="true"></div>
   <div class="tint" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
   <header class="nav" id="nav">
     <!-- Marca: wordmark JÎṄSËÎ, logo estático (sin enlace) -->
-    <span class="nav__brand" id="brand">
+    <span class="nav__brand">
       <img class="brand__logo" src="assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="432" height="91" decoding="async">
     </span>
     <nav class="nav__links" aria-label="Ramas JINSEI">
-      <a href="#top" class="is-active" aria-current="page">× Niebla</a>
+      <a href="niebla/">Niebla</a>
       <a href="barista-corner/">Barista Corner</a>
       <span class="nav__soon">Lab<small>Pronto</small></span>
       <span class="nav__soon">Ropa<small>Pronto</small></span>
     </nav>
     <div class="nav__actions">
       <!-- Botón maestro: monograma JS con halo de niebla = volver a la portada JINSEI -->
-      <a href="inicio/" class="nav__js" aria-label="Volver a la portada JINSEI">
+      <a href="./" class="nav__js" aria-label="Volver a la portada JINSEI" aria-current="page">
         <img src="assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async">
       </a>
       <a class="nav__wa js-wa"
-         data-wa="Hola JINSEI, vengo desde la preventa web y tengo una consulta."
+         data-wa="Hola JINSEI, vengo desde la web."
          href="https://wa.me/56951774751"
          target="_blank" rel="noopener noreferrer"
          aria-label="Escribir por WhatsApp">
@@ -70,8 +72,9 @@
     <nav class="menu__panel" aria-label="Menú principal">
       <p class="menu__kicker">JINSEI</p>
       <ol class="menu__list">
-        <li><a href="#top" class="is-active" aria-current="page"><span class="menu__n">I</span><span class="menu__t">× Niebla</span></a></li>
+        <li><a href="niebla/"><span class="menu__n">I</span><span class="menu__t">Niebla</span></a></li>
         <li><a href="barista-corner/"><span class="menu__n">II</span><span class="menu__t">Barista Corner</span></a></li>
+        <li><a href="tostadores/"><span class="menu__n">·</span><span class="menu__t">Para tostadores</span></a></li>
         <li class="menu__soon"><span class="menu__item"><span class="menu__n">III</span><span class="menu__t">Lab<span class="menu__sub">Pronto</span></span></span></li>
         <li class="menu__soon"><span class="menu__item"><span class="menu__n">IV</span><span class="menu__t">Ropa<span class="menu__sub">Pronto</span></span></span></li>
       </ol>
@@ -79,194 +82,73 @@
   </div>
 
   <main>
-    <!-- PORTADA -->
-    <section id="portada" class="hero">
-      <div class="hero__inner">
-        <!-- Emblema: monograma JS de JINSEI -->
-        <span class="hero__mark reveal reveal--fade"><img class="hero__emblem hero__emblem--js" src="assets/jinsei-js-sand.svg" alt="" width="103" height="215" decoding="async" fetchpriority="high"></span>
-        <h1 class="hero__title reveal">JINSEI<span class="hero__x"> × </span><em>Niebla</em></h1>
-        <p class="hero__tagline reveal">Cafés de especialidad en preventa.</p>
-        <div class="hero__cta reveal">
-          <a href="#cafe" class="btn btn--primary">Ver cafés</a>
-        </div>
+    <!-- PORTADA: el monograma JS es el protagonista (quieto; solo aparece por opacidad) -->
+    <section class="hb-hero">
+      <div class="hb-hero__mark hb-fade">
+        <img class="hb-hero__js" id="hb-js" src="assets/jinsei-js-sand.svg" alt="" width="824" height="1720" decoding="async" fetchpriority="high">
       </div>
+      <h1 class="hb-hero__title hb-fade"><img class="hb-hero__word" src="assets/jinsei-wordmark-sand.svg" alt="JINSEI" width="3456" height="728" decoding="async"></h1>
+      <p class="hb-hero__line hb-fade">Coffee, Comfort Food &amp; Lifestyle</p>
     </section>
 
-    <!-- COLAB -->
-    <section id="colab" class="section colab">
-      <div class="wrap">
-        <header class="section__head section__head--center reveal">
-          <p class="kicker">JINSEI colab</p>
-          <h2>Buenos cafés, sin ensayo y error</h2>
-          <p class="section__sub">Acercamos a quienes aman el café a tostadurías de alta calidad que están comenzando su aventura.</p>
-        </header>
-        <ul class="colab__grid reveal">
-          <li class="card colab__card"><span class="pillar__n">i</span><h3>Tostadurías que empiezan</h3><p>Proyectos de alta calidad que están creciendo.</p></li>
-          <li class="card colab__card"><span class="pillar__n">ii</span><h3>Sin ensayo y error</h3><p>Sin scroll eterno de reviews ni rumores: te ayudamos a encontrar buenos cafés.</p></li>
-          <li class="card colab__card"><span class="pillar__n">iii</span><h3>Un punto de encuentro</h3><p>Para quienes buscan probar cafés nuevos y buenos.</p></li>
-        </ul>
-        <p class="colab__foot reveal">Niebla es nuestra primera colab. <em>Cada colab, una tostaduría nueva.</em></p>
-      </div>
-    </section>
-
-    <!-- CONOCE A TU TOSTADOR -->
-    <section id="tostador" class="section">
-      <div class="wrap">
-        <header class="section__head section__head--center reveal">
-          <img class="emblem emblem--book" src="assets/emblema-libro.webp" alt="" width="360" height="337" loading="lazy" decoding="async">
-          <p class="kicker">Niebla · Machalí</p>
-          <h2>Conoce a tu tostador</h2>
-        </header>
-        <div class="card roast-intro reveal">
-          <div class="roast-intro__main">
-            <p class="learn__tag">Niebla, tostaduría mágica</p>
-            <p>Un mundo de brujos y brujas en Machalí que tuesta en lotes pequeños y envía a todo Chile.</p>
-            <p class="learn__tag roast-intro__tag2">Omniroast</p>
-            <p>Un solo perfil por origen, para filtrado y espresso: sin sobredesarrollar el café, para dejar hablar al origen.</p>
-            <ul class="omni__uses" aria-label="Sirve para"><li>Filtrado</li><li>Espresso</li></ul>
+    <!-- RAMAS: cuatro puertas -->
+    <section id="ramas" class="hb-doors" aria-label="Ramas JINSEI">
+      <ol class="hb-grid hb-fade">
+        <li class="hb-door">
+          <a class="card hb-door__card" href="niebla/">
+            <span class="hb-door__n" aria-hidden="true">I</span>
+            <span class="hb-door__plate"><img class="hb-door__img hb-door__img--niebla" src="assets/niebla/niebla-emblema.svg" alt="" width="2113" height="2212" loading="lazy" decoding="async"></span>
+            <span class="hb-door__name">Niebla</span>
+            <span class="hb-door__line">Cafés de especialidad en preventa.</span>
+            <span class="hb-door__go">Entrar <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="hb-door">
+          <a class="card hb-door__card" href="barista-corner/">
+            <span class="hb-door__n" aria-hidden="true">II</span>
+            <span class="hb-door__plate"><img class="hb-door__img hb-door__img--product" src="assets/barista/prestina-solo.webp" alt="" width="307" height="711" loading="lazy" decoding="async"></span>
+            <span class="hb-door__name">Barista Corner</span>
+            <span class="hb-door__line">Herramientas para tu café.</span>
+            <span class="hb-door__go">Entrar <span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li class="hb-door hb-door--soon">
+          <div class="card hb-door__card">
+            <span class="hb-door__n" aria-hidden="true">III</span>
+            <span class="hb-door__plate"><img class="hb-door__img hb-door__img--mark" src="assets/jinsei-js-sand.svg" alt="" width="824" height="1720" loading="lazy" decoding="async"></span>
+            <span class="hb-door__name">Lab</span>
+            <span class="hb-door__line">Comfort Food.</span>
+            <span class="hb-door__soon">Pronto</span>
           </div>
-          <div class="roast-intro__side">
-            <p class="learn__tag">Fecha de tostado</p>
-            <p>Cada bolsa la lleva. Su mejor momento: entre 5 y 30 días desde el tueste.</p>
-            <p class="roast-intro__ig"><a href="https://www.instagram.com/niebla_coffee/" target="_blank" rel="noopener noreferrer">@niebla_coffee</a></p>
+        </li>
+        <li class="hb-door hb-door--soon">
+          <div class="card hb-door__card">
+            <span class="hb-door__n" aria-hidden="true">IV</span>
+            <span class="hb-door__plate"><img class="hb-door__img hb-door__img--mark" src="assets/jinsei-js-sand.svg" alt="" width="824" height="1720" loading="lazy" decoding="async"></span>
+            <span class="hb-door__name">Ropa</span>
+            <span class="hb-door__line">Línea de ropa.</span>
+            <span class="hb-door__soon">Pronto</span>
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </section>
 
-    <!-- CAFÉ DISPONIBLE -->
-    <section id="cafe" class="section shop">
-      <div class="wrap">
-        <header class="section__head section__head--center reveal">
-          <p class="kicker">Café disponible</p>
-          <h2>Preventa</h2>
-          <p class="section__note">Precios de preventa.</p>
-        </header>
-
-        <div class="products">
-          <article class="card product reveal" data-id="espantapajaros">
-            <div class="product__media product__media--label">
-              <img src="assets/labels/espantapajaros.webp" alt="Etiqueta Espantapájaros" width="480" height="576" loading="lazy" decoding="async">
-              <div class="product__badges">
-                <span class="badge badge--ok">Preventa</span>
-              </div>
-            </div>
-            <div class="product__body">
-              <p class="product__origin">Colombia · Tolima</p>
-              <h3 class="product__name">Espantapájaros</h3>
-              <dl class="product__meta">
-                <div><dt>Proceso</dt><dd>Lavado</dd></div>
-                <div><dt>Altura</dt><dd>1600–1800 msnm</dd></div>
-                <div><dt>Variedad</dt><dd>Caturra Colombia</dd></div>
-              </dl>
-              <ul class="notes" aria-label="Notas de sabor">
-                <li>pomelo dulce</li>
-                <li>caramelo</li>
-              </ul>
-              <p class="product__desc">Guía: más sabor y acidez limpia.</p>
-              <div class="product__buy">
-                <p class="price">$12.000<small>250 g</small></p>
-                <button type="button" class="btn btn--primary" data-add="espantapajaros">Agregar al pedido</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="card product reveal" data-id="vampiros">
-            <div class="product__media product__media--label">
-              <img src="assets/labels/vampiros.webp" alt="Etiqueta Vampiros" width="480" height="576" loading="lazy" decoding="async">
-              <div class="product__badges">
-                <span class="badge badge--ok">Preventa</span>
-              </div>
-            </div>
-            <div class="product__body">
-              <p class="product__origin">Brasil · Furnas</p>
-              <h3 class="product__name">Vampiros</h3>
-              <dl class="product__meta">
-                <div><dt>Proceso</dt><dd>Natural</dd></div>
-                <div><dt>Altura</dt><dd>1350 msnm</dd></div>
-                <div><dt>Variedad</dt><dd>Catuaí Amarillo</dd></div>
-              </dl>
-              <ul class="notes" aria-label="Notas de sabor">
-                <li>cacao</li>
-                <li>miel</li>
-                <li>avellana</li>
-              </ul>
-              <p class="product__desc">Guía: suave y redondo, café de todos los días.</p>
-              <div class="product__buy">
-                <p class="price">$12.000<small>250 g</small></p>
-                <button type="button" class="btn btn--primary" data-add="vampiros">Agregar al pedido</button>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <p class="shop__note reveal">Sin pago en línea: envías tu pedido por WhatsApp y coordinamos.</p>
-      </div>
+    <!-- SERVICIO: invitación a tostadores -->
+    <section class="hb-serv hb-fade" aria-label="Servicio web para tostadores">
+      <a class="card hb-serv__card" href="tostadores/">
+        <span class="hb-serv__kicker">Para tostadores</span>
+        <span class="hb-serv__title">¿Tienes una tostaduría? Creamos o potenciamos tu página web.</span>
+        <span class="hb-serv__line">Tú te preocupas del café. Lo demás lo hacemos nosotros.</span>
+        <span class="hb-door__go">Ver planes <span aria-hidden="true">→</span></span>
+      </a>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>JINSEI × Niebla · <span id="year">2026</span></p>
+  <footer class="footer hb-footer">
+    <img class="hb-footer__mark" src="assets/jinsei-js-sand.svg" alt="" width="103" height="215" loading="lazy" decoding="async">
+    <p>JINSEI · <a href="tostadores/">Para tostadores</a></p>
   </footer>
 
-  <!-- Cómo pedir: nube flotante (abajo a la izquierda) -->
-  <div class="howto" id="howto">
-    <div class="howto__pop" id="howto-pop" role="dialog" aria-labelledby="howto-title" hidden>
-      <span class="howto__morph" aria-hidden="true"></span>
-      <button class="howto__close" id="howto-close" type="button" aria-label="Cerrar">×</button>
-      <p class="howto__title" id="howto-title">Cómo pedir</p>
-      <ol class="howto__steps">
-        <li><svg class="howto__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(32 12 12)" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><ellipse cx="12" cy="12" rx="6.2" ry="8.8"/><path d="M12 3.4c-2.6 3 2.6 6.2 0 8.6s2.6 5.6 0 8.6"/></g></svg><span>Elige tu café</span></li>
-        <li><svg class="howto__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8Zm3 0V6.5a3 3 0 0 1 6 0V8"/><path d="M12 11.5v5M9.5 14h5"/></g></svg><span>Agrégalo al pedido</span></li>
-        <li><svg class="howto__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg><span>Envíalo por WhatsApp para reservar</span><a class="howto__go" href="#cafe" data-close-howto>Ver cafés <span aria-hidden="true">→</span></a></li>
-      </ol>
-      <p class="howto__note">Entrega la semana siguiente a tu pedido.</p>
-    </div>
-    <span class="howto__hint" id="howto-hint" aria-hidden="true">¿Primera vez? <strong>Toca aquí</strong></span>
-    <button class="howto__fab" id="howto-open" type="button" aria-expanded="false" aria-controls="howto-pop">
-      <span class="howto__body">
-        <span class="howto__ring" aria-hidden="true"><svg viewBox="0 0 200 100" preserveAspectRatio="none" focusable="false"><path d="M44 92C24 92 10 80 12 64C14 50 26 42 40 44C42 28 58 16 76 20C86 6 108 2 122 12C136 6 156 12 162 28C180 28 194 42 192 58C198 66 196 82 186 88C180 92 172 92 166 92Z"/></svg></span>
-        <span class="howto__cloud" aria-hidden="true"><svg viewBox="0 0 200 100" preserveAspectRatio="none" focusable="false"><defs><linearGradient id="howto-sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6d8b8"/><stop offset=".55" stop-color="#cdbb96"/><stop offset="1" stop-color="#b6a27c"/></linearGradient></defs><path d="M44 92C24 92 10 80 12 64C14 50 26 42 40 44C42 28 58 16 76 20C86 6 108 2 122 12C136 6 156 12 162 28C180 28 194 42 192 58C198 66 196 82 186 88C180 92 172 92 166 92Z" fill="url(#howto-sand)"/><path d="M84 24C92 16 106 14 116 19" fill="none" stroke="#f6eedb" stroke-opacity=".5" stroke-width="2.2" stroke-linecap="round"/></svg></span>
-        <span class="howto__spark howto__spark--a" aria-hidden="true">✦</span>
-        <span class="howto__spark howto__spark--b" aria-hidden="true">✧</span>
-        <span class="howto__spark howto__spark--c" aria-hidden="true">✦</span>
-        <span class="howto__spark howto__spark--d" aria-hidden="true">✧</span>
-        <span class="howto__label"><span class="howto__star" aria-hidden="true">✦</span> <span class="howto__txt">¿Cómo pedir?</span></span>
-      </span>
-    </button>
-  </div>
-
-  <!-- Pedido (carrito → WhatsApp, sin pago) -->
-  <button class="cart-fab" id="cart-open" type="button" aria-controls="cart" aria-expanded="false" aria-label="Abrir pedido">
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 7h12l-1 13H7L6 7Zm3 0V5.5a3 3 0 0 1 6 0V7"/></svg>
-    <span class="cart-fab__count" id="cart-count" hidden>0</span>
-  </button>
-
-  <div class="cart-layer">
-  <div class="cart-backdrop" id="cart-backdrop" hidden></div>
-  <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
-    <header class="cart__head">
-      <h2 id="cart-title">Tu pedido</h2>
-      <button class="cart__close" id="cart-close" type="button" aria-label="Cerrar pedido">×</button>
-    </header>
-    <div class="cart__body">
-      <ul class="cart__items" id="cart-items"></ul>
-      <p class="cart__empty" id="cart-empty">Tu pedido está vacío.<br><a href="#cafe" data-close-cart>Ver cafés disponibles</a></p>
-    </div>
-    <footer class="cart__foot" id="cart-foot">
-      <div class="cart__total"><span>Total</span><strong id="cart-total">$0</strong></div>
-      <label class="field">
-        <span>Tu nombre (opcional)</span>
-        <input type="text" id="cart-name" autocomplete="name" placeholder="Ej: Ana">
-      </label>
-      <a class="btn btn--primary btn--block" id="cart-send" href="https://wa.me/56951774751" target="_blank" rel="noopener noreferrer">Enviar pedido por WhatsApp</a>
-      <p class="cart__hint">No se cobra nada aquí. Coordinamos reserva, pago y entrega por WhatsApp.</p>
-    </footer>
-  </aside>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script src="app.js" defer></script>
+  <script src="hub.js" defer></script>
 </body>
 </html>
