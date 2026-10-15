@@ -96,16 +96,20 @@ button, input, select { font: inherit; color: inherit; }
   position: absolute; inset: 0; opacity: 0;
   -webkit-transform: translateZ(0); transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;
   background:
-    radial-gradient(ellipse 75% 62% at 16% 20%, var(--c), transparent 70%),
-    radial-gradient(ellipse 70% 62% at 86% 80%, var(--c), transparent 70%);
+    radial-gradient(ellipse 75% 62% at 16% 20%, rgba(var(--rgb), .62), transparent 70%),
+    radial-gradient(ellipse 70% 62% at 86% 80%, rgba(var(--rgb), .62), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 88% 14%, rgba(var(--rgb), .42), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 12% 88%, rgba(var(--rgb), .42), transparent 70%),
+    radial-gradient(ellipse 65% 55% at 50% 50%, rgba(var(--rgb), .26), transparent 75%),
+    linear-gradient(rgba(var(--rgb), .14), rgba(var(--rgb), .14));
   -webkit-transition: opacity 1.6s linear; transition: opacity 1.6s linear;
 }
 /* Paleta sobria y oscura (cada velo sobre casi negro queda < 60/255 por canal) */
-.tint i:nth-child(1) { --c: rgba(34, 56, 40, .62); }  /* bosque */
-.tint i:nth-child(2) { --c: rgba(86, 48, 30, .52); }  /* espresso */
-.tint i:nth-child(3) { --c: rgba(84, 26, 40, .5); }   /* vino */
-.tint i:nth-child(4) { --c: rgba(34, 50, 84, .58); }  /* denim */
-.tint i:nth-child(5) { --c: rgba(20, 60, 62, .58); }  /* petróleo */
+.tint i:nth-child(1) { --rgb: 34, 56, 40; }  /* bosque */
+.tint i:nth-child(2) { --rgb: 86, 48, 30; }  /* espresso */
+.tint i:nth-child(3) { --rgb: 84, 26, 40; }   /* vino */
+.tint i:nth-child(4) { --rgb: 34, 50, 84; }  /* denim */
+.tint i:nth-child(5) { --rgb: 20, 60, 62; }  /* petróleo */
 /* Motor principal (app.js): cada 3,2 s pasa la clase .on al velo siguiente y la transición de 1,6 s funde
    los dos tonos. Corre SIEMPRE, también con «reducir movimiento» o modo de bajo consumo: es solo un fundido
    de color, sin desplazamiento. Sin JS, el mismo ciclo lo hace este respaldo con @keyframes. */
