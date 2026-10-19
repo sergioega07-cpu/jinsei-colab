@@ -105,16 +105,34 @@
         <h2>Filtrado o espresso</h2>
         <p>Modo Pourover y modo Espresso, en un mismo flujo.</p>
       </div>
-      <div class="feature-media feature-media--inset">
-        <img src="assets/hero-dot.webp" alt="Timemore Black Mirror Dot negra bajo un V60 mientras se vierte agua" width="900" height="900" loading="lazy">
-        <img class="inset" src="assets/modos.webp" alt="Modos Pourover y Espresso de la app" width="458" height="340" loading="lazy">
+      <div class="feature-media modes-media">
+        <img class="fade-photo" src="assets/hero-dot.webp" alt="Timemore Black Mirror Dot negra bajo un V60 mientras se vierte agua" width="900" height="900" loading="lazy">
+        <ul class="mode-chips" aria-label="Modos">
+          <li><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 6h14l-4 8H9L5 6Zm4 10h6v2H9z" fill="currentColor"/></svg>Pourover</li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="9" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 11h8v2h-8z" fill="currentColor"/></svg>Espresso</li>
+        </ul>
       </div>
     </section>
 
     <!-- 5 · Curva en tiempo real + app -->
     <section class="feature feature--reverse wrap" id="curva">
-      <div class="feature-media feature-media--white">
-        <img src="assets/curva.webp" alt="Curva de peso en tiempo real en la app" width="458" height="340" loading="lazy">
+      <div class="feature-media curve-media">
+        <svg class="curve" viewBox="0 0 480 300" role="img" aria-label="Ilustración: curva de peso que sube por etapas a medida que se vierte agua">
+          <defs>
+            <linearGradient id="cv-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#beac8a" stop-opacity=".42"/>
+              <stop offset="1" stop-color="#beac8a" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g stroke="rgba(28,31,26,.08)" stroke-width="1">
+            <line x1="20" y1="70" x2="460" y2="70"/><line x1="20" y1="130" x2="460" y2="130"/>
+            <line x1="20" y1="190" x2="460" y2="190"/><line x1="20" y1="250" x2="460" y2="250"/>
+          </g>
+          <path d="M20 250 L55 192 L150 190 L178 150 L262 148 L290 132 L350 131 L372 92 L405 62 L440 44 L440 250 Z" fill="url(#cv-fill)"/>
+          <path class="curve__line" d="M20 250 L55 192 L150 190 L178 150 L262 148 L290 132 L350 131 L372 92 L405 62 L440 44" fill="none" stroke="#7a6745" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="440" cy="44" r="6" fill="#beac8a" stroke="#fbfbfd" stroke-width="2"/>
+          <text x="440" y="26" text-anchor="end" font-size="15" font-weight="700" fill="#2c3328" font-family="Source Sans 3, sans-serif">273,3 g</text>
+        </svg>
       </div>
       <div class="feature-copy">
         <p class="eyebrow">En tiempo real</p>
@@ -124,7 +142,7 @@
     </section>
 
     <section class="app wrap" id="app">
-      <img class="app-scene" src="assets/app-escena.webp" alt="Dot con su mat de silicona junto a un teléfono con la app TIMEMORE" width="1200" height="619" loading="lazy">
+      <img class="app-scene fade-wide" src="assets/app-escena.webp" alt="Dot con su mat de silicona junto a un teléfono con la app TIMEMORE" width="1200" height="619" loading="lazy">
       <p class="eyebrow">App TIMEMORE</p>
       <h2>Calidad pro, donde vayas</h2>
       <ul class="chips">
@@ -138,9 +156,6 @@
       <p class="fine">Más funciones, pronto (según Timemore).</p>
     </section>
 
-  </div>
-  <div class="dusk" aria-hidden="true"></div>
-  <div class="zone zone--dark">
     <!-- 6 · Salpicaduras -->
     <section class="feature wrap" id="ipx3">
       <div class="feature-copy">

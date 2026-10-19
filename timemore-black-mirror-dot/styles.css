@@ -902,3 +902,80 @@ body { padding-bottom: 0; }
 /* Batería: disco completo, sin recorte, con halo */
 #bateria .feature-media { overflow: visible; padding: 1rem 0; }
 #bateria .feature-media--white img { width: 100%; max-width: 480px; height: auto; object-fit: contain; }
+
+/* ===== Dot: toda la página en el blanco/crema del video (sin transición a oscuro) ===== */
+html, body { background: #f3f0e9; }
+.zone--light { background: linear-gradient(180deg, #fbfbfd 0%, #fbfbfd 12%, #f8f7f3 35%, #f5f2ec 65%, #f2efe8 100%); }
+/* Recortes flotando sobre claro: sin láminas, sombra suave bajo el producto */
+.zone--light .feature-media--white,
+.zone--light .swatch,
+.zone--light .trio figure { background: transparent; box-shadow: none; border-radius: 0; padding: 0; }
+.zone--light .feature-media--white img,
+.zone--light .trio figure img,
+.zone--light .swatch img {
+  filter: drop-shadow(0 18px 18px rgba(28, 31, 26, 0.16)) drop-shadow(0 4px 6px rgba(28, 31, 26, 0.08));
+}
+.zone--light .trio figure img { aspect-ratio: 4 / 3; padding: 0.8rem; object-fit: contain; }
+.zone--light .trio figcaption { border-top: 1px solid var(--line); text-align: center; color: var(--green-soft); }
+.zone--light .trio .trio-photo img {
+  padding: 0; object-fit: cover; filter: none;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+.zone--light .swatch {
+  background: linear-gradient(180deg, #ffffff, #f6f3ed); border-radius: 18px; padding: 0.9rem 0.7rem 0.8rem;
+  box-shadow: 0 0 0 1px rgba(122, 103, 69, 0.12), 0 16px 30px -22px rgba(28, 31, 26, 0.35);
+}
+.zone--light .swatch span { color: var(--green-soft); }
+#bateria .feature-media--white img { max-width: 460px; }
+#ipx3 .feature-media--white img { width: 100%; max-width: 520px; }
+/* Pie y barra inferior claros */
+.site-footer { background: transparent; box-shadow: none; clip-path: none; color: var(--muted); border-top-color: var(--line); }
+.sticky-bar { background: rgba(251, 251, 253, 0.94); border-top-color: var(--line); }
+.sticky-inner strong { color: var(--ink); }
+.sticky-inner span { color: var(--green-soft); }
+
+/* Modos: foto con fundido radial al fondo + modos como chips flotantes */
+.modes-media { position: relative; overflow: visible; background: none; padding: 0 0 1.4rem; }
+.fade-photo {
+  width: 100%; max-width: none !important; border-radius: 0 !important;
+  -webkit-mask-image: radial-gradient(ellipse 70% 68% at 50% 46%, #000 52%, rgba(0,0,0,.55) 74%, transparent 100%);
+          mask-image: radial-gradient(ellipse 70% 68% at 50% 46%, #000 52%, rgba(0,0,0,.55) 74%, transparent 100%);
+}
+.mode-chips {
+  list-style: none; margin: 0; padding: 0; position: absolute; left: 50%; bottom: 0.4rem; transform: translateX(-50%);
+  display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center;
+}
+.mode-chips li {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.6rem 1rem; border-radius: 999px;
+  background: rgba(36, 28, 22, 0.92); color: #efe6d2; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
+  box-shadow: 0 0 0 1px rgba(216, 199, 161, 0.18), 0 14px 28px -14px rgba(28, 31, 26, 0.55);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.mode-chips svg { color: #d8c8a6; }
+
+/* Curva: gráfico vectorial limpio que flota sobre el fondo */
+.curve-media { background: none; overflow: visible; }
+.curve { width: 100%; max-width: 540px; height: auto; display: block; }
+.curve__line { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawCurve 3.6s ease-out 0.4s forwards; }
+@keyframes drawCurve { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .curve__line { animation: none; stroke-dashoffset: 0; } }
+
+/* App: escena ancha con fundido en los bordes, sin marco */
+.app-scene.fade-wide {
+  border-radius: 0; width: 100%;
+  -webkit-mask-image: radial-gradient(ellipse 62% 70% at 50% 50%, #000 50%, rgba(0,0,0,.5) 75%, transparent 100%);
+          mask-image: radial-gradient(ellipse 62% 70% at 50% 50%, #000 50%, rgba(0,0,0,.5) 75%, transparent 100%);
+}
+.app { border-top: 0; }
+@media (min-width: 1200px) { .app-scene.fade-wide { width: 116%; margin-left: -8%; max-width: none; } }
+/* Fundidos que llegan a transparente justo en el borde (sin canto visible) */
+.fade-photo {
+  -webkit-mask-image: radial-gradient(closest-side, #000 58%, rgba(0,0,0,.6) 80%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 58%, rgba(0,0,0,.6) 80%, transparent 100%);
+}
+.app-scene.fade-wide {
+  -webkit-mask-image: radial-gradient(closest-side, #000 60%, rgba(0,0,0,.55) 82%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 60%, rgba(0,0,0,.55) 82%, transparent 100%);
+}
+@media (max-width: 719px) { .mode-chips { flex-wrap: nowrap; bottom: 0.2rem; } .mode-chips li { padding: 0.5rem 0.8rem; font-size: 0.78rem; } }

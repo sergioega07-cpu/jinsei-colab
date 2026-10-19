@@ -671,3 +671,32 @@ body { padding-bottom: 0; }
 .step-card h3 { color: #efe6d2; }
 .step-card p { color: rgba(239, 230, 210, 0.78); }
 .step-media img { filter: drop-shadow(0 0 14px rgba(216, 199, 161, 0.12)); }
+
+/* ===== Prestina: toda la página en el oscuro JINSEI (sin zona clara ni transición) ===== */
+:root {
+  --green: #efe6d2; --green-soft: #ddcfb2; --ink: #efe6d2; --muted: rgba(239, 230, 210, 0.78);
+  --line: rgba(190, 172, 138, 0.16); --gold-text: #beac8a;
+}
+html, body { background: #080605; color: var(--ink); }
+.zone--dark { min-height: 100vh; }
+.site-header { position: absolute; top: 0; left: 0; right: 0; z-index: 10; border-bottom-color: var(--line); }
+.zone--dark .hero { padding-top: 6.5rem; }
+.zone--dark h1 {
+  background: linear-gradient(180deg, #f3ebda 10%, #dccba6 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.zone--dark .hero-kicker { -webkit-text-fill-color: #ddcfb2; }
+.zone--dark .price, .zone--dark .closing-price { color: #efe6d2; }
+.zone--dark .stock { color: #d8c8a6; }
+.zone--dark .fine, .zone--dark .recipe, .zone--dark .steps-lede { color: rgba(239, 230, 210, 0.64); }
+.zone--dark .feature { border-top-color: var(--line); }
+.zone--dark .steps-section { border-top-color: var(--line); }
+/* Hero: producto sobre halo cálido */
+.zone--dark .hero-media { position: relative; isolation: isolate; }
+.zone--dark .hero-media::before {
+  content: ""; position: absolute; inset: 6% 4%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(216, 199, 161, 0.18), rgba(167, 90, 43, 0.08) 55%, transparent 100%);
+}
+.zone--dark .hero-media img { filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 26px rgba(216, 199, 161, 0.14)); }
+.jinsei-js::before { background: radial-gradient(closest-side, rgba(216, 199, 161, 0.55) 0%, rgba(216, 199, 161, 0.25) 35%, rgba(190, 172, 138, 0.08) 70%, transparent 100%); }
+.jinsei-js img { filter: drop-shadow(0 0 8px rgba(216, 196, 150, 0.2)); }
