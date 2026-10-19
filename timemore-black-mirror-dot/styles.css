@@ -688,3 +688,69 @@ h2 {
   background: var(--white); border-radius: 10px; box-shadow: 0 12px 30px rgba(28, 31, 26, 0.16);
 }
 @media (min-width: 880px) { .hero { grid-template-columns: 1.1fr 0.9fr; } }
+
+/* ===== Hero a pantalla completa: video de colores de borde a borde, texto encima ===== */
+.site-header { position: absolute; top: 0; left: 0; right: 0; z-index: 10; border-bottom-color: rgba(28, 31, 26, 0.08); }
+.hero-full {
+  position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden;
+  background: #fbfbfd; display: flex;
+}
+.hero-full__media { position: absolute; inset: 0; }
+/* Escritorio: el video se corre a la derecha (su fondo claro se funde con el de la sección) para que los discos no queden bajo el texto */
+.hero-full__media .loop-video,
+.hero-full__media .loop-still {
+  position: absolute; top: 0; right: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 55%;
+}
+.hero-full__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(251, 251, 253, 0.96) 0%, rgba(251, 251, 253, 0.82) 30%, rgba(251, 251, 253, 0) 52%);
+}
+.hero-full__inner { position: relative; z-index: 2; display: flex; align-items: center; padding: 6rem 0 6.5rem; }
+.hero-full__copy { max-width: 26rem; }
+.hero-full__copy .lede { color: var(--ink); opacity: 0.78; }
+.hero-full__copy .price { margin-bottom: 1.1rem; }
+
+@media (min-width: 880px) {
+  .hero-full__media .loop-video,
+  .hero-full__media .loop-still { width: 74%; object-position: 40% 55%; }
+  .hero-full__media::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 26%; width: 12%; z-index: 1;
+    background: linear-gradient(90deg, #fbfbfd, rgba(251, 251, 253, 0));
+  }
+}
+/* Móvil: video arriba, texto abajo sobre un degradado suave */
+@media (max-width: 879px) {
+  .hero-full__media { bottom: auto; height: 58svh; height: 58vh; }
+  .hero-full__media .loop-video,
+  .hero-full__media .loop-still { object-position: 46% 60%; }
+  .hero-full__scrim { background: linear-gradient(180deg, rgba(251, 251, 253, 0) 0%, rgba(251, 251, 253, 0) 34%, rgba(251, 251, 253, 0.9) 54%, #fbfbfd 64%); }
+  .hero-full__inner { align-items: flex-end; padding: 0 0 5.6rem; }
+  .hero-full__copy h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); margin-bottom: 0.6rem; }
+  .hero-full__copy .pill { margin-bottom: 0.7rem; }
+  .hero-full__copy .lede { margin-bottom: 0.7rem; }
+  .hero-full__copy .button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-full__media .loop-video { display: none; }
+  .hero-full__media .loop-still { display: block; }
+}
+/* Ajuste: el video conserva su 16:9 (se ven los seis discos) y sus bordes se funden con el fondo, así se lee de borde a borde */
+.hero-full__media .loop-video,
+.hero-full__media .loop-still {
+  top: 50%; right: 0; left: auto; height: auto; aspect-ratio: 16 / 9;
+  transform: translateY(-50%); object-fit: cover; object-position: 50% 50%;
+  -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 62%, transparent 100%);
+}
+.hero-full__media::before { display: none; }
+@media (min-width: 880px) {
+  .hero-full__media .loop-video,
+  .hero-full__media .loop-still { width: 78%; max-height: 100%; right: -2%; top: 54%; }
+  .hero-full__scrim { background: linear-gradient(90deg, rgba(251, 251, 253, 0.9) 0%, rgba(251, 251, 253, 0.6) 26%, rgba(251, 251, 253, 0) 42%); }
+}
+@media (max-width: 879px) {
+  .hero-full__media { height: 56vh; height: 56svh; }
+  .hero-full__media .loop-video,
+  .hero-full__media .loop-still { width: 132%; right: -16%; top: 56%; }
+}
