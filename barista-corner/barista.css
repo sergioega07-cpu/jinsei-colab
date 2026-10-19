@@ -73,6 +73,7 @@ body.bc main { flex: 1; }
 .bc-card__desc + .bc-card__foot { margin-top: 1.15rem; }
 .bc-card__price { margin: 0; font: 500 1.3rem/1 var(--f-title); letter-spacing: .03em; color: var(--sand-hi); }
 .bc-card__price small { margin-left: .4rem; font: 400 .6rem/1 var(--f-mono); letter-spacing: .16em; color: var(--ink-faint); }
+.bc-card__price--tbc { font-size: 1rem; letter-spacing: .06em; color: var(--ink-soft); }
 .bc-card__cta { width: 100%; }
 
 .bc-more { margin: clamp(2rem, 5vw, 3rem) 0 0; text-align: center; font: italic 400 1.1rem/1.4 var(--f-accent); color: rgba(204, 187, 152, .62); }

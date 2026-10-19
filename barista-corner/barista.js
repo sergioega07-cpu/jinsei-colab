@@ -7,7 +7,7 @@
 
   /* ---------- Productos ----------
      Agregar un producto = agregar una entrada aquí (la grilla se centra sola con 1 a 4 tarjetas).
-     Solo datos reales: si no hay precio confirmado, omitir «precio» y no se muestra.
+     Solo datos reales: si no hay precio confirmado, omitir «precio» (y, si se quiere, poner «precioTexto», p. ej. «Precio por confirmar»).
      img: ruta relativa a esta página; ancho/alto reales del archivo (evitan saltos de diseño). */
   const PRODUCTS = [
     {
@@ -22,6 +22,19 @@
       alt: "Prestina de Wacaco: prensa y taza en un solo cuerpo, con su cuchara dosificadora",
       url: "../prestina/",
       cta: "Ver Prestina",
+    },
+    {
+      id: "timemore-black-mirror-dot",
+      nombre: "Black Mirror Dot",
+      marca: "Timemore",
+      desc: "Balanza de bolsillo: 0,1 g de precisión, tu teléfono es la pantalla.",
+      img: "../assets/barista/timemore-dot.webp",
+      w: 660,
+      h: 660,
+      alt: "Timemore Black Mirror Dot negra, balanza redonda de 80 mm",
+      precio: 52000,
+      url: "../timemore-black-mirror-dot/",
+      cta: "Ver Dot",
     },
   ];
 
@@ -68,7 +81,7 @@
           <h2 class="bc-card__name">${esc(p.nombre)}</h2>
           <p class="bc-card__desc">${esc(p.desc)}</p>
           <div class="bc-card__foot">
-            ${p.precio ? `<p class="bc-card__price">${clp(p.precio)}<small>CLP</small></p>` : ""}
+            ${p.precio ? `<p class="bc-card__price">${clp(p.precio)}<small>CLP</small></p>` : p.precioTexto ? `<p class="bc-card__price bc-card__price--tbc">${esc(p.precioTexto)}</p>` : ""}
             <a class="btn btn--primary bc-card__cta" href="${esc(safeUrl(p.url))}">${esc(p.cta || "Ver " + p.nombre)} <span aria-hidden="true">→</span></a>
           </div>
         </div>
