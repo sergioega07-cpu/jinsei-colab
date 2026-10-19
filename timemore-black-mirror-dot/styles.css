@@ -3,7 +3,13 @@
   --ink: #1c1f1a;
   --green: #2c3328;
   --green-soft: #5f6b52;
-  --orange: #e36a2e;
+  --orange: #beac8a;          /* oro JINSEI (= --sand de la portada) */
+  --gold-hi: #d8c8a6;
+  --gold-deep: #a08d6a;
+  --gold-text: #7a6745;       /* oro oscurecido para texto chico sobre crema (contraste) */
+  --gold-grad: linear-gradient(180deg, #d9c9a6 0%, #c4b28e 55%, #b3a07b 100%);
+  --gold-grad-hover: linear-gradient(180deg, #e3d4b3 0%, #ccbb98 55%, #bba886 100%);
+  --gold-ink: #2a1f16;
   --white: #ffffff;
   --muted: #5c5f57;
   --line: rgba(28, 31, 26, 0.12);
@@ -61,21 +67,21 @@ strong { font-weight: 600; }
   font-size: 0.84rem;
   font-weight: 700;
   padding: 0.55rem 1rem;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   border-radius: 999px;
 }
 
 .eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--orange);
+  color: var(--gold-text);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.eyebrow--on-dark { color: #f0a574; }
+.eyebrow--on-dark { color: var(--gold-hi); }
 
 h1, h2, h3, p { margin-top: 0; }
 
@@ -111,8 +117,8 @@ h2 {
 
 .pill {
   display: inline-block;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -165,13 +171,13 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 1rem 1.35rem;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
   border-radius: 4px;
-  box-shadow: 0 10px 28px rgba(227, 106, 46, 0.28);
+  box-shadow: 0 10px 30px -10px rgba(190, 172, 138, 0.55), inset 0 1px 0 rgba(255, 248, 230, 0.45);
   max-width: 100%;
 }
 
@@ -211,7 +217,7 @@ h2 {
 
 .feature-tagline {
   margin: 1rem 0 0;
-  color: var(--orange);
+  color: var(--gold-text);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -269,7 +275,7 @@ h2 {
 }
 
 .steps-section .eyebrow--on-dark {
-  color: var(--orange);
+  color: var(--gold-text);
 }
 
 .steps-grid {
@@ -319,8 +325,8 @@ h2 {
   width: 1.55rem;
   height: 1.55rem;
   border-radius: 50%;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   font-size: 0.72rem;
   font-weight: 700;
   margin-bottom: 0.45rem;
@@ -358,7 +364,7 @@ h2 {
 
 .closing h2 { color: var(--green); }
 
-.closing .eyebrow--on-dark { color: var(--orange); }
+.closing .eyebrow--on-dark { color: var(--gold-text); }
 
 .closing-price {
   font-family: var(--serif);
@@ -595,7 +601,8 @@ h2 {
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 1.5rem; }
 .stat-card { background: #3a4038; border-radius: 12px; padding: 1.2rem 1rem 1.1rem; box-shadow: 0 10px 28px rgba(28, 31, 26, 0.08); }
 .stat-card .stat-num { font-family: var(--serif); font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1; letter-spacing: -0.03em; color: var(--cream); margin: 0 0 0.7rem; }
-.stat-num small, .bat dt small { font-family: var(--sans); font-size: 0.32em; letter-spacing: 0.08em; margin-left: 0.2em; color: #f0a574; }
+.stat-num small, .bat dt small { font-family: var(--sans); font-size: 0.32em; letter-spacing: 0.08em; margin-left: 0.2em; color: var(--gold-hi); }
+.bat dt small { color: var(--gold-text); }
 .stat-card h3 { margin: 0 0 0.3rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream); }
 .stat-card p:last-child { margin: 0; font-size: 0.82rem; color: #c4c9bb; line-height: 1.35; }
 .duo { display: grid; gap: 0.85rem; margin-top: 1rem; }
@@ -619,7 +626,7 @@ h2 {
 .pair-step h3 { display: inline; margin: 0; font-size: 0.86rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream); vertical-align: middle; }
 @keyframes pairGlow {
   0%, 40%, 100% { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06); transform: none; }
-  12%, 28% { box-shadow: 0 0 0 2px var(--orange), 0 14px 34px rgba(227, 106, 46, 0.25); transform: translateY(-3px); }
+  12%, 28% { box-shadow: 0 0 0 2px var(--orange), 0 14px 34px rgba(190, 172, 138, 0.35); transform: translateY(-3px); }
 }
 @media (prefers-reduced-motion: reduce) { .pair-step { animation: none; } }
 
@@ -754,3 +761,144 @@ h2 {
   .hero-full__media .loop-video,
   .hero-full__media .loop-still { width: 132%; right: -16%; top: 56%; }
 }
+
+/* Oro JINSEI: hover de botones y borde fino como en la portada */
+.button, .header-cta { border: 1px solid rgba(239, 230, 210, 0.35); }
+.button:hover, .button:focus-visible, .header-cta:hover, .header-cta:focus-visible { background: var(--gold-grad-hover); filter: none; }
+
+/* Fondo del hero desde el borde superior (detrás del header): copia difuminada del mismo video a pantalla completa,
+   así el color de fondo cambia junto con el video y no hay franja. Mismo archivo, sin descarga extra. */
+.hero-full__bg { position: absolute; inset: 0; overflow: hidden; }
+.hero-full__bg .loop-video,
+.hero-full__bg .loop-still {
+  position: absolute; inset: -8%; width: 116%; height: 116%; max-width: none;
+  object-fit: cover; filter: blur(60px) saturate(1.05); transform: scale(1.1);
+}
+.hero-full__media { top: 0; }
+/* Header transparente sobre el hero: sin fondo ni línea */
+.site-header { background: transparent; border-bottom: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-full__bg .loop-video { display: none; }
+  .hero-full__bg .loop-still { display: block; }
+}
+/* Bordes del video principal: fundido completo hasta el borde (sin rectángulo visible) */
+.hero-full__media .loop-video,
+.hero-full__media .loop-still {
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+.hero-full__bg .loop-video, .hero-full__bg .loop-still { filter: blur(40px); }
+
+/* ===== Fondo progresivo: blanco arriba (como el video) → oscuro JINSEI abajo. Solo CSS.
+   Zona clara (texto oscuro + oro oscurecido) · «dusk» (transición larga, sin texto) · zona oscura con
+   los valores de la portada JINSEI (--charcoal #080605, --espresso #241c16, --ivory #efe6d2, --sand #beac8a). ===== */
+html { background: #fbfbfd; }
+body { background: linear-gradient(180deg, #fbfbfd 0%, #fbfbfd 50%, #080605 50%, #080605 100%); }
+.steps-section, .closing, .hero-full { background: transparent; }
+.feature-media { background: transparent; }
+
+.zone--light { background: linear-gradient(180deg, #fbfbfd 0%, #f8f7f3 30%, #f2efe8 65%, #e9e3d7 100%); }
+.dusk {
+  height: clamp(240px, 42vh, 460px);
+  background: linear-gradient(180deg,
+    #e9e3d7 0%, #d9cfbf 14%, #bfb09a 28%, #9a8770 40%, #6c5947 52%, #4a3b2f 63%,
+    #2e241c 74%, #1a140f 85%, #0c0806 100%);
+}
+.zone--dark {
+  --green: #efe6d2;            /* títulos → --ivory */
+  --green-soft: #ddcfb2;       /* → --parchment */
+  --ink: #efe6d2;
+  --muted: rgba(239, 230, 210, 0.78);   /* → --ink-soft */
+  --line: rgba(190, 172, 138, 0.16);    /* → --line de la portada */
+  --gold-text: #beac8a;                 /* oro principal sobre oscuro */
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse max(60vw, 460px) 40% at 88% 22%, rgba(29, 39, 32, 0.8), transparent 70%),
+    radial-gradient(ellipse max(55vw, 420px) 35% at 10% 48%, rgba(74, 40, 27, 0.42), transparent 70%),
+    radial-gradient(ellipse max(58vw, 440px) 40% at 84% 78%, rgba(29, 39, 32, 0.8), transparent 70%),
+    linear-gradient(180deg, #0c0806 0%, #0b0807 30%, #070a08 60%, #080605 100%);
+}
+.zone--dark h2 {
+  background: linear-gradient(180deg, #f3ebda 10%, #dccba6 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.zone--dark .eyebrow, .zone--dark .eyebrow--on-dark { color: #beac8a; }
+.zone--dark .feature, .zone--dark .colors, .zone--dark .case, .zone--dark .details, .zone--dark .closing { border-top-color: var(--line); }
+/* Fotos de producto con fondo blanco/crema: láminas claras redondeadas, borde fino dorado */
+.zone--dark .feature-media img,
+.zone--dark .feature-media--white,
+.zone--dark .swatch,
+.zone--dark .trio figure,
+.zone--dark .video-frame {
+  border-radius: 18px;
+  box-shadow: 0 0 0 1px rgba(216, 199, 161, 0.1), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+.zone--dark .feature-media--white img { box-shadow: none; }
+.zone--dark .swatch span,
+.zone--dark .trio figcaption { color: #5c5f57; border-top-color: rgba(28, 31, 26, 0.12); }
+.zone--dark .why-list li::before { background: #beac8a; }
+
+/* Pie y barra inferior en oscuro JINSEI */
+.site-footer {
+  color: rgba(239, 230, 210, 0.64); border-top-color: rgba(190, 172, 138, 0.16);
+  background: #080605; box-shadow: 0 0 0 100vmax #080605; clip-path: inset(0 -100vmax);
+}
+body { padding-bottom: 0; }
+.site-footer { padding-bottom: 6.5rem; }
+.sticky-bar { background: rgba(8, 6, 5, 0.88); border-top-color: rgba(190, 172, 138, 0.16); }
+.sticky-inner strong { color: #efe6d2; }
+.sticky-inner span { color: #d8c8a6; }
+/* Dot: hero sobre blanco puro; pasos destacados con tarjetas oscuras sobre la zona clara */
+.hero-full__scrim { display: none; }
+.pair { background: transparent; color: var(--ink); }
+.pair h2 { color: var(--green); }
+.pair-lede { color: var(--muted); }
+.pair .eyebrow--on-dark { color: var(--gold-text); }
+.pair-step { background: #241c16; }
+.pair-step:not(:last-child)::after { border-top-color: rgba(122, 103, 69, 0.5); }
+@media (max-width: 879px) {
+  .hero-full__copy { background: linear-gradient(180deg, rgba(251, 251, 253, 0), #fbfbfd 18%); padding-top: 1.5rem; }
+}
+.hero-full__media .loop-video,
+.hero-full__media .loop-still {
+  -webkit-mask-image: radial-gradient(closest-side, #000 72%, rgba(0,0,0,.6) 86%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 72%, rgba(0,0,0,.6) 86%, transparent 100%);
+}
+/* ===== Zona oscura sin láminas claras: recortes flotando con halo cálido; escenas con fundido radial ===== */
+.zone--dark .feature-media--white,
+.zone--dark .swatch,
+.zone--dark .trio figure {
+  background: transparent; box-shadow: none; border-radius: 0; padding: 0;
+}
+.zone--dark .feature-media--white { position: relative; isolation: isolate; }
+.zone--dark .feature-media--white::before,
+.zone--dark .trio figure::before {
+  content: ""; position: absolute; inset: 10% 8%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(216, 199, 161, 0.15), rgba(167, 90, 43, 0.07) 55%, transparent 100%);
+}
+.zone--dark .feature-media--white img,
+.zone--dark .trio figure img,
+.zone--dark .swatch img {
+  filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 18px rgba(216, 199, 161, 0.14));
+}
+.zone--dark .trio figure { position: relative; isolation: isolate; }
+.zone--dark .trio figure img { aspect-ratio: 4 / 3; padding: 0.8rem; }
+.zone--dark .trio figcaption { border-top: 1px solid var(--line); color: var(--muted); text-align: center; }
+/* Escena (mochila): sin recorte limpio → se funde en el oscuro con máscara radial */
+.zone--dark .trio .trio-photo img {
+  padding: 0; object-fit: cover; filter: none;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+.zone--dark .trio .trio-photo::before { display: none; }
+/* Fichas de color: superficie oscura JINSEI con el disco recortado */
+.zone--dark .swatch {
+  background: linear-gradient(180deg, rgba(46, 36, 28, 0.85), rgba(36, 28, 22, 0.85));
+  border-radius: 18px; padding: 0.9rem 0.7rem 0.8rem;
+  box-shadow: 0 0 0 1px rgba(216, 199, 161, 0.1), 0 20px 40px -24px rgba(0, 0, 0, 0.9);
+}
+.zone--dark .swatch span { color: var(--muted); border: 0; }
+.zone--dark #ipx3 .feature-media--white img { width: 100%; max-width: 520px; }
+/* Batería: disco completo, sin recorte, con halo */
+#bateria .feature-media { overflow: visible; padding: 1rem 0; }
+#bateria .feature-media--white img { width: 100%; max-width: 480px; height: auto; object-fit: contain; }

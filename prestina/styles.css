@@ -3,7 +3,13 @@
   --ink: #1c1f1a;
   --green: #2c3328;
   --green-soft: #5f6b52;
-  --orange: #e36a2e;
+  --orange: #beac8a;          /* oro JINSEI (= --sand de la portada) */
+  --gold-hi: #d8c8a6;
+  --gold-deep: #a08d6a;
+  --gold-text: #7a6745;       /* oro oscurecido para texto chico sobre crema (contraste) */
+  --gold-grad: linear-gradient(180deg, #d9c9a6 0%, #c4b28e 55%, #b3a07b 100%);
+  --gold-grad-hover: linear-gradient(180deg, #e3d4b3 0%, #ccbb98 55%, #bba886 100%);
+  --gold-ink: #2a1f16;
   --white: #ffffff;
   --muted: #5c5f57;
   --line: rgba(28, 31, 26, 0.12);
@@ -61,21 +67,21 @@ strong { font-weight: 600; }
   font-size: 0.84rem;
   font-weight: 700;
   padding: 0.55rem 1rem;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   border-radius: 999px;
 }
 
 .eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--orange);
+  color: var(--gold-text);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.eyebrow--on-dark { color: #f0a574; }
+.eyebrow--on-dark { color: var(--gold-hi); }
 
 h1, h2, h3, p { margin-top: 0; }
 
@@ -111,8 +117,8 @@ h2 {
 
 .pill {
   display: inline-block;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -165,13 +171,13 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 1rem 1.35rem;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
   border-radius: 4px;
-  box-shadow: 0 10px 28px rgba(227, 106, 46, 0.28);
+  box-shadow: 0 10px 30px -10px rgba(190, 172, 138, 0.55), inset 0 1px 0 rgba(255, 248, 230, 0.45);
   max-width: 100%;
 }
 
@@ -211,7 +217,7 @@ h2 {
 
 .feature-tagline {
   margin: 1rem 0 0;
-  color: var(--orange);
+  color: var(--gold-text);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -269,7 +275,7 @@ h2 {
 }
 
 .steps-section .eyebrow--on-dark {
-  color: var(--orange);
+  color: var(--gold-text);
 }
 
 .steps-grid {
@@ -319,8 +325,8 @@ h2 {
   width: 1.55rem;
   height: 1.55rem;
   border-radius: 50%;
-  background: var(--orange);
-  color: var(--white);
+  background: var(--gold-grad);
+  color: var(--gold-ink);
   font-size: 0.72rem;
   font-weight: 700;
   margin-bottom: 0.45rem;
@@ -358,7 +364,7 @@ h2 {
 
 .closing h2 { color: var(--green); }
 
-.closing .eyebrow--on-dark { color: var(--orange); }
+.closing .eyebrow--on-dark { color: var(--gold-text); }
 
 .closing-price {
   font-family: var(--serif);
@@ -578,3 +584,90 @@ h2 {
   .header-cta { padding: 0.55rem 0.8rem; font-size: 0.8rem; }
   .wordmark { letter-spacing: 0.12em; }
 }
+
+/* Oro JINSEI: hover de botones y borde fino como en la portada */
+.button, .header-cta { border: 1px solid rgba(239, 230, 210, 0.35); }
+.button:hover, .button:focus-visible, .header-cta:hover, .header-cta:focus-visible { background: var(--gold-grad-hover); filter: none; }
+
+/* ===== Fondo progresivo: blanco arriba (como el video) → oscuro JINSEI abajo. Solo CSS.
+   Zona clara (texto oscuro + oro oscurecido) · «dusk» (transición larga, sin texto) · zona oscura con
+   los valores de la portada JINSEI (--charcoal #080605, --espresso #241c16, --ivory #efe6d2, --sand #beac8a). ===== */
+html { background: #fbfbfd; }
+body { background: linear-gradient(180deg, #fbfbfd 0%, #fbfbfd 50%, #080605 50%, #080605 100%); }
+.steps-section, .closing, .hero-full { background: transparent; }
+.feature-media { background: transparent; }
+
+.zone--light { background: linear-gradient(180deg, #fbfbfd 0%, #f8f7f3 30%, #f2efe8 65%, #e9e3d7 100%); }
+.dusk {
+  height: clamp(240px, 42vh, 460px);
+  background: linear-gradient(180deg,
+    #e9e3d7 0%, #d9cfbf 14%, #bfb09a 28%, #9a8770 40%, #6c5947 52%, #4a3b2f 63%,
+    #2e241c 74%, #1a140f 85%, #0c0806 100%);
+}
+.zone--dark {
+  --green: #efe6d2;            /* títulos → --ivory */
+  --green-soft: #ddcfb2;       /* → --parchment */
+  --ink: #efe6d2;
+  --muted: rgba(239, 230, 210, 0.78);   /* → --ink-soft */
+  --line: rgba(190, 172, 138, 0.16);    /* → --line de la portada */
+  --gold-text: #beac8a;                 /* oro principal sobre oscuro */
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse max(60vw, 460px) 40% at 88% 22%, rgba(29, 39, 32, 0.8), transparent 70%),
+    radial-gradient(ellipse max(55vw, 420px) 35% at 10% 48%, rgba(74, 40, 27, 0.42), transparent 70%),
+    radial-gradient(ellipse max(58vw, 440px) 40% at 84% 78%, rgba(29, 39, 32, 0.8), transparent 70%),
+    linear-gradient(180deg, #0c0806 0%, #0b0807 30%, #070a08 60%, #080605 100%);
+}
+.zone--dark h2 {
+  background: linear-gradient(180deg, #f3ebda 10%, #dccba6 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.zone--dark .eyebrow, .zone--dark .eyebrow--on-dark { color: #beac8a; }
+.zone--dark .feature, .zone--dark .colors, .zone--dark .case, .zone--dark .details, .zone--dark .closing { border-top-color: var(--line); }
+/* Fotos de producto con fondo blanco/crema: láminas claras redondeadas, borde fino dorado */
+.zone--dark .feature-media img,
+.zone--dark .feature-media--white,
+.zone--dark .swatch,
+.zone--dark .trio figure,
+.zone--dark .video-frame {
+  border-radius: 18px;
+  box-shadow: 0 0 0 1px rgba(216, 199, 161, 0.1), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+}
+.zone--dark .feature-media--white img { box-shadow: none; }
+.zone--dark .swatch span,
+.zone--dark .trio figcaption { color: #5c5f57; border-top-color: rgba(28, 31, 26, 0.12); }
+.zone--dark .why-list li::before { background: #beac8a; }
+
+/* Pie y barra inferior en oscuro JINSEI */
+.site-footer {
+  color: rgba(239, 230, 210, 0.64); border-top-color: rgba(190, 172, 138, 0.16);
+  background: #080605; box-shadow: 0 0 0 100vmax #080605; clip-path: inset(0 -100vmax);
+}
+body { padding-bottom: 0; }
+.site-footer { padding-bottom: 6.5rem; }
+.sticky-bar { background: rgba(8, 6, 5, 0.88); border-top-color: rgba(190, 172, 138, 0.16); }
+.sticky-inner strong { color: #efe6d2; }
+.sticky-inner span { color: #d8c8a6; }
+/* Zona oscura: producto recortado flotando sobre el fondo JINSEI, con halo cálido (sin lámina clara) */
+.zone--dark .feature-media { position: relative; isolation: isolate; }
+.zone--dark .feature-media::before {
+  content: ""; position: absolute; inset: 8% 10%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(216, 199, 161, 0.16), rgba(167, 90, 43, 0.08) 55%, transparent 100%);
+}
+.zone--dark .feature-media img {
+  border-radius: 0; box-shadow: none; max-width: 420px;
+  filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 22px rgba(216, 199, 161, 0.12));
+}
+/* Pasos: tarjetas en degradado espresso → casi negro (tokens JINSEI) con halo dorado sutil, en vez del oliva plano */
+.step-card {
+  position: relative; isolation: isolate;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, rgba(216, 199, 161, 0.14), transparent 70%),
+    linear-gradient(165deg, #2e241c 0%, #241c16 38%, #1a140f 72%, #0c0806 100%);
+  box-shadow: 0 0 0 1px rgba(216, 199, 161, 0.1), 0 22px 44px -26px rgba(36, 28, 22, 0.75), 0 10px 40px -20px rgba(167, 90, 43, 0.22);
+}
+.step-media, .step-meta { background: transparent; }
+.step-meta { border-top-color: rgba(190, 172, 138, 0.16); }
+.step-card h3 { color: #efe6d2; }
+.step-card p { color: rgba(239, 230, 210, 0.78); }
+.step-media img { filter: drop-shadow(0 0 14px rgba(216, 199, 161, 0.12)); }
