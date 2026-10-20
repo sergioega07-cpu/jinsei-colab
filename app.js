@@ -21,7 +21,7 @@
     "espantapajaros-gabriela": { id: "espantapajaros-gabriela", nombre: "Espantapájaros Gabriela", formatos: [F("150 g", 12500, "SI"), F("1 kg", 42000, "SI")] },
     "espantapajaros-huila": { id: "espantapajaros-huila", nombre: "Espantapájaros Huila", formatos: [F("250 g", 11500, "NO"), F("1 kg", 39000, "NO")] },
     vampiros: { id: "vampiros", nombre: "Vampiros", formatos: [F("250 g", 12000, "SI")] },
-    "los-duendes": { id: "los-duendes", nombre: "Los Duendes", formatos: [F("250 g", 11500, "SI"), F("1 kg", 39000, "SI")] },
+    "los-duendes": { id: "los-duendes", nombre: "Los Duendes", formatos: [F("250 g", 12000, "SI"), F("1 kg", 39000, "SI")] },
     "los-tres-brujos": { id: "los-tres-brujos", nombre: "Los Tres Brujos", formatos: [F("200 g", 19000, "SI")] },
   };
   const findFmt = (id, formato) => CATALOG[id]?.formatos.find((f) => f.formato === formato);
