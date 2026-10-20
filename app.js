@@ -8,13 +8,24 @@
   const WA_NUMBER = "56951774751";
   const CART_KEY = "jinsei-niebla-carrito-v1";
   const NAME_KEY = "jinsei-niebla-nombre-v1";
-  const FORMATO = "250 g";
-  const PRECIO = 12000;
-
+  // Catálogo de la preventa. stock: SI/NO (también acepta números viejos: > 0 = hay).
+  const F = (formato, precio, stock) => ({ formato, precio, stock: hasStock(stock) });
+  function hasStock(v) {
+    const t = String(v ?? "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (!t || /^(no|sin stock|agotado|0+)$/.test(t)) return 0;
+    if (/^\d+$/.test(t)) return parseInt(t, 10) > 0 ? 1 : 0;
+    return /^(si|s|yes|hay|con stock|disponible|x)$/.test(t) ? 1 : 0;
+  }
   const CATALOG = {
-    espantapajaros: { id: "espantapajaros", nombre: "Espantapájaros" },
-    vampiros: { id: "vampiros", nombre: "Vampiros" },
+    espantapajaros: { id: "espantapajaros", nombre: "Espantapájaros", formatos: [F("250 g", 12000, "NO")] },
+    "espantapajaros-gabriela": { id: "espantapajaros-gabriela", nombre: "Espantapájaros Gabriela", formatos: [F("150 g", 12500, "SI"), F("1 kg", 42000, "SI")] },
+    "espantapajaros-huila": { id: "espantapajaros-huila", nombre: "Espantapájaros Huila", formatos: [F("250 g", 11500, "NO"), F("1 kg", 39000, "NO")] },
+    vampiros: { id: "vampiros", nombre: "Vampiros", formatos: [F("250 g", 12000, "SI")] },
+    "los-duendes": { id: "los-duendes", nombre: "Los Duendes", formatos: [F("250 g", 11500, "SI"), F("1 kg", 39000, "SI")] },
+    "los-tres-brujos": { id: "los-tres-brujos", nombre: "Los Tres Brujos", formatos: [F("200 g", 19000, "SI")] },
   };
+  const findFmt = (id, formato) => CATALOG[id]?.formatos.find((f) => f.formato === formato);
+  const inStock = (p) => p.formatos.some((f) => f.stock);
 
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
@@ -71,7 +82,9 @@
     cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
     if (!Array.isArray(cart)) cart = [];
     cart = cart.filter((i) => i && typeof i.id === "string" && Object.prototype.hasOwnProperty.call(CATALOG, i.id))
-      .map((i) => ({ ...i, key: i.id, precio: PRECIO, qty: Math.min(MAX_QTY, Math.max(1, parseInt(i.qty, 10) || 1)) }));
+      .map((i) => ({ ...i, formato: i.formato || "250 g" }))
+      .filter((i) => findFmt(i.id, i.formato)?.stock)
+      .map((i) => ({ ...i, key: i.id + "|" + i.formato, nombre: CATALOG[i.id].nombre, precio: findFmt(i.id, i.formato).precio, qty: Math.min(MAX_QTY, Math.max(1, parseInt(i.qty, 10) || 1)) }));
   } catch {
     cart = [];
   }
@@ -82,16 +95,17 @@
   const cartTotal = () => cart.reduce((s, i) => s + i.precio * i.qty, 0);
   const cartCount = () => cart.reduce((s, i) => s + i.qty, 0);
 
-  function addToCart(id) {
+  function addToCart(id, formato) {
     const p = CATALOG[id];
-    if (!p) return;
-    const key = id;
+    const f = findFmt(id, formato);
+    if (!p || !f || !f.stock) return;
+    const key = id + "|" + formato;
     const it = cart.find((i) => i.key === key);
     if (it) { if (it.qty >= MAX_QTY) { toast(`Máximo ${MAX_QTY} por café en la preventa`); return; } it.qty++; }
-    else cart.push({ key, id: p.id, nombre: p.nombre, formato: FORMATO, precio: PRECIO, qty: 1 });
+    else cart.push({ key, id: p.id, nombre: p.nombre, formato, precio: f.precio, qty: 1 });
     saveCart();
     renderCart();
-    toast(`Agregado: ${p.nombre} ${FORMATO}`);
+    toast(`Agregado: ${p.nombre} ${formato}`);
     const fab = $("#cart-open");
     if (fab) {
       fab.classList.remove("bump");
@@ -155,8 +169,29 @@
     a.href = waLink(buildOrderMessage());
   }
 
-  $$("[data-add]").forEach((btn) => {
-    btn.addEventListener("click", () => addToCart(btn.getAttribute("data-add")));
+  /* ---------- Tarjetas: formato, precio y stock (Con stock / Sin stock) ---------- */
+  $$("[data-buy]").forEach((box) => {
+    const p = CATALOG[box.dataset.buy];
+    if (!p) return;
+    const card = box.closest(".product");
+    const ok = inStock(p);
+    card?.classList.toggle("is-out", !ok);
+    const badge = card?.querySelector('[data-role="stock"]');
+    if (badge) { badge.textContent = ok ? "Con stock" : "Sin stock"; badge.className = "badge " + (ok ? "badge--ok" : "badge--out"); }
+    let sel = Math.max(0, p.formatos.findIndex((f) => f.stock));
+    const paint = () => {
+      const f = p.formatos[sel];
+      box.innerHTML = `
+        ${p.formatos.length > 1 ? `<div class="fmt" role="group" aria-label="Formato">${p.formatos.map((fo, i) => `<button type="button" data-i="${i}" aria-pressed="${i === sel}" ${fo.stock ? "" : 'class="is-out" title="Sin stock"'}>${esc(fo.formato)}</button>`).join("")}</div>` : ""}
+        <p class="price">${clp(f.precio)}<small>${esc(f.formato)}</small></p>
+        <button type="button" class="btn btn--primary" data-add ${f.stock ? "" : "disabled"}>${f.stock ? "Agregar al pedido" : "Sin stock"}</button>`;
+    };
+    box.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-i]");
+      if (b) { sel = +b.dataset.i; paint(); return; }
+      if (e.target.closest("[data-add]")) addToCart(p.id, p.formatos[sel].formato);
+    });
+    paint();
   });
 
   $("#cart-items")?.addEventListener("click", (e) => {

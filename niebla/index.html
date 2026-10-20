@@ -6,7 +6,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Niebla · JINSEI — Preventa de cafés</title>
-  <meta name="description" content="Niebla: preventa de cafés de especialidad Niebla (Espantapájaros y Vampiros). Pide por WhatsApp.">
+  <meta name="description" content="Niebla: preventa de cafés de especialidad Niebla (Espantapájaros, Vampiros, Los Duendes y más). Pide por WhatsApp.">
   <meta name="theme-color" content="#080605">
   <link rel="icon" href="../assets/jinsei-icon.svg?v=3" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
@@ -17,7 +17,7 @@
   <meta property="og:locale" content="es_CL">
   <meta property="og:site_name" content="JINSEI">
   <meta property="og:title" content="Niebla · JINSEI — Preventa de cafés">
-  <meta property="og:description" content="JINSEI colab con Niebla: Espantapájaros y Vampiros en preventa. Pide por WhatsApp.">
+  <meta property="og:description" content="JINSEI colab con Niebla: Espantapájaros, Vampiros, Los Duendes y Los Tres Brujos. Pide por WhatsApp.">
   <meta property="og:url" content="https://jinseixjj.cl/niebla/">
   <meta property="og:image" content="https://jinseixjj.cl/assets/og-niebla.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20261015">
+  <link rel="stylesheet" href="../styles.css?v=20261020">
   <!-- CSP: este script en línea está permitido por su hash sha256 (si se edita, actualizar el hash en la meta CSP) -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -149,7 +149,7 @@
             <div class="product__media product__media--label">
               <img src="../assets/labels/espantapajaros.webp" alt="Etiqueta Espantapájaros" width="480" height="576" loading="lazy" decoding="async">
               <div class="product__badges">
-                <span class="badge badge--ok">Preventa</span>
+                <span class="badge" data-role="stock">Preventa</span>
               </div>
             </div>
             <div class="product__body">
@@ -165,10 +165,55 @@
                 <li>caramelo</li>
               </ul>
               <p class="product__desc">Guía: más sabor y acidez limpia.</p>
-              <div class="product__buy">
-                <p class="price">$12.000<small>250 g</small></p>
-                <button type="button" class="btn btn--primary" data-add="espantapajaros">Agregar al pedido</button>
+              <div class="product__buy" data-buy="espantapajaros"></div>
+            </div>
+          </article>
+
+          <article class="card product reveal" data-id="espantapajaros-gabriela">
+            <div class="product__media product__media--label">
+              <img src="../assets/labels/espantapajaros-gabriela.webp" alt="Etiqueta Espantapájaros Gabriela" width="480" height="576" loading="lazy" decoding="async">
+              <div class="product__badges">
+                <span class="badge" data-role="stock">Preventa</span>
               </div>
+            </div>
+            <div class="product__body">
+              <p class="product__origin">Colombia</p>
+              <h3 class="product__name">Espantapájaros Gabriela</h3>
+              <dl class="product__meta">
+                <div><dt>Proceso</dt><dd>Lavado</dd></div>
+                <div><dt>Altura</dt><dd>1600 msnm</dd></div>
+                <div><dt>Variedad</dt><dd>Caturra, Castillo</dd></div>
+              </dl>
+              <ul class="notes" aria-label="Notas de sabor">
+                <li>mandarina</li>
+                <li>panela</li>
+                <li>frutos secos</li>
+              </ul>
+              <div class="product__buy" data-buy="espantapajaros-gabriela"></div>
+            </div>
+          </article>
+
+          <article class="card product reveal" data-id="espantapajaros-huila">
+            <div class="product__media product__media--label">
+              <img src="../assets/labels/espantapajaros.webp" alt="Etiqueta Espantapájaros Huila" width="480" height="576" loading="lazy" decoding="async">
+              <div class="product__badges">
+                <span class="badge" data-role="stock">Preventa</span>
+              </div>
+            </div>
+            <div class="product__body">
+              <p class="product__origin">Colombia · Huila</p>
+              <h3 class="product__name">Espantapájaros Huila</h3>
+              <dl class="product__meta">
+                <div><dt>Proceso</dt><dd>Lavado</dd></div>
+                <div><dt>Altura</dt><dd>1500–1800 msnm</dd></div>
+                <div><dt>Variedad</dt><dd>Caturra, Castillo, Colombia</dd></div>
+              </dl>
+              <ul class="notes" aria-label="Notas de sabor">
+                <li>damasco</li>
+                <li>caramelo</li>
+                <li>eucalipto</li>
+              </ul>
+              <div class="product__buy" data-buy="espantapajaros-huila"></div>
             </div>
           </article>
 
@@ -176,7 +221,7 @@
             <div class="product__media product__media--label">
               <img src="../assets/labels/vampiros.webp" alt="Etiqueta Vampiros" width="480" height="576" loading="lazy" decoding="async">
               <div class="product__badges">
-                <span class="badge badge--ok">Preventa</span>
+                <span class="badge" data-role="stock">Preventa</span>
               </div>
             </div>
             <div class="product__body">
@@ -193,10 +238,57 @@
                 <li>avellana</li>
               </ul>
               <p class="product__desc">Guía: suave y redondo, café de todos los días.</p>
-              <div class="product__buy">
-                <p class="price">$12.000<small>250 g</small></p>
-                <button type="button" class="btn btn--primary" data-add="vampiros">Agregar al pedido</button>
+              <div class="product__buy" data-buy="vampiros"></div>
+            </div>
+          </article>
+
+          <article class="card product reveal" data-id="los-duendes">
+            <div class="product__media product__media--label">
+              <img src="../assets/labels/los-duendes.webp" alt="Etiqueta Los Duendes" width="480" height="576" loading="lazy" decoding="async">
+              <div class="product__badges">
+                <span class="badge" data-role="stock">Preventa</span>
               </div>
+            </div>
+            <div class="product__body">
+              <p class="product__origin">Honduras · El Paraíso</p>
+              <h3 class="product__name">Los Duendes</h3>
+              <dl class="product__meta">
+                <div><dt>Proceso</dt><dd>Lavado</dd></div>
+                <div><dt>Altura</dt><dd>1400 msnm</dd></div>
+                <div><dt>Variedad</dt><dd>Parainema</dd></div>
+              </dl>
+              <ul class="notes" aria-label="Notas de sabor">
+                <li>panela</li>
+                <li>naranja</li>
+                <li>piña madura</li>
+              </ul>
+              <div class="product__buy" data-buy="los-duendes"></div>
+            </div>
+          </article>
+
+          <article class="card product reveal" data-id="los-tres-brujos">
+            <div class="product__media product__media--label">
+              <img src="../assets/labels/los-tres-brujos.webp" alt="Etiqueta Los Tres Brujos" width="480" height="576" loading="lazy" decoding="async">
+              <div class="product__badges">
+                <span class="badge" data-role="stock">Preventa</span>
+              </div>
+            </div>
+            <div class="product__body">
+              <p class="product__origin">Colombia</p>
+              <h3 class="product__name">Los Tres Brujos</h3>
+              <dl class="product__meta">
+                <div><dt>Proceso</dt><dd>Natural</dd></div>
+                <div><dt>Altura</dt><dd>1950 msnm</dd></div>
+                <div><dt>Variedad</dt><dd>Caturra</dd></div>
+              </dl>
+              <ul class="notes" aria-label="Notas de sabor">
+                <li>toffee</li>
+                <li>berries</li>
+                <li>maracuyá</li>
+                <li>anís</li>
+                <li>clavo de olor</li>
+              </ul>
+              <div class="product__buy" data-buy="los-tres-brujos"></div>
             </div>
           </article>
         </div>
@@ -268,6 +360,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="../app.js" defer></script>
+  <script src="../app.js?v=20261020" defer></script>
 </body>
 </html>
