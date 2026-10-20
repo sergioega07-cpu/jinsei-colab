@@ -18,7 +18,7 @@
   }
   const CATALOG = {
     espantapajaros: { id: "espantapajaros", nombre: "Espantapájaros", formatos: [F("250 g", 12000, "NO")] },
-    "espantapajaros-gabriela": { id: "espantapajaros-gabriela", nombre: "Espantapájaros Gabriela", formatos: [F("150 g", 12500, "SI"), F("1 kg", 42000, "SI")] },
+    "espantapajaros-gabriela": { id: "espantapajaros-gabriela", nombre: "Espantapájaros Gabriela", formatos: [F("250 g", 12500, "SI"), F("1 kg", 42000, "SI")] },
     "espantapajaros-huila": { id: "espantapajaros-huila", nombre: "Espantapájaros Huila", formatos: [F("250 g", 11500, "NO"), F("1 kg", 39000, "NO")] },
     vampiros: { id: "vampiros", nombre: "Vampiros", formatos: [F("250 g", 12000, "SI")] },
     "los-duendes": { id: "los-duendes", nombre: "Los Duendes", formatos: [F("250 g", 12000, "SI"), F("1 kg", 39000, "SI")] },
