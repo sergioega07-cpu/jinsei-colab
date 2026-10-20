@@ -169,6 +169,11 @@
     a.href = waLink(buildOrderMessage());
   }
 
+  /* Sin stock al final (se ejecuta tras marcar .is-out) */
+  queueMicrotask(() => {
+    $$(".product.is-out").forEach((c) => c.parentElement && c.parentElement.appendChild(c));
+  });
+
   /* ---------- Tarjetas: formato, precio y stock (Con stock / Sin stock) ---------- */
   $$("[data-buy]").forEach((box) => {
     const p = CATALOG[box.dataset.buy];
