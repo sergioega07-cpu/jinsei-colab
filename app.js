@@ -23,6 +23,7 @@
     vampiros: { id: "vampiros", nombre: "Vampiros", formatos: [F("250 g", 12000, "SI")] },
     "los-duendes": { id: "los-duendes", nombre: "Los Duendes", formatos: [F("250 g", 12000, "SI"), F("1 kg", 39000, "SI")] },
     "los-tres-brujos": { id: "los-tres-brujos", nombre: "Los Tres Brujos", formatos: [F("200 g", 19000, "SI")] },
+    "drip-coffee": { id: "drip-coffee", nombre: "Drip Coffee", formatos: [F("unidad", 2500, "SI")] },
   };
   const findFmt = (id, formato) => CATALOG[id]?.formatos.find((f) => f.formato === formato);
   const inStock = (p) => p.formatos.some((f) => f.stock);
