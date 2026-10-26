@@ -141,3 +141,7 @@ a.hb-door__card:hover .hb-door__go::after, a.hb-door__card:focus-visible .hb-doo
   text-transform: uppercase;
   color: #beac8a;
 }
+
+/* Acceso discreto al panel privado */
+.hb-footer__panel{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-top:.5rem;border-radius:50%;color:currentColor;opacity:.4;transition:opacity .2s}
+.hb-footer__panel:hover,.hb-footer__panel:focus-visible{opacity:.9}
