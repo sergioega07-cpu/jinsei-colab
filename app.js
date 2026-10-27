@@ -51,6 +51,8 @@
   })();
 
   const clp = (n) => "$" + String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  /* La hoja guarda el precio por transferencia; el precio normal (tarjeta, link de pago Mercado Pago) es +3,2% redondeado hacia arriba a la centena. */
+  const normal = (n) => Math.ceil((Number(n) || 0) * 1.032 / 100) * 100;
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const waLink = (text) =>
     `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text).replace(/[()]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase())}`;
@@ -94,6 +96,7 @@
   };
 
   const cartTotal = () => cart.reduce((s, i) => s + i.precio * i.qty, 0);
+  const cartTotalNormal = () => cart.reduce((s, i) => s + normal(i.precio) * i.qty, 0);
   const cartCount = () => cart.reduce((s, i) => s + i.qty, 0);
 
   function addToCart(id, formato) {
@@ -119,9 +122,10 @@
     const name = ($("#cart-name")?.value || "").trim();
     const lines = ["Hola JINSEI, quiero reservar este pedido de la preventa:"];
     for (const i of cart) {
-      lines.push(`- ${i.qty}× ${i.nombre} ${i.formato} — ${clp(i.precio * i.qty)}`);
+      lines.push(`- ${i.qty}× ${i.nombre} ${i.formato} — ${clp(normal(i.precio) * i.qty)} (transferencia ${clp(i.precio * i.qty)})`);
     }
-    lines.push(`Total: ${clp(cartTotal())}`);
+    lines.push(`Total precio normal (tarjeta, link de pago): ${clp(cartTotalNormal())}`);
+    lines.push(`Total con descuento por transferencia: ${clp(cartTotal())}`);
     if (name) lines.push(`Nombre: ${name}`);
     return lines.join("\n");
   }
@@ -132,8 +136,8 @@
     list.innerHTML = cart
       .map(
         (i) => `<li class="cart-item" data-key="${esc(i.key)}">
-        <div><p class="cart-item__name">${esc(i.nombre)}</p><p class="cart-item__opt">${esc(i.formato)} · ${clp(i.precio)} c/u</p></div>
-        <div class="cart-item__price">${clp(i.precio * i.qty)}</div>
+        <div><p class="cart-item__name">${esc(i.nombre)}</p><p class="cart-item__opt">${esc(i.formato)} · ${clp(normal(i.precio))} c/u · transferencia ${clp(i.precio)}</p></div>
+        <div class="cart-item__price">${clp(normal(i.precio) * i.qty)}</div>
         <div class="cart-item__row">
           <div class="qty"><button type="button" data-q="-1" aria-label="Quitar uno">−</button><output aria-live="polite">${esc(i.qty)}</output><button type="button" data-q="1" aria-label="Agregar uno" ${i.qty >= MAX_QTY ? "disabled" : ""}>+</button></div>
           <button type="button" class="cart-item__remove" data-remove>Eliminar</button>
@@ -147,7 +151,9 @@
     if (empty) empty.hidden = n > 0;
     if (foot) foot.hidden = n === 0;
     const total = $("#cart-total");
-    if (total) total.textContent = clp(cartTotal());
+    if (total) total.textContent = clp(cartTotalNormal());
+    const totalT = $("#cart-total-transfer");
+    if (totalT) totalT.textContent = clp(cartTotal());
     const count = $("#cart-count");
     if (count) {
       count.hidden = n === 0;
@@ -189,7 +195,7 @@
       const f = p.formatos[sel];
       box.innerHTML = `
         ${p.formatos.length > 1 ? `<div class="fmt" role="group" aria-label="Formato">${p.formatos.map((fo, i) => `<button type="button" data-i="${i}" aria-pressed="${i === sel}" ${fo.stock ? "" : 'class="is-out" title="Sin stock"'}>${esc(fo.formato)}</button>`).join("")}</div>` : ""}
-        <p class="price">${clp(f.precio)}<small>${esc(f.formato)}</small></p>
+        <p class="price">${clp(normal(f.precio))}<small>${esc(f.formato)}</small><small>Por transferencia: ${clp(f.precio)}</small></p>
         <button type="button" class="btn btn--primary" data-add ${f.stock ? "" : "disabled"}>${f.stock ? "Agregar al pedido" : "Sin stock"}</button>`;
     };
     box.addEventListener("click", (e) => {
