@@ -1,6 +1,9 @@
 /* ==========================================================================
    JINSEI × Niebla — Preventa (JS mínimo)
-   Menú móvil, nav de ramas, carrito → WhatsApp (sin pago / sin Sheets).
+   Menú móvil, nav de ramas, carrito → WhatsApp (sin pago).
+   El listado de cafés, textos, stock e imágenes se leen de la misma planilla
+   publicada que Niebla; los precios propios de JINSEI se mantienen.
+   Si la planilla no carga, se usa el catálogo local de esta página.
    ========================================================================== */
 (() => {
   "use strict";
@@ -32,6 +35,118 @@
   };
   const findFmt = (id, formato) => CATALOG[id]?.formatos.find((f) => f.formato === formato);
   const inStock = (p) => p.formatos.some((f) => f.stock);
+  const canSell = (f) => !!(f && f.stock && !f.precioPendiente && f.precio > 0);
+
+  // Precios de JINSEI (se conservan). No se copian los de Niebla ni se inventan.
+  const JINSEI_PRICES = {};
+  for (const p of Object.values(CATALOG)) {
+    JINSEI_PRICES[p.id] = Object.fromEntries(p.formatos.map((f) => [f.formato, f.precio]));
+  }
+  const DRIP_ID = "drip-coffee";
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3q6EliurFneCq_EGOYeC24JWwfwXeNEB3nK0h0StznvtLdKEsoLL2iW-ts4K6KXtlrzdmt6tdstM5/pub?gid=356496886&single=true&output=csv";
+  const NIEBLA_ORIGIN = "https://nieblacoffee.cl/";
+  // Ids de Niebla → ids de JINSEI, solo cuando no coinciden.
+  const NIEBLA_ID_TO_JINSEI = { gabriela: "espantapajaros-gabriela", huila: "espantapajaros-huila" };
+  const LABEL_BY_NIEBLA_ID = { gabriela: "espantapajaros-gabriela", huila: "huila-2026-11" };
+  const isHidden = (v) => /^(no|false|0|n)$/i.test(String(v || "").trim());
+  const normKey = (v) => String(v ?? "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  function grams(f) {
+    const m = String(f).toLowerCase().replace(",", ".").match(/([\d.]+)\s*(kg|g)/);
+    return m ? parseFloat(m[1]) * (m[2] === "kg" ? 1000 : 1) : 1e9;
+  }
+  function parseCSV(text) {
+    const rows = [];
+    let row = [], field = "", i = 0, q = false;
+    text = String(text).replace(/^\uFEFF/, "");
+    while (i < text.length) {
+      const c = text[i];
+      if (q) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i += 2; continue; }
+          q = false; i++; continue;
+        }
+        field += c; i++; continue;
+      }
+      if (c === '"') { q = true; i++; continue; }
+      if (c === ",") { row.push(field); field = ""; i++; continue; }
+      if (c === "\r") { i++; continue; }
+      if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; i++; continue; }
+      field += c; i++;
+    }
+    if (field !== "" || row.length) { row.push(field); rows.push(row); }
+    const nonEmpty = rows.filter((r) => r.some((v) => String(v).trim() !== ""));
+    if (!nonEmpty.length) return [];
+    const head = nonEmpty[0].map((h) => h.trim().toLowerCase());
+    return nonEmpty.slice(1).map((r) => Object.fromEntries(head.map((h, k) => [h, (r[k] ?? "").trim()])));
+  }
+  async function fetchText(url) {
+    const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status} en ${url}`);
+    return res.text();
+  }
+  function jinseiIdFor(row) {
+    if (NIEBLA_ID_TO_JINSEI[row.id]) return NIEBLA_ID_TO_JINSEI[row.id];
+    if (row.id && row.id !== DRIP_ID) return row.id;
+    const want = normKey(row.nombre);
+    return Object.values(CATALOG).find((p) => p.id !== DRIP_ID && normKey(p.nombre) === want)?.id || row.id;
+  }
+  function labelSrc(nieblaId, imagenUrl) {
+    const raw = String(imagenUrl || "").trim();
+    if (/^https?:\/\//i.test(raw)) return raw;
+    const path = raw || `assets/labels/${LABEL_BY_NIEBLA_ID[nieblaId] || nieblaId}.webp`;
+    return NIEBLA_ORIGIN + path.replace(/^\//, "");
+  }
+  function localLabelSrc(nieblaId, jid, imagenUrl) {
+    const file = String(imagenUrl || "").trim().split("/").pop() || `${LABEL_BY_NIEBLA_ID[nieblaId] || jid || nieblaId}.webp`;
+    return `../assets/labels/${file}`;
+  }
+  function applyNieblaRows(rows) {
+    const map = new Map();
+    for (const r of rows) {
+      if (!r.id || isHidden(r.visible)) continue;
+      const id = jinseiIdFor(r);
+      if (!id || id === DRIP_ID) continue;
+      if (!map.has(id)) {
+        map.set(id, {
+          id,
+          nieblaId: r.id,
+          nombre: r.nombre,
+          origen: r.origen,
+          categoria: r.categoria,
+          proceso: r.proceso,
+          altura: r.altura,
+          variedad: r.variedad,
+          descripcion: r.descripcion,
+          notas: (r.notas_sabor || "").split(/[,;·]/).map((s) => s.trim()).filter(Boolean),
+          imagen: labelSrc(r.id, r.imagen_url),
+          imagenLocal: localLabelSrc(r.id, id, r.imagen_url),
+          formatos: [],
+        });
+      }
+      const p = map.get(id);
+      const precio = JINSEI_PRICES[id]?.[r.formato];
+      const hasPrecio = Number.isFinite(Number(precio)) && Number(precio) > 0;
+      p.formatos.push({
+        formato: r.formato || "Único",
+        precio: hasPrecio ? Number(precio) : 0,
+        precioPendiente: !hasPrecio,
+        stock: hasStock(r.stock),
+        low: isLowStock(r.stock),
+      });
+    }
+    for (const p of map.values()) p.formatos.sort((a, b) => grams(a.formato) - grams(b.formato));
+    const drip = CATALOG[DRIP_ID];
+    for (const id of Object.keys(CATALOG)) {
+      if (id !== DRIP_ID) delete CATALOG[id];
+    }
+    const order = [];
+    for (const p of map.values()) {
+      CATALOG[p.id] = p;
+      order.push(p.id);
+    }
+    if (drip) CATALOG[DRIP_ID] = drip;
+    return order;
+  }
 
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
@@ -89,10 +204,8 @@
   try {
     cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
     if (!Array.isArray(cart)) cart = [];
-    cart = cart.filter((i) => i && typeof i.id === "string" && Object.prototype.hasOwnProperty.call(CATALOG, i.id))
-      .map((i) => ({ ...i, formato: i.formato || "250 g" }))
-      .filter((i) => findFmt(i.id, i.formato)?.stock)
-      .map((i) => ({ ...i, key: i.id + "|" + i.formato, nombre: CATALOG[i.id].nombre, precio: findFmt(i.id, i.formato).precio, qty: Math.min(MAX_QTY, Math.max(1, parseInt(i.qty, 10) || 1)) }));
+    cart = cart.filter((i) => i && typeof i.id === "string")
+      .map((i) => ({ ...i, formato: i.formato || "250 g", qty: Math.min(MAX_QTY, Math.max(1, parseInt(i.qty, 10) || 1)) }));
   } catch {
     cart = [];
   }
@@ -107,7 +220,7 @@
   function addToCart(id, formato) {
     const p = CATALOG[id];
     const f = findFmt(id, formato);
-    if (!p || !f || !f.stock) return;
+    if (!p || !canSell(f)) return;
     const key = id + "|" + formato;
     const it = cart.find((i) => i.key === key);
     if (it) { if (it.qty >= MAX_QTY) { toast(`Máximo ${MAX_QTY} por café en la preventa`); return; } it.qty++; }
@@ -181,39 +294,122 @@
     a.href = waLink(buildOrderMessage());
   }
 
-  /* Sin stock al final (se ejecuta tras marcar .is-out) */
-  queueMicrotask(() => {
-    $$(".product.is-out").forEach((c) => c.parentElement && c.parentElement.appendChild(c));
-  });
+  function sanitizeCart() {
+    cart = cart
+      .filter((i) => i && typeof i.id === "string" && Object.prototype.hasOwnProperty.call(CATALOG, i.id))
+      .map((i) => ({ ...i, formato: i.formato || "250 g" }))
+      .filter((i) => canSell(findFmt(i.id, i.formato)))
+      .map((i) => ({
+        ...i,
+        key: i.id + "|" + i.formato,
+        nombre: CATALOG[i.id].nombre,
+        precio: findFmt(i.id, i.formato).precio,
+        qty: Math.min(MAX_QTY, Math.max(1, parseInt(i.qty, 10) || 1)),
+      }));
+    saveCart();
+  }
 
-  /* ---------- Tarjetas: formato, precio y stock (Con stock / Sin stock) ---------- */
-  $$("[data-buy]").forEach((box) => {
-    const p = CATALOG[box.dataset.buy];
-    if (!p) return;
-    const card = box.closest(".product");
-    const ok = inStock(p);
-    card?.classList.toggle("is-out", !ok);
-    let sel = Math.max(0, p.formatos.findIndex((f) => f.stock));
-    const paint = () => {
-      const f = p.formatos[sel];
-      const badge = card?.querySelector('[data-role="stock"]');
-      if (badge) {
-        const label = !f.stock ? "Sin stock" : f.low ? "Poco stock" : "Con stock";
-        badge.textContent = label;
-        badge.className = "badge " + (!f.stock ? "badge--out" : f.low ? "badge--low" : "badge--ok");
-      }
-      box.innerHTML = `
-        ${p.formatos.length > 1 ? `<div class="fmt" role="group" aria-label="Formato">${p.formatos.map((fo, i) => `<button type="button" data-i="${i}" aria-pressed="${i === sel}" ${fo.stock ? "" : 'class="is-out" title="Sin stock"'}>${esc(fo.formato)}</button>`).join("")}</div>` : ""}
-        <p class="price">${clp(normal(f.precio))}<small>${esc(f.formato)}</small><small>Por transferencia: ${clp(f.precio)}</small></p>
-        <button type="button" class="btn btn--primary" data-add ${f.stock ? "" : "disabled"}>${f.stock ? "Agregar al pedido" : "Sin stock"}</button>`;
-    };
-    box.addEventListener("click", (e) => {
-      const b = e.target.closest("[data-i]");
-      if (b) { sel = +b.dataset.i; paint(); return; }
-      if (e.target.closest("[data-add]")) addToCart(p.id, p.formatos[sel].formato);
+  function metaHTML(p) {
+    const rows = [
+      p.proceso && ["Proceso", p.proceso],
+      p.altura && ["Altura", p.altura],
+      p.variedad && ["Variedad", p.variedad],
+    ].filter(Boolean);
+    if (!rows.length) return "";
+    return `<dl class="product__meta">${rows.map(([dt, dd]) => `<div><dt>${esc(dt)}</dt><dd>${esc(dd)}</dd></div>`).join("")}</dl>`;
+  }
+  function notesHTML(p) {
+    if (!p.notas || !p.notas.length) return "";
+    return `<ul class="notes" aria-label="Notas de sabor">${p.notas.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>`;
+  }
+  function cardHTML(p) {
+    return `<article class="card product reveal is-in" data-id="${esc(p.id)}" data-from="niebla">
+      <div class="product__media product__media--label">
+        <img src="${esc(p.imagen)}" data-fallback="${esc(p.imagenLocal || "")}" alt="Etiqueta ${esc(p.nombre)}" width="480" height="576" loading="lazy" decoding="async">
+        <div class="product__badges">
+          <span class="badge" data-role="stock">Preventa</span>
+        </div>
+      </div>
+      <div class="product__body">
+        <p class="product__origin">${esc(p.origen || "")}</p>
+        <h3 class="product__name">${esc(p.nombre)}</h3>
+        ${metaHTML(p)}
+        ${notesHTML(p)}
+        ${p.descripcion ? `<p class="product__desc">${esc(p.descripcion)}</p>` : ""}
+        <div class="product__buy" data-buy="${esc(p.id)}"></div>
+      </div>
+    </article>`;
+  }
+  function renderNieblaProducts(order) {
+    const root = $(".products");
+    if (!root) return;
+    const drip = root.querySelector(`.product[data-id="${DRIP_ID}"]`);
+    $$(".product", root).forEach((el) => { if (el.dataset.id !== DRIP_ID) el.remove(); });
+    const html = order.map((id) => cardHTML(CATALOG[id])).join("");
+    if (drip) drip.insertAdjacentHTML("beforebegin", html);
+    else root.insertAdjacentHTML("beforeend", html);
+    $$(".product.reveal", root).forEach((el) => el.classList.add("is-in"));
+    $$(".product[data-from='niebla'] img[data-fallback]", root).forEach((img) => {
+      img.addEventListener("error", () => {
+        const fb = img.getAttribute("data-fallback");
+        if (!fb) return;
+        try {
+          if (img.src !== new URL(fb, location.href).href) img.src = fb;
+        } catch {
+          img.src = fb;
+        }
+      }, { once: true });
     });
-    paint();
-  });
+  }
+
+  /* ---------- Tarjetas: formato, precio y stock (Con stock / Poco stock / Sin stock) ---------- */
+  const painters = [];
+  function bindBuyBoxes(scope = document) {
+    $$("[data-buy]", scope).forEach((box) => {
+      if (box.dataset.bound === "1") return;
+      box.dataset.bound = "1";
+      const pId = box.dataset.buy;
+      const card = box.closest(".product");
+      let sel = 0;
+      const paint = () => {
+        const p = CATALOG[pId];
+        if (!p) return;
+        card?.classList.toggle("is-out", !inStock(p));
+        if (sel >= p.formatos.length) sel = 0;
+        const firstOk = p.formatos.findIndex((f) => f.stock);
+        if (firstOk >= 0 && !p.formatos[sel]?.stock) sel = firstOk;
+        const f = p.formatos[sel];
+        if (!f) return;
+        const badge = card?.querySelector('[data-role="stock"]');
+        if (badge) {
+          const label = !f.stock ? "Sin stock" : f.low ? "Poco stock" : "Con stock";
+          badge.textContent = label;
+          badge.className = "badge " + (!f.stock ? "badge--out" : f.low ? "badge--low" : "badge--ok");
+        }
+        const priceBlock = f.precioPendiente
+          ? `<p class="price">Precio por confirmar<small>${esc(f.formato)}</small></p>`
+          : `<p class="price">${clp(normal(f.precio))}<small>${esc(f.formato)}</small><small>Por transferencia: ${clp(f.precio)}</small></p>`;
+        const btnLabel = !f.stock ? "Sin stock" : f.precioPendiente ? "Precio por confirmar" : "Agregar al pedido";
+        box.innerHTML = `
+        ${p.formatos.length > 1 ? `<div class="fmt" role="group" aria-label="Formato">${p.formatos.map((fo, i) => `<button type="button" data-i="${i}" aria-pressed="${i === sel}" ${fo.stock ? "" : 'class="is-out" title="Sin stock"'}>${esc(fo.formato)}</button>`).join("")}</div>` : ""}
+        ${priceBlock}
+        <button type="button" class="btn btn--primary" data-add ${canSell(f) ? "" : "disabled"}>${btnLabel}</button>`;
+      };
+      box.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-i]");
+        if (b) { sel = +b.dataset.i; paint(); return; }
+        if (e.target.closest("[data-add]")) addToCart(pId, CATALOG[pId]?.formatos[sel]?.formato);
+      });
+      painters.push(paint);
+      paint();
+    });
+  }
+  function paintCatalog() {
+    painters.forEach((fn) => fn());
+    const root = $(".products");
+    if (!root) return;
+    $$(".product.is-out", root).forEach((c) => root.appendChild(c));
+  }
 
   $("#cart-items")?.addEventListener("click", (e) => {
     const li = e.target.closest(".cart-item");
@@ -504,5 +700,20 @@
   observeReveals();
 
   /* boot */
-  renderCart();
+  async function boot() {
+    try {
+      const rows = parseCSV(await fetchText(SHEET_CSV_URL));
+      const order = applyNieblaRows(rows);
+      if (!order.length) throw new Error("planilla vacía");
+      renderNieblaProducts(order);
+    } catch (e) {
+      console.warn("[JINSEI] No se pudo leer el catálogo de Niebla; se mantiene el catálogo local.", e);
+    }
+    bindBuyBoxes(document);
+    sanitizeCart();
+    renderCart();
+    paintCatalog();
+    observeReveals();
+  }
+  boot();
 })();
