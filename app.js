@@ -8,19 +8,23 @@
   const WA_NUMBER = "56951774751";
   const CART_KEY = "jinsei-niebla-carrito-v1";
   const NAME_KEY = "jinsei-niebla-nombre-v1";
-  // Catálogo de la preventa. stock: SI/NO (también acepta números viejos: > 0 = hay).
-  const F = (formato, precio, stock) => ({ formato, precio, stock: hasStock(stock) });
+  // Catálogo de la preventa. stock: SI/NO/poco stock (también acepta números viejos: > 0 = hay).
+  const F = (formato, precio, stock) => ({ formato, precio, stock: hasStock(stock), low: isLowStock(stock) });
+  function normStock(v) {
+    return String(v ?? "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+  function isLowStock(v) { return /^(poco stock|poco)$/.test(normStock(v)); }
   function hasStock(v) {
-    const t = String(v ?? "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const t = normStock(v);
     if (!t || /^(no|sin stock|agotado|0+)$/.test(t)) return 0;
     if (/^\d+$/.test(t)) return parseInt(t, 10) > 0 ? 1 : 0;
-    return /^(si|s|yes|hay|con stock|disponible|x)$/.test(t) ? 1 : 0;
+    return /^(si|s|yes|hay|con stock|disponible|x|poco stock|poco)$/.test(t) ? 1 : 0;
   }
   const CATALOG = {
     espantapajaros: { id: "espantapajaros", nombre: "Espantapájaros", formatos: [F("250 g", 12000, "NO")] },
     "espantapajaros-gabriela": { id: "espantapajaros-gabriela", nombre: "Espantapájaros Gabriela", formatos: [F("250 g", 12500, "SI"), F("1 kg", 42000, "SI")] },
     "espantapajaros-huila": { id: "espantapajaros-huila", nombre: "Espantapájaros Huila", formatos: [F("250 g", 11500, "NO"), F("1 kg", 39000, "NO")] },
-    vampiros: { id: "vampiros", nombre: "Vampiros", formatos: [F("250 g", 12000, "SI")] },
+    vampiros: { id: "vampiros", nombre: "Vampiros", formatos: [F("250 g", 12000, "poco stock")] },
     "los-duendes": { id: "los-duendes", nombre: "Los Duendes", formatos: [F("250 g", 12000, "SI"), F("1 kg", 39000, "SI")] },
     "los-tres-brujos": { id: "los-tres-brujos", nombre: "Los Tres Brujos", formatos: [F("200 g", 19000, "SI")] },
     "drip-coffee": { id: "drip-coffee", nombre: "Drip Coffee", formatos: [F("unidad", 2500, "SI")] },
@@ -188,11 +192,15 @@
     const card = box.closest(".product");
     const ok = inStock(p);
     card?.classList.toggle("is-out", !ok);
-    const badge = card?.querySelector('[data-role="stock"]');
-    if (badge) { badge.textContent = ok ? "Con stock" : "Sin stock"; badge.className = "badge " + (ok ? "badge--ok" : "badge--out"); }
     let sel = Math.max(0, p.formatos.findIndex((f) => f.stock));
     const paint = () => {
       const f = p.formatos[sel];
+      const badge = card?.querySelector('[data-role="stock"]');
+      if (badge) {
+        const label = !f.stock ? "Sin stock" : f.low ? "Poco stock" : "Con stock";
+        badge.textContent = label;
+        badge.className = "badge " + (!f.stock ? "badge--out" : f.low ? "badge--low" : "badge--ok");
+      }
       box.innerHTML = `
         ${p.formatos.length > 1 ? `<div class="fmt" role="group" aria-label="Formato">${p.formatos.map((fo, i) => `<button type="button" data-i="${i}" aria-pressed="${i === sel}" ${fo.stock ? "" : 'class="is-out" title="Sin stock"'}>${esc(fo.formato)}</button>`).join("")}</div>` : ""}
         <p class="price">${clp(normal(f.precio))}<small>${esc(f.formato)}</small><small>Por transferencia: ${clp(f.precio)}</small></p>

@@ -345,6 +345,7 @@ body.menu-open .cart-fab { opacity: 0; pointer-events: none; }
 .price small { display: block; font: 400 .62rem/1.4 var(--f-mono); letter-spacing: .14em; color: var(--ink-faint); text-transform: uppercase; margin-top: .3rem; }
 .product__buy .btn { padding-inline: 1.2rem; }
 .product__buy .btn[disabled] { opacity: .45; cursor: not-allowed; }
+.badge--low { color: #e8d4a4; border-color: rgba(200, 160, 80, .55); background: rgba(70, 52, 24, .8); }
 .badge--out { color: #e9d9cf; border-color: rgba(150, 90, 70, .55); background: rgba(70, 36, 28, .8); }
 .product.is-out .product__media img { filter: grayscale(.7) brightness(.75); }
 .fmt { display: flex; gap: .4rem; flex-basis: 100%; }
